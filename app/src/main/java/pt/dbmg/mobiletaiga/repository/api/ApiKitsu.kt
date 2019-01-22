@@ -13,6 +13,10 @@ import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
+import pt.dbmg.mobiletaiga.network.response.GroupBans
+import pt.dbmg.mobiletaiga.network.response.GroupBansPaged
+import pt.dbmg.mobiletaiga.network.response.GroupCategories
+import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
@@ -108,16 +112,16 @@ interface ApiKitsu {
     fun getGroupActionLogsResource(@Path("id") id: Int): Observable<GroupActionLogs>
 
     @GET("/api/edge/group-bans")
-    fun getGroupBansCollection(@Field("group")group: String)
+    fun getGroupBansCollection(@Field("group") group: String): Observable<GroupBansPaged>
 
     @GET("/api/edge/group-bans/{id}")
-    fun getGroupBansResource(@Path("id") id:Int)
+    fun getGroupBansResource(@Path("id") id: Int): Observable<GroupBans>
 
     @GET("/api/edge/group-categories")
-    fun getGroupCategoriesCollection(@Field("group")group: String)
+    fun getGroupCategoriesCollection(@Field("group") group: String): Observable<GroupCategoriesPaged>
 
     @GET("/api/edge/group-categories/{id}")
-    fun getGroupCategoriesResource(@Path("id") id:Int)
+    fun getGroupCategoriesResource(@Path("id") id: Int): Observable<GroupCategories>
 
     @GET("/api/edge/group-invites")
     fun getGroupInvitesCollection(@Field("group")group: String)
