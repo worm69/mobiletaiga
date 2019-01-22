@@ -19,6 +19,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupCategories
 import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
 import pt.dbmg.mobiletaiga.network.response.LibraryEntriesPaged
+import pt.dbmg.mobiletaiga.network.response.LibraryEntryLogsPaged
+import pt.dbmg.mobiletaiga.network.response.LibraryEntryLogsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEvents
 import pt.dbmg.mobiletaiga.network.response.LibraryEventsPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
@@ -474,7 +476,7 @@ interface ApiKitsu {
     fun getSiteAnnouncementsDramaResource(@Path("id") id: Int): Observable<SiteAnnouncements>
     //endregion
 
-    //region User Libraries
+    //region User Libraries Done
     @GET("/api/edge/library-entries")
     fun getLibraryEntriesCollection(
         @Field("userId") userId: Int, @Field("anime_id") anime_id: Int, @Field("manga_id") manga_id: Int, @Field(
@@ -496,22 +498,20 @@ interface ApiKitsu {
     @DELETE("/api/edge/library-entries/{id}")
     fun deleteLibraryEntries(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
-
-
     @GET("/api/edge/library-entry-logs")
-    fun getLibraryEntriesLogsCollection(@Field("linkedAccountId")linkedAccountId: Int, @Field("syncStatus")syncStatus:String)
+    fun getLibraryEntriesLogsCollection(@Field("linkedAccountId") linkedAccountId: Int, @Field("syncStatus") syncStatus: String): Observable<LibraryEntryLogsPaged>
 
     @GET("/api/edge/library-entry-logs/{id}")
-    fun getLibraryEntriesLogsResource(@Path("id") id:Int)
+    fun getLibraryEntriesLogsResource(@Path("id") id: Int): Observable<LibraryEntryLogsResource>
 
     @POST("/api/edge/library-entry-logs")
-    fun postLibraryEntriesLogs(@Body data:String)
+    fun postLibraryEntriesLogs(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/library-entry-logs/{id}")
-    fun updateLibraryEntriesLogs(@Path("id") id:Int,@Body data:String)
+    fun updateLibraryEntriesLogs(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/library-entry-logs/{id}")
-    fun deleteLibraryEntriesLogs(@Path("id") id:Int,@Body data:String)
+    fun deleteLibraryEntriesLogs(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @GET("/api/edge/library-events")
     fun getLibraryEventsCollection(@Field("userId") userId: Int): Observable<LibraryEventsPaged>
