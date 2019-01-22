@@ -27,6 +27,9 @@ import pt.dbmg.mobiletaiga.network.response.Producers
 import pt.dbmg.mobiletaiga.network.response.ProducersPaged
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncements
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
+import pt.dbmg.mobiletaiga.network.response.UserBlocksError
+import pt.dbmg.mobiletaiga.network.response.UsersBlocks
+import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -495,16 +498,16 @@ interface ApiKitsu {
 
     //region Users
     @GET("/api/edge/blocks")
-    fun getBlocksCollection(@Field("user")user: String)
+    fun getBlocksCollection(@Field("user") user: String): Observable<UsersBlocksPaged>
 
     @GET("/api/edge/blocks/{id}")
-    fun getBlocksResource(@Path("id") id:Int)
+    fun getBlocksResource(@Path("id") id: Int): Observable<UsersBlocks>
 
     @POST("/api/edge/blocks")
-    fun postBlocks(@Body data:String)
+    fun postBlocks(@Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/blocks/{id}")
-    fun deleteBlocks(@Path("id") id:Int,@Body data:String)
+    fun deleteBlocks(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/favorites")
