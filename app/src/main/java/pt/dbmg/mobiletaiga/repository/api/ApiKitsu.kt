@@ -17,6 +17,7 @@ import pt.dbmg.mobiletaiga.network.response.GroupBans
 import pt.dbmg.mobiletaiga.network.response.GroupBansPaged
 import pt.dbmg.mobiletaiga.network.response.GroupCategories
 import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
+import pt.dbmg.mobiletaiga.network.response.LibraryEntries
 import pt.dbmg.mobiletaiga.network.response.LibraryEntriesPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
@@ -482,16 +483,16 @@ interface ApiKitsu {
     ): Observable<LibraryEntriesPaged>
 
     @GET("/api/edge/library-entries/{id}")
-    fun getLibraryEntriesResource(@Path("id") id:Int)
+    fun getLibraryEntriesResource(@Path("id") id: Int): Observable<LibraryEntries>
 
     @POST("/api/edge/library-entries")
-    fun postLibraryEntries(@Body data:String)
+    fun postLibraryEntries(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/library-entries/{id}")
-    fun updateLibraryEntries(@Path("id") id:Int,@Body data:String)
+    fun updateLibraryEntries(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/library-entries/{id}")
-    fun deleteLibraryEntries(@Path("id") id:Int,@Body data:String)
+    fun deleteLibraryEntries(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
 
