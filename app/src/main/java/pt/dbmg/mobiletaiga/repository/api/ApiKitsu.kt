@@ -7,6 +7,8 @@ import pt.dbmg.mobiletaiga.network.response.AnimeProductions
 import pt.dbmg.mobiletaiga.network.response.AnimeProductionsPaged
 import pt.dbmg.mobiletaiga.network.response.AnimeStaff
 import pt.dbmg.mobiletaiga.network.response.AnimeStaffPaged
+import pt.dbmg.mobiletaiga.network.response.Castings
+import pt.dbmg.mobiletaiga.network.response.CastingsPaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -46,10 +48,14 @@ interface ApiKitsu {
     fun getAnimeStaffResource(@Path("id") id: Int): Observable<AnimeStaff>
 
     @GET("/api/edge/castings")
-    fun getCastingsCollection(@Field("anime_id")animeId: Int, @Field("manga_id")manga_Id:Int, @Field("drama_id")drama_id:Int, @Field("mediaType")mediaType:String,@Field("language")language:String, @Field("featured")featured:Boolean, @Field("isCharacter")isCharacter:Boolean)
+    fun getCastingsCollection(
+        @Field("anime_id") animeId: Int, @Field("manga_id") manga_Id: Int, @Field("drama_id") drama_id: Int, @Field(
+            "mediaType"
+        ) mediaType: String, @Field("language") language: String, @Field("featured") featured: Boolean, @Field("isCharacter") isCharacter: Boolean
+    ): Observable<CastingsPaged>
 
     @GET("/api/edge/castings/{id}")
-    fun getCastingsResource(@Path("id") id:Int)
+    fun getCastingsResource(@Path("id") id: Int): Observable<Castings>
 
     @GET("/api/edge/characters")
     fun getCharactersCollection(@Field("slug")slug: String, @Field("name")name:String)
