@@ -34,6 +34,10 @@ import pt.dbmg.mobiletaiga.network.response.UserFollows
 import pt.dbmg.mobiletaiga.network.response.UserFollowsPaged
 import pt.dbmg.mobiletaiga.network.response.UserLinkedAccounts
 import pt.dbmg.mobiletaiga.network.response.UserLinkedAccountsPaged
+import pt.dbmg.mobiletaiga.network.response.UserProfileLinkSites
+import pt.dbmg.mobiletaiga.network.response.UserProfileLinkSitesPaged
+import pt.dbmg.mobiletaiga.network.response.UserProfileLinks
+import pt.dbmg.mobiletaiga.network.response.UserProfileLinksPaged
 import pt.dbmg.mobiletaiga.network.response.UsersBlocks
 import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
@@ -565,25 +569,25 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/profile-link-sites")
-    fun getProfileLinkSitesCollection(@Field("linkedAccountId")linkedAccountId: Int, @Field("syncStatus")syncStatus:String)
+    fun getProfileLinkSitesCollection(@Field("linkedAccountId") linkedAccountId: Int, @Field("syncStatus") syncStatus: String): Observable<UserProfileLinkSitesPaged>
 
     @GET("/api/edge/profile-link-sites/{id}")
-    fun getProfileLinkSitesResource(@Path("id") id:Int)
+    fun getProfileLinkSitesResource(@Path("id") id: Int): Observable<UserProfileLinkSites>
 
     @GET("/api/edge/profile-links")
-    fun getProfileLinksCollection(@Field("linkedAccountId")linkedAccountId: Int, @Field("syncStatus")syncStatus:String)
+    fun getProfileLinksCollection(@Field("linkedAccountId") linkedAccountId: Int, @Field("syncStatus") syncStatus: String): Observable<UserProfileLinksPaged>
 
     @GET("/api/edge/profile-links/{id}")
-    fun getProfileLinksResource(@Path("id") id:Int)
+    fun getProfileLinksResource(@Path("id") id: Int): Observable<UserProfileLinks>
 
     @POST("/api/edge/profile-links")
-    fun postProfileLinks(@Body data:String)
+    fun postProfileLinks(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/profile-links/{id}")
-    fun updateProfileLinks(@Path("id") id:Int,@Body data:String)
+    fun updateProfileLinks(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/profile-links/{id}")
-    fun deleteProfileLinks(@Path("id") id:Int,@Body data:String)
+    fun deleteProfileLinks(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/roles")
