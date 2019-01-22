@@ -38,6 +38,8 @@ import pt.dbmg.mobiletaiga.network.response.UserProfileLinkSites
 import pt.dbmg.mobiletaiga.network.response.UserProfileLinkSitesPaged
 import pt.dbmg.mobiletaiga.network.response.UserProfileLinks
 import pt.dbmg.mobiletaiga.network.response.UserProfileLinksPaged
+import pt.dbmg.mobiletaiga.network.response.UserRolesPaged
+import pt.dbmg.mobiletaiga.network.response.UserRolesResource
 import pt.dbmg.mobiletaiga.network.response.UsersBlocks
 import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
@@ -591,10 +593,10 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/roles")
-    fun getRolesCollection()
+    fun getRolesCollection(): Observable<UserRolesPaged>
 
     @GET("/api/edge/roles/{id}")
-    fun getRolesResource(@Path("id") id:Int)
+    fun getRolesResource(@Path("id") id: Int): Observable<UserRolesResource>
 
     @GET("/api/edge/stats")
     fun getStatsCollection(@Field("userId")userId:Int)
