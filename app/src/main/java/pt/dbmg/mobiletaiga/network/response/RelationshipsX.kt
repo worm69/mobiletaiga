@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RelationshipsX(
     @SerializedName("character")
-    val character: Character,
+    val character: CharacterLink,
     @SerializedName("media")
     val media: Media,
     @SerializedName("person")

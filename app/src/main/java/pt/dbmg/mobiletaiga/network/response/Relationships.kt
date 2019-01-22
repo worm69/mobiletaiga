@@ -8,5 +8,5 @@ data class Relationships(
     @SerializedName("castings")
     val castings: CastingsRelationships,
     @SerializedName("character")
-    val character: Character
+    val character: CharacterLink
 )

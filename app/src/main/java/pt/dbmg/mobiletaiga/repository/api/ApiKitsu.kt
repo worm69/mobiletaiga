@@ -9,6 +9,8 @@ import pt.dbmg.mobiletaiga.network.response.AnimeStaff
 import pt.dbmg.mobiletaiga.network.response.AnimeStaffPaged
 import pt.dbmg.mobiletaiga.network.response.Castings
 import pt.dbmg.mobiletaiga.network.response.CastingsPaged
+import pt.dbmg.mobiletaiga.network.response.Characters
+import pt.dbmg.mobiletaiga.network.response.CharactersPaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -58,10 +60,10 @@ interface ApiKitsu {
     fun getCastingsResource(@Path("id") id: Int): Observable<Castings>
 
     @GET("/api/edge/characters")
-    fun getCharactersCollection(@Field("slug")slug: String, @Field("name")name:String)
+    fun getCharactersCollection(@Field("slug") slug: String, @Field("name") name: String): Observable<CharactersPaged>
 
     @GET("/api/edge/characters/{id}")
-    fun getCharactersResource(@Path("id") id:Int)
+    fun getCharactersResource(@Path("id") id: Int): Observable<Characters>
 
     @GET("/api/edge/manga-characters")
     fun getMangaCharactersCollection(@Field("mangaId")slug: Int)

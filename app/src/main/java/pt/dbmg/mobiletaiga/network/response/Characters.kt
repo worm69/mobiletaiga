@@ -2,7 +2,7 @@ package pt.dbmg.mobiletaiga.network.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Character(
-    @SerializedName("links")
-    val links: Links2
+data class Characters(
+    @SerializedName("data")
+    val `data`: List<DataXXX>
 )
