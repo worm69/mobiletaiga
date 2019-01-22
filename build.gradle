@@ -8,6 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
+        //https://stackoverflow.com/questions/52412023/api-variant-getexternalnativebuildtasks-is-obsolete-and-has-been-replaced-wi/52487634#52487634
         classpath 'com.android.tools.build:gradle:3.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
