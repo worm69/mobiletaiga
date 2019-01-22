@@ -19,6 +19,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupCategories
 import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
 import pt.dbmg.mobiletaiga.network.response.LibraryEntriesPaged
+import pt.dbmg.mobiletaiga.network.response.LibraryEvents
+import pt.dbmg.mobiletaiga.network.response.LibraryEventsPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
@@ -512,10 +514,10 @@ interface ApiKitsu {
     fun deleteLibraryEntriesLogs(@Path("id") id:Int,@Body data:String)
 
     @GET("/api/edge/library-events")
-    fun getLibraryEventsCollection(@Field("userId")userId: Int)
+    fun getLibraryEventsCollection(@Field("userId") userId: Int): Observable<LibraryEventsPaged>
 
     @GET("/api/edge/library-events/{id}")
-    fun geLibraryEventsResource(@Path("id") id:Int)
+    fun geLibraryEventsResource(@Path("id") id: Int): Observable<LibraryEvents>
 
 
     //endregion
