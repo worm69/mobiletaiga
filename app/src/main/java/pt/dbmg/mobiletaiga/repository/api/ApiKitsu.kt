@@ -42,6 +42,8 @@ import pt.dbmg.mobiletaiga.network.response.UserRolesPaged
 import pt.dbmg.mobiletaiga.network.response.UserRolesResource
 import pt.dbmg.mobiletaiga.network.response.UserStats
 import pt.dbmg.mobiletaiga.network.response.UserStatsPaged
+import pt.dbmg.mobiletaiga.network.response.UserUserRoles
+import pt.dbmg.mobiletaiga.network.response.UserUserRolesPaged
 import pt.dbmg.mobiletaiga.network.response.UsersBlocks
 import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
@@ -510,7 +512,7 @@ interface ApiKitsu {
 
     //endregion
 
-    //region Users
+    //region Users Done
     @GET("/api/edge/blocks")
     fun getBlocksCollection(@Field("user") user: String): Observable<UsersBlocksPaged>
 
@@ -607,26 +609,30 @@ interface ApiKitsu {
     fun getStatsResource(@Path("id") id: Int): Observable<UserStats>
 
     @GET("/api/edge/user-roles")
-    fun getUserRolesCollection(@Field("userId")userId:Int)
+    fun getUserRolesCollection(@Field("userId") userId: Int): Observable<UserUserRolesPaged>
 
     @GET("/api/edge/user-roles/{id}")
-    fun getUserRolesResource(@Path("id") id:Int)
+    fun getUserRolesResource(@Path("id") id: Int): Observable<UserUserRoles>
 
 
     @GET("/api/edge/users")
-    fun getUsersCollection(@Field("slug")slug: String, @Field("name")name:String, @Field("self")self:String, @Field("query")query:String)
+    fun getUsersCollection(
+        @Field("slug") slug: String, @Field("name") name: String, @Field("self") self: String, @Field(
+            "query"
+        ) query: String
+    ): Observable<UserUserRolesPaged>
 
     @GET("/api/edge/users/{id}")
-    fun getUsersResource(@Path("id") id:Int)
+    fun getUsersResource(@Path("id") id: Int): Observable<UserUserRoles>
 
     @POST("/api/edge/users")
-    fun postUsers(@Body data:String)
+    fun postUsers(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/users/{id}")
-    fun updateUsers(@Path("id") id:Int,@Body data:String)
+    fun updateUsers(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/users/{id}")
-    fun deleteUsers(@Path("id") id:Int,@Body data:String)
+    fun deleteUsers(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     //endregion
 }
