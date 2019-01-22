@@ -4,28 +4,20 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
-import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.exception.ApolloException
-import okhttp3.OkHttpClient
-import com.apollographql.apollo.api.Response
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.drawer_layout
 import kotlinx.android.synthetic.main.activity_main.nav_view
 import kotlinx.android.synthetic.main.app_bar_main2.nav_button_menu
 import kotlinx.android.synthetic.main.app_bar_main2.nav_host_fragment
 import kotlinx.android.synthetic.main.app_bar_main2.toolbar
-
-import pt.dbmg.mobiletaiga.view.UsersListFragment
-import pt.dbmg.mobiletaiga.R
+import okhttp3.OkHttpClient
 import pt.dbmg.mobiletaiga.R.layout.activity_main
 import pt.dbmg.mobiletaiga.R.string
 import java.util.logging.Logger
@@ -108,9 +100,9 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

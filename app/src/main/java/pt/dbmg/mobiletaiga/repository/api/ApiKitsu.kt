@@ -1,7 +1,20 @@
 package pt.dbmg.mobiletaiga.repository.api
 
-import retrofit2.http.*
-import java.util.*
+import io.reactivex.Observable
+import pt.dbmg.mobiletaiga.network.response.AnimeCharacters
+import pt.dbmg.mobiletaiga.network.response.AnimeCharactersPaged
+import pt.dbmg.mobiletaiga.network.response.AnimeProductions
+import pt.dbmg.mobiletaiga.network.response.AnimeProductionsPaged
+import pt.dbmg.mobiletaiga.network.response.AnimeStaff
+import pt.dbmg.mobiletaiga.network.response.AnimeStaffPaged
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.POST
+import retrofit2.http.Path
+import java.util.Date
 
 interface ApiKitsu {
     /**
@@ -15,22 +28,22 @@ interface ApiKitsu {
 
     //region Characters & People
     @GET("/api/edge/anime-characters")
-    fun getAnimeCharactersCollection(@Field("animeId") animeId:Int)
+    fun getAnimeCharactersCollection(@Field("animeId") animeId: Int): Observable<AnimeCharactersPaged>
 
     @GET("/api/edge/anime-characters/{id}")
-    fun getAnimeCharactersResource(@Path("id") id:Int)
+    fun getAnimeCharactersResource(@Path("id") id: Int): Observable<AnimeCharacters>
 
     @GET("/api/edge/anime-productions")
-    fun getAnimeProductionsCollection(@Field("animeId") animeId:Int, @Field("producerId") producerId:Int, @Field("role") role:String)
+    fun getAnimeProductionsCollection(@Field("animeId") animeId: Int, @Field("producerId") producerId: Int, @Field("role") role: String): Observable<AnimeProductionsPaged>
 
     @GET("/api/edge/anime-productions/{id}")
-    fun getAnimeProductionsResource(@Path("id") id:Int)
+    fun getAnimeProductionsResource(@Path("id") id: Int): Observable<AnimeProductions>
 
     @GET("/api/edge/anime-staff")
-    fun getAnimeStaffCollection()
+    fun getAnimeStaffCollection(): Observable<AnimeStaffPaged>
 
     @GET("/api/edge/anime-staff/{id}")
-    fun getAnimeStaffResource(@Path("id") id:Int)
+    fun getAnimeStaffResource(@Path("id") id: Int): Observable<AnimeStaff>
 
     @GET("/api/edge/castings")
     fun getCastingsCollection(@Field("anime_id")animeId: Int, @Field("manga_id")manga_Id:Int, @Field("drama_id")drama_id:Int, @Field("mediaType")mediaType:String,@Field("language")language:String, @Field("featured")featured:Boolean, @Field("isCharacter")isCharacter:Boolean)
