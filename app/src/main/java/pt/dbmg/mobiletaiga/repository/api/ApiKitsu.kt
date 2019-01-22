@@ -32,6 +32,8 @@ import pt.dbmg.mobiletaiga.network.response.UserFavorites
 import pt.dbmg.mobiletaiga.network.response.UserFavoritesPaged
 import pt.dbmg.mobiletaiga.network.response.UserFollows
 import pt.dbmg.mobiletaiga.network.response.UserFollowsPaged
+import pt.dbmg.mobiletaiga.network.response.UserLinkedAccounts
+import pt.dbmg.mobiletaiga.network.response.UserLinkedAccountsPaged
 import pt.dbmg.mobiletaiga.network.response.UsersBlocks
 import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
@@ -547,19 +549,19 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/linked-accounts")
-    fun getLinkedAccountsCollection(@Field("userId")userId: Int)
+    fun getLinkedAccountsCollection(@Field("userId") userId: Int): Observable<UserLinkedAccountsPaged>
 
     @GET("/api/edge/linked-accounts/{id}")
-    fun getLinkedAccountsResource(@Path("id") id:Int)
+    fun getLinkedAccountsResource(@Path("id") id: Int): Observable<UserLinkedAccounts>
 
     @POST("/api/edge/linked-accounts")
-    fun postLinkedAccounts(@Body data:String)
+    fun postLinkedAccounts(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/linked-accounts/{id}")
-    fun updateLinkedAccounts(@Path("id") id:Int,@Body data:String)
+    fun updateLinkedAccounts(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/linked-accounts/{id}")
-    fun deleteLinkedAccounts(@Path("id") id:Int,@Body data:String)
+    fun deleteLinkedAccounts(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/profile-link-sites")
