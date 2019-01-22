@@ -30,6 +30,8 @@ import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
 import pt.dbmg.mobiletaiga.network.response.UserBlocksError
 import pt.dbmg.mobiletaiga.network.response.UserFavorites
 import pt.dbmg.mobiletaiga.network.response.UserFavoritesPaged
+import pt.dbmg.mobiletaiga.network.response.UserFollows
+import pt.dbmg.mobiletaiga.network.response.UserFollowsPaged
 import pt.dbmg.mobiletaiga.network.response.UsersBlocks
 import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
@@ -529,19 +531,19 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/follows")
-    fun getFollowsCollection(@Field("follower")follower: Int, @Field("followed")followed:String)
+    fun getFollowsCollection(@Field("follower") follower: Int, @Field("followed") followed: String): Observable<UserFollowsPaged>
 
     @GET("/api/edge/follows/{id}")
-    fun getFollowsResource(@Path("id") id:Int)
+    fun getFollowsResource(@Path("id") id: Int): Observable<UserFollows>
 
     @POST("/api/edge/follows")
-    fun postFollows(@Body data:String)
+    fun postFollows(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/follows/{id}")
-    fun updateFollows(@Path("id") id:Int,@Body data:String)
+    fun updateFollows(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/follows/{id}")
-    fun deleteFollows(@Path("id") id:Int,@Body data:String)
+    fun deleteFollows(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/linked-accounts")
