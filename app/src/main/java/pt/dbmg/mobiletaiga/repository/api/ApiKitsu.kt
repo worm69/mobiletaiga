@@ -25,6 +25,8 @@ import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
 import pt.dbmg.mobiletaiga.network.response.Producers
 import pt.dbmg.mobiletaiga.network.response.ProducersPaged
+import pt.dbmg.mobiletaiga.network.response.SiteAnnouncements
+import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -44,7 +46,7 @@ interface ApiKitsu {
     @POST("/api/oauth/token")
     fun getToken(@Field("grant_type") grant_type: String, @Field("username")username: String,  @Field("password")password: String)
 
-    //region Characters & People
+    //region Characters & People Done
     @GET("/api/edge/anime-characters")
     fun getAnimeCharactersCollection(@Field("animeId") animeId: Int): Observable<AnimeCharactersPaged>
 
@@ -441,12 +443,12 @@ interface ApiKitsu {
 
     //endregion
 
-    //region Site Announcements
+    //region Site Announcements Done
     @GET("/api/edge/site-announcements")
-    fun getSiteAnnouncementsCollection()
+    fun getSiteAnnouncementsCollection(): Observable<SiteAnnouncementsPaged>
 
     @GET("/api/edge/site-announcements/{id}")
-    fun getSiteAnnouncementsDramaResource(@Path("id") id:Int)
+    fun getSiteAnnouncementsDramaResource(@Path("id") id: Int): Observable<SiteAnnouncements>
     //endregion
 
     //region User Libraries
