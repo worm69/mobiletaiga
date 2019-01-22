@@ -13,7 +13,10 @@ import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
+import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
+import pt.dbmg.mobiletaiga.network.response.People
+import pt.dbmg.mobiletaiga.network.response.PeoplePaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -78,13 +81,13 @@ interface ApiKitsu {
     fun getMangaStaffCollection(@Field("mangaId") manga_Id: Int): Observable<MangaStaffPaged>
 
     @GET("/api/edge/manga-staff/{id}")
-    fun getMangaStaffResource(@Path("id") id: Int): Observable<MangaStaffPaged>
+    fun getMangaStaffResource(@Path("id") id: Int): Observable<MangaStaff>
 
     @GET("/api/edge/people")
-    fun getPeopleCollection(@Field("id")id: Int)
+    fun getPeopleCollection(@Field("id") id: Int): Observable<PeoplePaged>
 
     @GET("/api/edge/people/{id}")
-    fun getPeopleResource(@Path("id") id:Int)
+    fun getPeopleResource(@Path("id") id: Int): Observable<People>
 
     @GET("/api/edge/producers")
     fun getProducersCollection(@Field("slug")slug: String)
