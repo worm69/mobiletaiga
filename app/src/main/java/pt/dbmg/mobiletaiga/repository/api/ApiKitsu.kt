@@ -11,12 +11,16 @@ import pt.dbmg.mobiletaiga.network.response.Castings
 import pt.dbmg.mobiletaiga.network.response.CastingsPaged
 import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
+import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
+import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
 import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
+import pt.dbmg.mobiletaiga.network.response.Producers
+import pt.dbmg.mobiletaiga.network.response.ProducersPaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -90,18 +94,18 @@ interface ApiKitsu {
     fun getPeopleResource(@Path("id") id: Int): Observable<People>
 
     @GET("/api/edge/producers")
-    fun getProducersCollection(@Field("slug")slug: String)
+    fun getProducersCollection(@Field("slug") slug: String): Observable<ProducersPaged>
 
     @GET("/api/edge/producers/{id}")
-    fun getProducersResource(@Path("id") id:Int)
+    fun getProducersResource(@Path("id") id: Int): Observable<Producers>
     //endregion
 
     //region Groups
     @GET("/api/edge/group-action-logs")
-    fun getGroupActionLogsCollection(@Field("group")group: String)
+    fun getGroupActionLogsCollection(@Field("group") group: String): Observable<GroupActionLogsPaged>
 
     @GET("/api/edge/group-action-logs/{id}")
-    fun getGroupActionLogsResource(@Path("id") id:Int)
+    fun getGroupActionLogsResource(@Path("id") id: Int): Observable<GroupActionLogs>
 
     @GET("/api/edge/group-bans")
     fun getGroupBansCollection(@Field("group")group: String)
