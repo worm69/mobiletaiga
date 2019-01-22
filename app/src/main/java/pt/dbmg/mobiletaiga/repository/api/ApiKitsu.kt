@@ -17,6 +17,7 @@ import pt.dbmg.mobiletaiga.network.response.GroupBans
 import pt.dbmg.mobiletaiga.network.response.GroupBansPaged
 import pt.dbmg.mobiletaiga.network.response.GroupCategories
 import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
+import pt.dbmg.mobiletaiga.network.response.LibraryEntriesPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
@@ -472,7 +473,13 @@ interface ApiKitsu {
 
     //region User Libraries
     @GET("/api/edge/library-entries")
-    fun getLibraryEntriesCollection(@Field("userId")userId: Int, @Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int,@Field("kind")kind:String,@Field("following")following:Boolean,@Field("since")since:Date,@Field("status")status:String,@Field("title")title:String)
+    fun getLibraryEntriesCollection(
+        @Field("userId") userId: Int, @Field("anime_id") anime_id: Int, @Field("manga_id") manga_id: Int, @Field(
+            "drama_id"
+        ) drama_id: Int, @Field("kind") kind: String, @Field("following") following: Boolean, @Field("since") since: Date, @Field(
+            "status"
+        ) status: String, @Field("title") title: String
+    ): Observable<LibraryEntriesPaged>
 
     @GET("/api/edge/library-entries/{id}")
     fun getLibraryEntriesResource(@Path("id") id:Int)
