@@ -28,6 +28,8 @@ import pt.dbmg.mobiletaiga.network.response.ProducersPaged
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncements
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
 import pt.dbmg.mobiletaiga.network.response.UserBlocksError
+import pt.dbmg.mobiletaiga.network.response.UserFavorites
+import pt.dbmg.mobiletaiga.network.response.UserFavoritesPaged
 import pt.dbmg.mobiletaiga.network.response.UsersBlocks
 import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
@@ -511,19 +513,19 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/favorites")
-    fun getFavoritesCollection(@Field("userId")userId: Int, @Field("itemType")itemType:String, @Field("itemId")itemId:String)
+    fun getFavoritesCollection(@Field("userId") userId: Int, @Field("itemType") itemType: String, @Field("itemId") itemId: String): Observable<UserFavoritesPaged>
 
     @GET("/api/edge/favorites/{id}")
-    fun getFavoritesResource(@Path("id") id:Int)
+    fun getFavoritesResource(@Path("id") id: Int): Observable<UserFavorites>
 
     @POST("/api/edge/favorites")
-    fun postFavorites(@Body data:String)
+    fun postFavorites(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/favorites/{id}")
-    fun updateFavorites(@Path("id") id:Int,@Body data:String)
+    fun updateFavorites(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/favorites/{id}")
-    fun deleteFavorites(@Path("id") id:Int,@Body data:String)
+    fun deleteFavorites(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/follows")
