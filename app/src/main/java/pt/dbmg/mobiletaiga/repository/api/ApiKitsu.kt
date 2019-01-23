@@ -53,6 +53,8 @@ import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
 import pt.dbmg.mobiletaiga.network.response.MappingsPaged
 import pt.dbmg.mobiletaiga.network.response.MediaAttributeVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaAttributeVotesResource
+import pt.dbmg.mobiletaiga.network.response.MediaAttributesPaged
+import pt.dbmg.mobiletaiga.network.response.MediaAttributesResource
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactions
@@ -359,11 +361,21 @@ interface ApiKitsu {
     @GET("/api/edge/media-attribute-votes/{id}")
     fun geMediaAttributeVotesResource(@Path("id") id: Int): Observable<MediaAttributeVotesResource>
 
+    @POST("/api/edge/media-attribute-votes")
+    fun postMediaAttributeVotes(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/media-attribute-votes/{id}")
+    fun updateMediaAttributeVotes(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/media-attribute-votes/{id}")
+    fun deleteMediaAttributeVotes(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+
     @GET("/api/edge/media-attributes")
-    fun getMediaAttributesCollection(@Field("slug")slug:String)
+    fun getMediaAttributesCollection(@Field("slug") slug: String): Observable<MediaAttributesPaged>
 
     @GET("/api/edge/media-attributes/{id}")
-    fun getMediaAttributesResource(@Path("id") id:Int)
+    fun getMediaAttributesResource(@Path("id") id: Int): Observable<MediaAttributesResource>
 
     @GET("/api/edge/media-follows")
     fun getMediaFollowsCollection(@Field("slug")slug:String)
