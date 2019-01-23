@@ -46,6 +46,8 @@ import pt.dbmg.mobiletaiga.network.response.LibraryEvents
 import pt.dbmg.mobiletaiga.network.response.LibraryEventsPaged
 import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
+import pt.dbmg.mobiletaiga.network.response.MangaPaged
+import pt.dbmg.mobiletaiga.network.response.MangaResource
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
@@ -333,10 +335,10 @@ interface ApiKitsu {
     fun getInstallmentsResource(@Path("id") id: Int): Observable<InstallmentsResource>
 
     @GET("/api/edge/manga")
-    fun getMangaCollection(@Field("chapterCount")chapterCount:Int)
+    fun getMangaCollection(@Field("chapterCount") chapterCount: Int): Observable<MangaPaged>
 
     @GET("/api/edge/manga/{id}")
-    fun getMangaResource(@Path("id") id:Int)
+    fun getMangaResource(@Path("id") id: Int): Observable<MangaResource>
 
     @GET("/api/edge/mappings")
     fun getMappingsCollection(@Field("externalSite")externalSite:String, @Field("externalId")externalId:Int)
