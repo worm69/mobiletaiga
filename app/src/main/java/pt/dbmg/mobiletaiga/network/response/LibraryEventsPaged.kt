@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class LibraryEventsPaged(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXX>,
+    val `data`: List<DataLibraryEvents>,
     @SerializedName("links")
     val links: Links4,
     @SerializedName("meta")

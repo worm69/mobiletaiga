@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Producers(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXX>
+    val `data`: List<DataProducers>
 )

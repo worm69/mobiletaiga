@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PostFollows(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataPostFollows>
 )

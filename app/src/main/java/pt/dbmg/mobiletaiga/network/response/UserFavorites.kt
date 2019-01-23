@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class UserFavorites(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXX>
+    val `data`: List<DataUserFavorites>
 )

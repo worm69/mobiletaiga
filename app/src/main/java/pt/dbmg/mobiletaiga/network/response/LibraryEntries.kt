@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class LibraryEntries(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataLibraryEntries>
 )

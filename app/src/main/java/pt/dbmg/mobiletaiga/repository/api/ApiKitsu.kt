@@ -222,7 +222,7 @@ interface ApiKitsu {
     fun getGroupLeaderChatMessagesResource(@Path("id") id:Int)
     //endregion
 
-    //region Anime
+    //region Media
     /**
      *@param season	winter, spring, summer, fall
      *@param seasonYear	2017, 2005,2006
@@ -351,7 +351,7 @@ interface ApiKitsu {
 
     //endregion
 
-    //region Posts
+    //region Posts Done
     @GET("/api/edge/comment-likes")
     fun getCommentLikesCollection(@Field("commentId") commentId: Int, @Field("userId") userId: Int): Observable<CommentLikesPaged>
 

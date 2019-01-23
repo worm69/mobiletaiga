@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class ReviewsResource(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataReviews>
 )

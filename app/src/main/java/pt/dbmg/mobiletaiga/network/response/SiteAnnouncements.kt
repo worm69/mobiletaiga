@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class SiteAnnouncements(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXX>
+    val `data`: List<DataSiteAnnouncements>
 )

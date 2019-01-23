@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class GroupActionLogs(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXX>
+    val `data`: List<DataGroupActionLogs>
 )

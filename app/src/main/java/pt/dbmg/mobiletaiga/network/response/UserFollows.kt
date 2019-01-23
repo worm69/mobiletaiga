@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class UserFollows(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXX>
+    val `data`: List<DataUserFollows>
 )

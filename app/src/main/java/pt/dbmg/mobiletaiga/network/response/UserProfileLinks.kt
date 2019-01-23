@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class UserProfileLinks(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataUserProfileLinks>
 )

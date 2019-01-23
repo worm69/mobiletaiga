@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PostResource(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataPost>
 )

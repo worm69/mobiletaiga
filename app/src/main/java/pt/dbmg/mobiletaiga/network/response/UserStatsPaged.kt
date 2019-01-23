@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class UserStatsPaged(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataUserStats>
 )

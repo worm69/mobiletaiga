@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CommentLikesResource(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>,
+    val `data`: List<DataCommentLikes>,
     @SerializedName("links")
     val links: Links4,
     @SerializedName("meta")

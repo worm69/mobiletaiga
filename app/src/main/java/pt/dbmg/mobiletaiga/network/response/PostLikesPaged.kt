@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PostLikesPaged(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>,
+    val `data`: List<DataPostLikes>,
     @SerializedName("links")
     val links: Links4,
     @SerializedName("meta")

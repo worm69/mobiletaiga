@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MediaReactionsPaged(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXX>,
+    val `data`: List<DataMediaReactions>,
     @SerializedName("links")
     val links: Links4,
     @SerializedName("meta")

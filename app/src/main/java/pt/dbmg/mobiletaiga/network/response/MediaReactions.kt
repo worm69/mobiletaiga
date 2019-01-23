@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class MediaReactions(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataMediaReactions>
 )

@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class AnimeStaff(
     @SerializedName("data")
-    val `data`: DataXXXX
+    val `data`: DataAnimeStaff
 )

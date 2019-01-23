@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class CommentLikesPaged(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
+    val `data`: List<DataCommentLikes>
 )

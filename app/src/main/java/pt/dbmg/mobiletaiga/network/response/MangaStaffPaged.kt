@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MangaStaffPaged(
     @SerializedName("data")
-    val `data`: List<DataXXXXXX>,
+    val `data`: List<DataMangaStaff>,
     @SerializedName("links")
     val links: Links4,
     @SerializedName("meta")
