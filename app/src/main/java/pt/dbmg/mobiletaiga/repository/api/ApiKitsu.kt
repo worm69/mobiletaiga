@@ -13,6 +13,7 @@ import pt.dbmg.mobiletaiga.network.response.Castings
 import pt.dbmg.mobiletaiga.network.response.CastingsPaged
 import pt.dbmg.mobiletaiga.network.response.CategoriesPaged
 import pt.dbmg.mobiletaiga.network.response.CategoriesResource
+import pt.dbmg.mobiletaiga.network.response.CategoryFavoritesPaged
 import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
 import pt.dbmg.mobiletaiga.network.response.CommentLikesPaged
@@ -249,11 +250,22 @@ interface ApiKitsu {
     @GET("/api/edge/categories/{id}")
     fun getCategoriesResource(@Path("id") id: Int): Observable<CategoriesResource>
 
+
     @GET("/api/edge/category-favorites")
-    fun getCategoryFavoritesCollection(@Field("userId")userId: Int, @Field("categoryId")categoryId: Int)
+    fun getCategoryFavoritesCollection(@Field("userId") userId: Int, @Field("categoryId") categoryId: Int): Observable<CategoryFavoritesPaged>
 
     @GET("/api/edge/category-favorites/{id}")
-    fun getCategoryFavoritesResource(@Path("id") id:Int)
+    fun getCategoryFavoritesResource(@Path("id") id: Int): Observable<CategoriesResource>
+
+    @POST("/api/edge/category-favorites")
+    fun postCategoryFavorites(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/category-favorites/{id}")
+    fun updateCategoryFavorites(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/category-favorites/{id}")
+    fun deleteCategoryFavorites(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     /**
      * @param mangaId	2, '8,987'

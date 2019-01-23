@@ -62,12 +62,12 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 //                .builder()
 //                .id(15125)
 //                .build())
-//                .enqueue(object : ApolloCall.Callback<FindQuery.Data>() {
+//                .enqueue(object : ApolloCall.Callback<FindQuery.DataCategoryFavorites>() {
 //
 //                    override fun onFailure(e: ApolloException) {
 //                        Log.info(e.message.toString())
 //                    }
-//                    override fun onResponse(response: Response<FindQuery.Data>) {
+//                    override fun onResponse(response: Response<FindQuery.DataCategoryFavorites>) {
 //                        Log.info(response.toString())
 //                        android.util.Log.w(response.data()?.Media()?.title()?.romaji(), MainActivity::class.java.name)
 //
