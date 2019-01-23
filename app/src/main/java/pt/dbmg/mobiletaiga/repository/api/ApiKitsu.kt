@@ -50,6 +50,7 @@ import pt.dbmg.mobiletaiga.network.response.MangaPaged
 import pt.dbmg.mobiletaiga.network.response.MangaResource
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
+import pt.dbmg.mobiletaiga.network.response.MappingsPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactions
@@ -341,10 +342,10 @@ interface ApiKitsu {
     fun getMangaResource(@Path("id") id: Int): Observable<MangaResource>
 
     @GET("/api/edge/mappings")
-    fun getMappingsCollection(@Field("externalSite")externalSite:String, @Field("externalId")externalId:Int)
+    fun getMappingsCollection(@Field("externalSite") externalSite: String, @Field("externalId") externalId: Int): Observable<MappingsPaged>
 
     @GET("/api/edge/mappings/{id}")
-    fun getMappingsResource(@Path("id") id:Int)
+    fun getMappingsResource(@Path("id") id: Int): Observable<MangaResource>
 
     @GET("/api/edge/media-attribute-votes")
     fun getMediaAttributeVotesCollection(@Field("createdAt")createdAt:String, @Field("userId")userId:Int, @Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int)
