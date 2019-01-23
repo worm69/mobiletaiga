@@ -11,6 +11,8 @@ import pt.dbmg.mobiletaiga.network.response.AnimeStaff
 import pt.dbmg.mobiletaiga.network.response.AnimeStaffPaged
 import pt.dbmg.mobiletaiga.network.response.Castings
 import pt.dbmg.mobiletaiga.network.response.CastingsPaged
+import pt.dbmg.mobiletaiga.network.response.CategoriesPaged
+import pt.dbmg.mobiletaiga.network.response.CategoriesResource
 import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
 import pt.dbmg.mobiletaiga.network.response.CommentLikesPaged
@@ -242,10 +244,10 @@ interface ApiKitsu {
     fun getAnimeResource(@Path("id") id: Int): Observable<AnimeResource>
 
     @GET("/api/edge/categories")
-    fun getCategoriesCollection(@Field("parentId")season: Int, @Field("slug")slug: Int,@Field("nsfw")nsfw: Boolean)
+    fun getCategoriesCollection(@Field("parentId") season: Int, @Field("slug") slug: Int, @Field("nsfw") nsfw: Boolean): Observable<CategoriesPaged>
 
     @GET("/api/edge/categories/{id}")
-    fun getCategoriesResource(@Path("id") id:Int)
+    fun getCategoriesResource(@Path("id") id: Int): Observable<CategoriesResource>
 
     @GET("/api/edge/category-favorites")
     fun getCategoryFavoritesCollection(@Field("userId")userId: Int, @Field("categoryId")categoryId: Int)
