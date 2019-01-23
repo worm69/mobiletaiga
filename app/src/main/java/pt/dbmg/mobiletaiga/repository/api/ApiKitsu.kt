@@ -41,6 +41,8 @@ import pt.dbmg.mobiletaiga.network.response.PostFollows
 import pt.dbmg.mobiletaiga.network.response.PostFollowsPaged
 import pt.dbmg.mobiletaiga.network.response.PostLikes
 import pt.dbmg.mobiletaiga.network.response.PostLikesPaged
+import pt.dbmg.mobiletaiga.network.response.PostPaged
+import pt.dbmg.mobiletaiga.network.response.PostResource
 import pt.dbmg.mobiletaiga.network.response.Producers
 import pt.dbmg.mobiletaiga.network.response.ProducersPaged
 import pt.dbmg.mobiletaiga.network.response.ReviewLikes
@@ -407,10 +409,10 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/posts")
-    fun getPostsCollection(@Field("postId")postId: Int, @Field("parentId")parentId: Int)
+    fun getPostsCollection(@Field("postId") postId: Int, @Field("parentId") parentId: Int): Observable<PostPaged>
 
     @GET("/api/edge/posts/{id}")
-    fun getPostsResource(@Path("id") id:Int)
+    fun getPostsResource(@Path("id") id: Int): Observable<PostResource>
 
     @POST("/api/edge/posts")
     fun postPost(@Body data: String): Observable<UserBlocksError>
