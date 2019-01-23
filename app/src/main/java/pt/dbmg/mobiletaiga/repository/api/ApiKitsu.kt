@@ -37,6 +37,10 @@ import pt.dbmg.mobiletaiga.network.response.MediaReactions
 import pt.dbmg.mobiletaiga.network.response.MediaReactionsPaged
 import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
+import pt.dbmg.mobiletaiga.network.response.PostFollows
+import pt.dbmg.mobiletaiga.network.response.PostFollowsPaged
+import pt.dbmg.mobiletaiga.network.response.PostLikes
+import pt.dbmg.mobiletaiga.network.response.PostLikesPaged
 import pt.dbmg.mobiletaiga.network.response.Producers
 import pt.dbmg.mobiletaiga.network.response.ProducersPaged
 import pt.dbmg.mobiletaiga.network.response.ReviewLikes
@@ -376,10 +380,10 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/post-likes")
-    fun getPostLikesCollection(@Field("postId")postId: Int, @Field("userId")userId: Int)
+    fun getPostLikesCollection(@Field("postId") postId: Int, @Field("userId") userId: Int): Observable<PostLikesPaged>
 
     @GET("/api/edge/post-likes/{id}")
-    fun getPostLikesResource(@Path("id") id:Int)
+    fun getPostLikesResource(@Path("id") id: Int): Observable<PostLikes>
 
     @POST("/api/edge/post-likes")
     fun postPostLike(@Body data: String): Observable<UserBlocksError>
@@ -390,16 +394,16 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/post-follows")
-    fun getPostFollowsCollection(@Field("postId")postId: Int, @Field("userId")userId: Int)
+    fun getPostFollowsCollection(@Field("postId") postId: Int, @Field("userId") userId: Int): Observable<PostFollowsPaged>
 
     @GET("/api/edgepost-follows/{id}")
-    fun getPostFollowsResource(@Path("id") id:Int)
+    fun getPostFollowsResource(@Path("id") id: Int): Observable<PostFollows>
 
     @POST("/api/edge/post-follows")
-    fun postPostFollow(@Body data:String)
+    fun postPostFollow(@Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/post-follows/{id}")
-    fun deletePostFollow(@Path("id") id:Int,@Body data:String)
+    fun deletePostFollow(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/posts")
@@ -409,19 +413,19 @@ interface ApiKitsu {
     fun getPostsResource(@Path("id") id:Int)
 
     @POST("/api/edge/posts")
-    fun postPost(@Body data:String)
+    fun postPost(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/posts/{id}")
-    fun updatePost(@Path("id") id:Int,@Body data:String)
+    fun updatePost(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/posts/{id}")
-    fun deletePost(@Path("id") id:Int,@Body data:String)
+    fun deletePost(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @POST("/api/edge/reports")
-    fun postReport(@Body data:String)
+    fun postReport(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/reports/{id}")
-    fun updateReport(@Path("id") id:Int,@Body data:String)
+    fun updateReport(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     //endregion
