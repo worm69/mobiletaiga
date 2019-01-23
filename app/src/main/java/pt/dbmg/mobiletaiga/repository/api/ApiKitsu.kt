@@ -55,6 +55,8 @@ import pt.dbmg.mobiletaiga.network.response.MediaAttributeVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaAttributeVotesResource
 import pt.dbmg.mobiletaiga.network.response.MediaAttributesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaAttributesResource
+import pt.dbmg.mobiletaiga.network.response.MediaFollowsPaged
+import pt.dbmg.mobiletaiga.network.response.MediaFollowsResource
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactions
@@ -378,10 +380,10 @@ interface ApiKitsu {
     fun getMediaAttributesResource(@Path("id") id: Int): Observable<MediaAttributesResource>
 
     @GET("/api/edge/media-follows")
-    fun getMediaFollowsCollection(@Field("slug")slug:String)
+    fun getMediaFollowsCollection(@Field("slug") slug: String): Observable<MediaFollowsPaged>
 
     @GET("/api/edge/media-follows/{id}")
-    fun getMediaFollowsResource(@Path("id") id:Int)
+    fun getMediaFollowsResource(@Path("id") id: Int): Observable<MediaFollowsResource>
 
     @GET("/api/edge/media-relationships")
     fun getMediaRelationshipsCollection(@Field("role")role:String,@Field("sourceType")sourceType:String,@Field("sourceId")sourceId:Int,@Field("destinationId")destinationId:Int )
