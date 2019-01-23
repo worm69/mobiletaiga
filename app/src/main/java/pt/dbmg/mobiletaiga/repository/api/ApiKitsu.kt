@@ -37,6 +37,8 @@ import pt.dbmg.mobiletaiga.network.response.Producers
 import pt.dbmg.mobiletaiga.network.response.ProducersPaged
 import pt.dbmg.mobiletaiga.network.response.ReviewLikes
 import pt.dbmg.mobiletaiga.network.response.ReviewLikesPaged
+import pt.dbmg.mobiletaiga.network.response.ReviewsPaged
+import pt.dbmg.mobiletaiga.network.response.ReviewsResource
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncements
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
 import pt.dbmg.mobiletaiga.network.response.UserBlocksError
@@ -413,7 +415,7 @@ interface ApiKitsu {
 
     //endregion
 
-    //region Reactions
+    //region Reactions Done
     @GET("/api/edge/media-reaction-votes")
     fun getMediaReactionVotesCollection(@Field("postId") postId: Int, @Field("parentId") parentId: Int): Observable<MediaReactionVotesPaged>
 
@@ -463,10 +465,14 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/reviews")
-    fun getReviewCollection(@Field("userId")userId: Int, @Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int,@Field("kind")kind:String)
+    fun getReviewCollection(
+        @Field("userId") userId: Int, @Field("anime_id") anime_id: Int, @Field("manga_id") manga_id: Int, @Field(
+            "drama_id"
+        ) drama_id: Int, @Field("kind") kind: String
+    ): Observable<ReviewsPaged>
 
     @GET("/api/edge/reviews/{id}")
-    fun getReviewResource(@Path("id") id:Int)
+    fun getReviewResource(@Path("id") id: Int): Observable<ReviewsResource>
 
     @POST("/api/edge/reviews")
     fun postReview(@Body data: String): Observable<UserBlocksError>
