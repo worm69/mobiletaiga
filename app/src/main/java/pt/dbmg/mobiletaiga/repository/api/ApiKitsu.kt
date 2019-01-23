@@ -27,6 +27,8 @@ import pt.dbmg.mobiletaiga.network.response.MangaCharacters
 import pt.dbmg.mobiletaiga.network.response.MangaCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
+import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
+import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
 import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
 import pt.dbmg.mobiletaiga.network.response.Producers
@@ -409,16 +411,16 @@ interface ApiKitsu {
 
     //region Reactions
     @GET("/api/edge/media-reaction-votes")
-    fun getMediaReactionVotesCollection(@Field("postId")postId: Int, @Field("parentId")parentId: Int)
+    fun getMediaReactionVotesCollection(@Field("postId") postId: Int, @Field("parentId") parentId: Int): Observable<MediaReactionVotesPaged>
 
     @GET("/api/edge/media-reaction-votes/{id}")
-    fun getMediaReactionVotesResource(@Path("id") id:Int)
+    fun getMediaReactionVotesResource(@Path("id") id: Int): Observable<MediaReactionVotes>
 
     @POST("/api/edge/media-reaction-votes")
-    fun postMediaReactionVotes(@Body data:String)
+    fun postMediaReactionVotes(@Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/media-reaction-votes/{id}")
-    fun deleteMediaReactionVotes(@Path("id") id:Int,@Body data:String)
+    fun deleteMediaReactionVotes(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/media-reactions")
@@ -428,13 +430,13 @@ interface ApiKitsu {
     fun getMediaReactionResource(@Path("id") id:Int)
 
     @POST("/api/edge/media-reactions")
-    fun postMediaReaction(@Body data:String)
+    fun postMediaReaction(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/media-reactions/{id}")
-    fun updateMediaReaction(@Path("id") id:Int,@Body data:String)
+    fun updateMediaReaction(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/media-reactions/{id}")
-    fun deleteMediaReaction(@Path("id") id:Int,@Body data:String)
+    fun deleteMediaReaction(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/review-likes")
@@ -444,10 +446,10 @@ interface ApiKitsu {
     fun getReviewLikesResource(@Path("id") id:Int)
 
     @POST("/api/edge/review-likes")
-    fun postReviewLikes(@Body data:String)
+    fun postReviewLikes(@Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/review-likes/{id}")
-    fun deleteReviewLikes(@Path("id") id:Int,@Body data:String)
+    fun deleteReviewLikes(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/reviews")
@@ -457,13 +459,13 @@ interface ApiKitsu {
     fun getReviewResource(@Path("id") id:Int)
 
     @POST("/api/edge/reviews")
-    fun postReview(@Body data:String)
+    fun postReview(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/reviews/{id}")
-    fun updateReview(@Path("id") id:Int,@Body data:String)
+    fun updateReview(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/reviews/{id}")
-    fun deleteReview(@Path("id") id:Int,@Body data:String)
+    fun deleteReview(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     //endregion
