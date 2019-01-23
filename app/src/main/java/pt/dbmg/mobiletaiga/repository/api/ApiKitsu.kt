@@ -24,6 +24,8 @@ import pt.dbmg.mobiletaiga.network.response.CommentsPaged
 import pt.dbmg.mobiletaiga.network.response.CommentsResource
 import pt.dbmg.mobiletaiga.network.response.DramaPaged
 import pt.dbmg.mobiletaiga.network.response.DramaResource
+import pt.dbmg.mobiletaiga.network.response.EpisodesPaged
+import pt.dbmg.mobiletaiga.network.response.EpisodesResource
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupBans
@@ -293,10 +295,14 @@ interface ApiKitsu {
      * @param kind anime, 'anime,manga'
      */
     @GET("/api/edge/episodes")
-    fun getEpisodesCollection(@Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int,@Field("kind")kind:String,@Field("number")number:Int)
+    fun getEpisodesCollection(
+        @Field("anime_id") anime_id: Int, @Field("manga_id") manga_id: Int, @Field("drama_id") drama_id: Int, @Field(
+            "kind"
+        ) kind: String, @Field("number") number: Int
+    ): Observable<EpisodesPaged>
 
     @GET("/api/edge/episodes/{id}")
-    fun getEpisodesResource(@Path("id") id:Int)
+    fun getEpisodesResource(@Path("id") id: Int): Observable<EpisodesResource>
 
     @GET("/api/edge/franchises")
     fun getFranchisesCollection()
