@@ -35,6 +35,8 @@ import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
 import pt.dbmg.mobiletaiga.network.response.Producers
 import pt.dbmg.mobiletaiga.network.response.ProducersPaged
+import pt.dbmg.mobiletaiga.network.response.ReviewLikes
+import pt.dbmg.mobiletaiga.network.response.ReviewLikesPaged
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncements
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
 import pt.dbmg.mobiletaiga.network.response.UserBlocksError
@@ -448,10 +450,10 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/review-likes")
-    fun getReviewLikesCollection(@Field("reviewId")reviewId: Int, @Field("userId")userId: Int)
+    fun getReviewLikesCollection(@Field("reviewId") reviewId: Int, @Field("userId") userId: Int): Observable<ReviewLikesPaged>
 
     @GET("/api/edge/review-likes/{id}")
-    fun getReviewLikesResource(@Path("id") id:Int)
+    fun getReviewLikesResource(@Path("id") id: Int): Observable<ReviewLikes>
 
     @POST("/api/edge/review-likes")
     fun postReviewLikes(@Body data: String): Observable<UserBlocksError>
