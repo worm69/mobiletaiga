@@ -61,6 +61,8 @@ import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactions
 import pt.dbmg.mobiletaiga.network.response.MediaReactionsPaged
+import pt.dbmg.mobiletaiga.network.response.MediaRelationshipsPaged
+import pt.dbmg.mobiletaiga.network.response.MediaRelationshipsResource
 import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
 import pt.dbmg.mobiletaiga.network.response.PostFollows
@@ -386,10 +388,14 @@ interface ApiKitsu {
     fun getMediaFollowsResource(@Path("id") id: Int): Observable<MediaFollowsResource>
 
     @GET("/api/edge/media-relationships")
-    fun getMediaRelationshipsCollection(@Field("role")role:String,@Field("sourceType")sourceType:String,@Field("sourceId")sourceId:Int,@Field("destinationId")destinationId:Int )
+    fun getMediaRelationshipsCollection(
+        @Field("role") role: String, @Field("sourceType") sourceType: String, @Field("sourceId") sourceId: Int, @Field(
+            "destinationId"
+        ) destinationId: Int
+    ): Observable<MediaRelationshipsPaged>
 
     @GET("/api/edge/media-relationships/{id}")
-    fun getMediaRelationshipsResource(@Path("id") id:Int)
+    fun getMediaRelationshipsResource(@Path("id") id: Int): Observable<MediaRelationshipsResource>
 
     @GET("/api/edge/streamers")
     fun getStreamersCollection()
