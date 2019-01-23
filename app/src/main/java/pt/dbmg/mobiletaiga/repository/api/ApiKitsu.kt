@@ -28,6 +28,8 @@ import pt.dbmg.mobiletaiga.network.response.EpisodesPaged
 import pt.dbmg.mobiletaiga.network.response.EpisodesResource
 import pt.dbmg.mobiletaiga.network.response.FranchisesPaged
 import pt.dbmg.mobiletaiga.network.response.FranchisesResource
+import pt.dbmg.mobiletaiga.network.response.GenresPaged
+import pt.dbmg.mobiletaiga.network.response.GenresResource
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupBans
@@ -313,10 +315,10 @@ interface ApiKitsu {
     fun getFranchisesResource(@Path("id") id: Int): Observable<FranchisesResource>
 
     @GET("/api/edge/genres")
-    fun getGenresCollection()
+    fun getGenresCollection(): Observable<GenresPaged>
 
     @GET("/api/edge/genres/{id}")
-    fun getGenresResource(@Path("id") id:Int)
+    fun getGenresResource(@Path("id") id: Int): Observable<GenresResource>
 
     @GET("/api/edge/installments")
     fun getInstallmentsCollection(@Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int,@Field("kind")kind:String)
