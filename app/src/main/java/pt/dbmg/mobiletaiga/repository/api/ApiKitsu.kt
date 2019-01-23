@@ -29,6 +29,8 @@ import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
+import pt.dbmg.mobiletaiga.network.response.MediaReactions
+import pt.dbmg.mobiletaiga.network.response.MediaReactionsPaged
 import pt.dbmg.mobiletaiga.network.response.People
 import pt.dbmg.mobiletaiga.network.response.PeoplePaged
 import pt.dbmg.mobiletaiga.network.response.Producers
@@ -424,10 +426,16 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/media-reactions")
-    fun getMediaReactionCollection(@Field("createdAt")createdAt: String, @Field("upVotesCount")upVotesCount: Int, @Field("userId")userId: Int, @Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int,@Field("kind")kind:String)
+    fun getMediaReactionCollection(
+        @Field("createdAt") createdAt: String, @Field("upVotesCount") upVotesCount: Int, @Field(
+            "userId"
+        ) userId: Int, @Field("anime_id") anime_id: Int, @Field("manga_id") manga_id: Int, @Field("drama_id") drama_id: Int, @Field(
+            "kind"
+        ) kind: String
+    ): Observable<MediaReactionsPaged>
 
     @GET("/api/edge/media-reactions/{id}")
-    fun getMediaReactionResource(@Path("id") id:Int)
+    fun getMediaReactionResource(@Path("id") id: Int): Observable<MediaReactions>
 
     @POST("/api/edge/media-reactions")
     fun postMediaReaction(@Body data: String): Observable<UserBlocksError>
