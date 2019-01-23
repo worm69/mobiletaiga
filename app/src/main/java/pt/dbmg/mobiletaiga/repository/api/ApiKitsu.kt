@@ -3,8 +3,10 @@ package pt.dbmg.mobiletaiga.repository.api
 import io.reactivex.Observable
 import pt.dbmg.mobiletaiga.network.response.AnimeCharacters
 import pt.dbmg.mobiletaiga.network.response.AnimeCharactersPaged
+import pt.dbmg.mobiletaiga.network.response.AnimePaged
 import pt.dbmg.mobiletaiga.network.response.AnimeProductions
 import pt.dbmg.mobiletaiga.network.response.AnimeProductionsPaged
+import pt.dbmg.mobiletaiga.network.response.AnimeResource
 import pt.dbmg.mobiletaiga.network.response.AnimeStaff
 import pt.dbmg.mobiletaiga.network.response.AnimeStaffPaged
 import pt.dbmg.mobiletaiga.network.response.Castings
@@ -230,10 +232,14 @@ interface ApiKitsu {
      *@param ageRating	G, PG,R,R18
      */
     @GET("/api/edge/anime")
-    fun getAnimeCollection(@Field("season")season: String, @Field("seasonYear")seasonYear: Int,@Field("streamers")streamers: String,@Field("ageRating")ageRating: String)
+    fun getAnimeCollection(
+        @Field("season") season: String, @Field("seasonYear") seasonYear: Int, @Field("streamers") streamers: String, @Field(
+            "ageRating"
+        ) ageRating: String
+    ): Observable<AnimePaged>
 
     @GET("/api/edge/anime/{id}")
-    fun getAnimeResource(@Path("id") id:Int)
+    fun getAnimeResource(@Path("id") id: Int): Observable<AnimeResource>
 
     @GET("/api/edge/categories")
     fun getCategoriesCollection(@Field("parentId")season: Int, @Field("slug")slug: Int,@Field("nsfw")nsfw: Boolean)
