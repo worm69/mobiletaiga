@@ -51,6 +51,8 @@ import pt.dbmg.mobiletaiga.network.response.MangaResource
 import pt.dbmg.mobiletaiga.network.response.MangaStaff
 import pt.dbmg.mobiletaiga.network.response.MangaStaffPaged
 import pt.dbmg.mobiletaiga.network.response.MappingsPaged
+import pt.dbmg.mobiletaiga.network.response.MediaAttributeVotesPaged
+import pt.dbmg.mobiletaiga.network.response.MediaAttributeVotesResource
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotes
 import pt.dbmg.mobiletaiga.network.response.MediaReactionVotesPaged
 import pt.dbmg.mobiletaiga.network.response.MediaReactions
@@ -348,10 +350,14 @@ interface ApiKitsu {
     fun getMappingsResource(@Path("id") id: Int): Observable<MangaResource>
 
     @GET("/api/edge/media-attribute-votes")
-    fun getMediaAttributeVotesCollection(@Field("createdAt")createdAt:String, @Field("userId")userId:Int, @Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int)
+    fun getMediaAttributeVotesCollection(
+        @Field("createdAt") createdAt: String, @Field("userId") userId: Int, @Field("anime_id") anime_id: Int, @Field(
+            "manga_id"
+        ) manga_id: Int, @Field("drama_id") drama_id: Int
+    ): Observable<MediaAttributeVotesPaged>
 
     @GET("/api/edge/media-attribute-votes/{id}")
-    fun geMediaAttributeVotesResource(@Path("id") id:Int)
+    fun geMediaAttributeVotesResource(@Path("id") id: Int): Observable<MediaAttributeVotesResource>
 
     @GET("/api/edge/media-attributes")
     fun getMediaAttributesCollection(@Field("slug")slug:String)
