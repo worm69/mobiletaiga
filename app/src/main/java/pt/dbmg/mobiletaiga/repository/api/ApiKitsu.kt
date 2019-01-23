@@ -26,6 +26,8 @@ import pt.dbmg.mobiletaiga.network.response.DramaPaged
 import pt.dbmg.mobiletaiga.network.response.DramaResource
 import pt.dbmg.mobiletaiga.network.response.EpisodesPaged
 import pt.dbmg.mobiletaiga.network.response.EpisodesResource
+import pt.dbmg.mobiletaiga.network.response.FranchisesPaged
+import pt.dbmg.mobiletaiga.network.response.FranchisesResource
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupBans
@@ -305,10 +307,10 @@ interface ApiKitsu {
     fun getEpisodesResource(@Path("id") id: Int): Observable<EpisodesResource>
 
     @GET("/api/edge/franchises")
-    fun getFranchisesCollection()
+    fun getFranchisesCollection(): Observable<FranchisesPaged>
 
     @GET("/api/edge/franchises/{id}")
-    fun getFranchisesResource(@Path("id") id:Int)
+    fun getFranchisesResource(@Path("id") id: Int): Observable<FranchisesResource>
 
     @GET("/api/edge/genres")
     fun getGenresCollection()
