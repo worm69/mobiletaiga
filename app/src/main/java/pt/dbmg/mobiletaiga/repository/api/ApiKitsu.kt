@@ -22,6 +22,8 @@ import pt.dbmg.mobiletaiga.network.response.CommentLikesPaged
 import pt.dbmg.mobiletaiga.network.response.CommentLikesResource
 import pt.dbmg.mobiletaiga.network.response.CommentsPaged
 import pt.dbmg.mobiletaiga.network.response.CommentsResource
+import pt.dbmg.mobiletaiga.network.response.DramaPaged
+import pt.dbmg.mobiletaiga.network.response.DramaResource
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupBans
@@ -279,10 +281,10 @@ interface ApiKitsu {
     fun getChaptersResource(@Path("id") id: Int): Observable<ChaptersResource>
 
     @GET("/api/edge/drama")
-    fun getDramaCollection()
+    fun getDramaCollection(): Observable<DramaPaged>
 
     @GET("/api/edge/drama/{id}")
-    fun getDramaResource(@Path("id") id:Int)
+    fun getDramaResource(@Path("id") id: Int): Observable<DramaResource>
 
     /**
      * @param anime_id Only one
