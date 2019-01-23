@@ -36,6 +36,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupBans
 import pt.dbmg.mobiletaiga.network.response.GroupBansPaged
 import pt.dbmg.mobiletaiga.network.response.GroupCategories
 import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
+import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
+import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
 import pt.dbmg.mobiletaiga.network.response.LibraryEntriesPaged
 import pt.dbmg.mobiletaiga.network.response.LibraryEntryLogsPaged
@@ -321,10 +323,14 @@ interface ApiKitsu {
     fun getGenresResource(@Path("id") id: Int): Observable<GenresResource>
 
     @GET("/api/edge/installments")
-    fun getInstallmentsCollection(@Field("anime_id")anime_id:Int, @Field("manga_id")manga_id:Int, @Field("drama_id")drama_id:Int,@Field("kind")kind:String)
+    fun getInstallmentsCollection(
+        @Field("anime_id") anime_id: Int, @Field("manga_id") manga_id: Int, @Field("drama_id") drama_id: Int, @Field(
+            "kind"
+        ) kind: String
+    ): Observable<InstallmentsPaged>
 
     @GET("/api/edge/installments/{id}")
-    fun getInstallmentsResource(@Path("id") id:Int)
+    fun getInstallmentsResource(@Path("id") id: Int): Observable<InstallmentsResource>
 
     @GET("/api/edge/manga")
     fun getMangaCollection(@Field("chapterCount")chapterCount:Int)
