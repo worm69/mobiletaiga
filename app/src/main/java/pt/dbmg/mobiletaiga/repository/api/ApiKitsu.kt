@@ -11,6 +11,10 @@ import pt.dbmg.mobiletaiga.network.response.Castings
 import pt.dbmg.mobiletaiga.network.response.CastingsPaged
 import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
+import pt.dbmg.mobiletaiga.network.response.CommentLikesPaged
+import pt.dbmg.mobiletaiga.network.response.CommentLikesResource
+import pt.dbmg.mobiletaiga.network.response.CommentsPaged
+import pt.dbmg.mobiletaiga.network.response.CommentsResource
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogs
 import pt.dbmg.mobiletaiga.network.response.GroupActionLogsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupBans
@@ -343,26 +347,33 @@ interface ApiKitsu {
 
     //region Posts
     @GET("/api/edge/comment-likes")
-    fun getCommentLikesCollection(@Field("commentId")commentId: Int, @Field("userId")userId: Int)
+    fun getCommentLikesCollection(@Field("commentId") commentId: Int, @Field("userId") userId: Int): Observable<CommentLikesPaged>
 
     @GET("/api/edge/comment-likes/{id}")
-    fun getCommentLikesResource(@Path("id") id:Int)
+    fun getCommentLikesResource(@Path("id") id: Int): Observable<CommentLikesResource>
+
+    @POST("api/edge/comment-likes")
+    fun postCommentLike(@Body data: String): Observable<UserBlocksError>
+
+    @DELETE("api/edge/comment-likes/{id}")
+    fun deleteCommentLike(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/comments")
-    fun getCommentsCollection(@Field("postId")postId: Int, @Field("parentId")parentId: Int)
+    fun getCommentsCollection(@Field("postId") postId: Int, @Field("parentId") parentId: Int): Observable<CommentsPaged>
 
     @GET("/api/edge/comments/{id}")
-    fun getCommentsResource(@Path("id") id:Int)
+    fun getCommentsResource(@Path("id") id: Int): Observable<CommentsResource>
 
-    //TODO: Create CRUD comments
     @POST("/api/edge/comments")
-    fun postComment(@Body data:String)
+    fun postComment(@Body data: String): Observable<UserBlocksError>
 
     @PATCH("/api/edge/comments/{id}")
-    fun updateComment(@Path("id") id:Int,@Body data:String)
+    fun updateComment(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/comments/{id}")
-    fun deleteComment(@Path("id") id:Int,@Body data:String)
+    fun deleteComment(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/post-likes")
     fun getPostLikesCollection(@Field("postId")postId: Int, @Field("userId")userId: Int)
@@ -371,10 +382,10 @@ interface ApiKitsu {
     fun getPostLikesResource(@Path("id") id:Int)
 
     @POST("/api/edge/post-likes")
-    fun postPostLike(@Body data:String)
+    fun postPostLike(@Body data: String): Observable<UserBlocksError>
 
     @DELETE("/api/edge/post-likes/{id}")
-    fun deletePostLike(@Path("id") id:Int,@Body data:String)
+    fun deletePostLike(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
 
