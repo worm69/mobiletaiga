@@ -14,6 +14,8 @@ import pt.dbmg.mobiletaiga.network.response.CastingsPaged
 import pt.dbmg.mobiletaiga.network.response.CategoriesPaged
 import pt.dbmg.mobiletaiga.network.response.CategoriesResource
 import pt.dbmg.mobiletaiga.network.response.CategoryFavoritesPaged
+import pt.dbmg.mobiletaiga.network.response.ChaptersPaged
+import pt.dbmg.mobiletaiga.network.response.ChaptersResource
 import pt.dbmg.mobiletaiga.network.response.Characters
 import pt.dbmg.mobiletaiga.network.response.CharactersPaged
 import pt.dbmg.mobiletaiga.network.response.CommentLikesPaged
@@ -271,10 +273,10 @@ interface ApiKitsu {
      * @param mangaId	2, '8,987'
      */
     @GET("/api/edge/chapters")
-    fun getChaptersCollection(@Field("mangaId")mangaId: Int, @Field("number")number: Int)
+    fun getChaptersCollection(@Field("mangaId") mangaId: Int, @Field("number") number: Int): Observable<ChaptersPaged>
 
     @GET("/api/edge/chapters/{id}")
-    fun getChaptersResource(@Path("id") id:Int)
+    fun getChaptersResource(@Path("id") id: Int): Observable<ChaptersResource>
 
     @GET("/api/edge/drama")
     fun getDramaCollection()
