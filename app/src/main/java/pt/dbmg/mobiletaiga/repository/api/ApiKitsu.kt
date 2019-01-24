@@ -52,6 +52,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupTicketMessagesPaged
 import pt.dbmg.mobiletaiga.network.response.GroupTicketMessagesResource
 import pt.dbmg.mobiletaiga.network.response.GroupTicketsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupTicketsResource
+import pt.dbmg.mobiletaiga.network.response.GroupsPaged
+import pt.dbmg.mobiletaiga.network.response.GroupsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -344,6 +346,22 @@ interface ApiKitsu {
 
     @PATCH("/api/edge/group-tickets/{id}")
     fun updateGroupTicket(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @GET("/api/edge/groups")
+    fun getGroupCollection(@Field("ticket") group: String): Observable<GroupsPaged>
+
+    @GET("/api/edge/groups/{id}")
+    fun getGroupResource(@Path("id") id: Int): GroupsResource
+
+    @POST("/api/edge/groups")
+    fun postGroup(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/groups/{id}")
+    fun updateGroup(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/groups/{id}")
+    fun deleteGroup(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
 
     @GET("/api/edge/leader-chat-messages")
