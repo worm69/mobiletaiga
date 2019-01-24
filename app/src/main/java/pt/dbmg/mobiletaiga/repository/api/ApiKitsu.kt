@@ -44,6 +44,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupMembersPaged
 import pt.dbmg.mobiletaiga.network.response.GroupMembersResource
 import pt.dbmg.mobiletaiga.network.response.GroupNeighborsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupNeighborsResource
+import pt.dbmg.mobiletaiga.network.response.GroupPermissionsPaged
+import pt.dbmg.mobiletaiga.network.response.GroupPermissionsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -271,10 +273,17 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/group-permissions")
-    fun getGroupPermissionsCollection(@Field("group")group: String)
+    fun getGroupPermissionsCollection(@Field("group") group: String): Observable<GroupPermissionsPaged>
 
     @GET("/api/edge/group-permissions/{id}")
-    fun getGroupPermissionsResource(@Path("id") id:Int)
+    fun getGroupPermissionsResource(@Path("id") id: Int): Observable<GroupPermissionsResource>
+
+    @POST("/api/edge/group-permissions")
+    fun postGroupPermissions(@Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/group-permissions/{id}")
+    fun deleteGroupPermissions(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     /**
      * @param naughtyType Post, Comment, Review, Reaction
