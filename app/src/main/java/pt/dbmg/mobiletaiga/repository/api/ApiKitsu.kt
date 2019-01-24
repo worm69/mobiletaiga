@@ -48,6 +48,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupPermissionsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupPermissionsResource
 import pt.dbmg.mobiletaiga.network.response.GroupReportsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupReportsResource
+import pt.dbmg.mobiletaiga.network.response.GroupTicketMessagesPaged
+import pt.dbmg.mobiletaiga.network.response.GroupTicketMessagesResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -310,10 +312,20 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/group-ticket-messages")
-    fun getGroupTicketMessagesCollection(@Field("ticket")group: String)
+    fun getGroupTicketMessagesCollection(@Field("ticket") group: String): Observable<GroupTicketMessagesPaged>
 
     @GET("/api/edge/group-ticket-messages/{id}")
-    fun getGroupTicketMessagesResource(@Path("id") id:Int)
+    fun getGroupTicketMessagesResource(@Path("id") id: Int): Observable<GroupTicketMessagesResource>
+
+    @POST("/api/edge/group-ticket-messages")
+    fun postGroupTicketMessages(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/group-ticket-messages/{id}")
+    fun updateGroupTicketMessages(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/group-ticket-messages/{id}")
+    fun deleteGroupTicketMessages(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/group-tickets")
     fun getGroupTicketCollection(@Field("group")group: String, @Field("user")user: String, @Field("assignee")assignee: String, @Field("status")status: String, @Field("queryGroup")queryGroup: String,@Field("query")query: String)
