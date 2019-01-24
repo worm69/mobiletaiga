@@ -36,6 +36,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupBans
 import pt.dbmg.mobiletaiga.network.response.GroupBansPaged
 import pt.dbmg.mobiletaiga.network.response.GroupCategories
 import pt.dbmg.mobiletaiga.network.response.GroupCategoriesPaged
+import pt.dbmg.mobiletaiga.network.response.GroupInvitesPaged
+import pt.dbmg.mobiletaiga.network.response.GroupInvitesResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -203,10 +205,20 @@ interface ApiKitsu {
     fun getGroupCategoriesResource(@Path("id") id: Int): Observable<GroupCategories>
 
     @GET("/api/edge/group-invites")
-    fun getGroupInvitesCollection(@Field("group")group: String)
+    fun getGroupInvitesCollection(@Field("group") group: String): Observable<GroupInvitesPaged>
 
     @GET("/api/edge/group-invites/{id}")
-    fun getGroupInvitesResource(@Path("id") id:Int)
+    fun getGroupInvitesResource(@Path("id") id: Int): Observable<GroupInvitesResource>
+
+    @POST("/api/edge/group-invites")
+    fun postGroupInvites(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/group-invites/{id}")
+    fun updateGroupInvites(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/group-invites/{id}")
+    fun deleteGroupInvites(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/group-member-notes")
     fun getGroupMemberNotesCollection(@Field("group")group: String)
@@ -256,7 +268,7 @@ interface ApiKitsu {
     fun getGroupLeaderChatMessagesResource(@Path("id") id:Int)
     //endregion
 
-    //region Media
+    //region Media Done
     /**
      *@param season	winter, spring, summer, fall
      *@param seasonYear	2017, 2005,2006
