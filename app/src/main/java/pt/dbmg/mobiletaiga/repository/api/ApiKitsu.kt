@@ -50,6 +50,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupReportsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupReportsResource
 import pt.dbmg.mobiletaiga.network.response.GroupTicketMessagesPaged
 import pt.dbmg.mobiletaiga.network.response.GroupTicketMessagesResource
+import pt.dbmg.mobiletaiga.network.response.GroupTicketsPaged
+import pt.dbmg.mobiletaiga.network.response.GroupTicketsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -328,10 +330,21 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/group-tickets")
-    fun getGroupTicketCollection(@Field("group")group: String, @Field("user")user: String, @Field("assignee")assignee: String, @Field("status")status: String, @Field("queryGroup")queryGroup: String,@Field("query")query: String)
+    fun getGroupTicketCollection(
+        @Field("group") group: String, @Field("user") user: String, @Field("assignee") assignee: String, @Field(
+            "status"
+        ) status: String, @Field("queryGroup") queryGroup: String, @Field("query") query: String
+    ): Observable<GroupTicketsPaged>
 
     @GET("/api/edge/group-tickets/{id}")
-    fun getGroupTicketResource(@Path("id") id:Int)
+    fun getGroupTicketResource(@Path("id") id: Int): Observable<GroupTicketsResource>
+
+    @POST("/api/edge/group-tickets")
+    fun postGroupTicket(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/group-tickets/{id}")
+    fun updateGroupTicket(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/leader-chat-messages")
     fun getGroupLeaderChatMessagesCollection(@Field("groupId")group: String)
