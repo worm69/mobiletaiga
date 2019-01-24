@@ -56,6 +56,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
+import pt.dbmg.mobiletaiga.network.response.LeaderChatMessagesPaged
+import pt.dbmg.mobiletaiga.network.response.LeaderChatMessagesResouce
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
 import pt.dbmg.mobiletaiga.network.response.LibraryEntriesPaged
 import pt.dbmg.mobiletaiga.network.response.LibraryEntryLogsPaged
@@ -365,10 +367,19 @@ interface ApiKitsu {
 
 
     @GET("/api/edge/leader-chat-messages")
-    fun getGroupLeaderChatMessagesCollection(@Field("groupId")group: String)
+    fun getGroupLeaderChatMessagesCollection(@Field("groupId") group: String): Observable<LeaderChatMessagesPaged>
 
     @GET("/api/edge/leader-chat-messages/{id}")
-    fun getGroupLeaderChatMessagesResource(@Path("id") id:Int)
+    fun getGroupLeaderChatMessagesResource(@Path("id") id: Int): Observable<LeaderChatMessagesResouce>
+
+    @POST("/api/edge/leader-chat-messages")
+    fun postGroupLeaderChatMessages(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/leader-chat-messages/{id}")
+    fun updateGroupLeaderChatMessages(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/leader-chat-messages/{id}")
+    fun deleteGroupLeaderChatMessages(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
     //endregion
 
     //region Media Done
