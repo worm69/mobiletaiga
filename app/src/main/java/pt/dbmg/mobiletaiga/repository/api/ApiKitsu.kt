@@ -40,6 +40,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupInvitesPaged
 import pt.dbmg.mobiletaiga.network.response.GroupInvitesResource
 import pt.dbmg.mobiletaiga.network.response.GroupMemberNotesPaged
 import pt.dbmg.mobiletaiga.network.response.GroupMemberNotesResource
+import pt.dbmg.mobiletaiga.network.response.GroupMembersPaged
+import pt.dbmg.mobiletaiga.network.response.GroupMembersResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -238,12 +240,21 @@ interface ApiKitsu {
     fun deleteGroupMemberNotes(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
-
     @GET("/api/edge/group-members")
-    fun getGroupMembersCollection(@Field("group")group: String)
+    fun getGroupMembersCollection(@Field("group") group: String): Observable<GroupMembersPaged>
 
     @GET("/api/edge/group-members/{id}")
-    fun getGroupMembersResource(@Path("id") id:Int)
+    fun getGroupMembersResource(@Path("id") id: Int): Observable<GroupMembersResource>
+
+    @POST("/api/edge/group-members")
+    fun postGroupMembers(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/group-members/{id}")
+    fun updateGroupMembers(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/group-members/{id}")
+    fun deleteGroupMembers(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/group-permissions")
     fun getGroupPermissionsCollection(@Field("group")group: String)
