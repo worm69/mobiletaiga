@@ -46,6 +46,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupNeighborsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupNeighborsResource
 import pt.dbmg.mobiletaiga.network.response.GroupPermissionsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupPermissionsResource
+import pt.dbmg.mobiletaiga.network.response.GroupReportsPaged
+import pt.dbmg.mobiletaiga.network.response.GroupReportsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -291,10 +293,21 @@ interface ApiKitsu {
      * @param status current, onHold
      */
     @GET("/api/edge/group-reports")
-    fun getGroupReportsCollection(@Field("group")group: String, @Field("user")user: String,@Field("naughty")naughty: String,@Field("naughtyType")naughtyType: String,@Field("reason")reason: String,@Field("status")status: String)
+    fun getGroupReportsCollection(
+        @Field("group") group: String, @Field("user") user: String, @Field("naughty") naughty: String, @Field(
+            "naughtyType"
+        ) naughtyType: String, @Field("reason") reason: String, @Field("status") status: String
+    ): Observable<GroupReportsPaged>
 
     @GET("/api/edge/group-reports/{id}")
-    fun getGroupReportsResource(@Path("id") id:Int)
+    fun getGroupReportsResource(@Path("id") id: Int): Observable<GroupReportsResource>
+
+    @POST("/api/edge/group-reports")
+    fun postGroupReports(@Body data: String): Observable<UserBlocksError>
+
+    @PATCH("/api/edge/group-reports/{id}")
+    fun updateGroupReports(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
 
     @GET("/api/edge/group-ticket-messages")
     fun getGroupTicketMessagesCollection(@Field("ticket")group: String)
