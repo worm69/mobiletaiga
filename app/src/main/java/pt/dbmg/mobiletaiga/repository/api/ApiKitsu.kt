@@ -84,6 +84,7 @@ import pt.dbmg.mobiletaiga.network.response.StreamersResource
 import pt.dbmg.mobiletaiga.network.response.StreamingLinksPaged
 import pt.dbmg.mobiletaiga.network.response.TrendingAnime
 import pt.dbmg.mobiletaiga.network.response.TrendingDrama
+import pt.dbmg.mobiletaiga.network.response.TrendingManga
 import pt.dbmg.mobiletaiga.network.response.UserBlocksError
 import pt.dbmg.mobiletaiga.network.response.UserFavorites
 import pt.dbmg.mobiletaiga.network.response.UserFavoritesPaged
@@ -421,7 +422,7 @@ interface ApiKitsu {
     fun getTrendingDramaCollection(): Observable<TrendingDrama>
 
     @GET("/api/edge/trending/manga")
-    fun getTrendingMangaCollection()
+    fun getTrendingMangaCollection(): Observable<TrendingManga>
 
     //endregion
 
