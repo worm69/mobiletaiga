@@ -2,9 +2,9 @@ package pt.dbmg.mobiletaiga.network.response
 
 import com.google.gson.annotations.SerializedName
 
-data class StreamersPaged(
+data class StreamingLinksPaged(
     @SerializedName("data")
-    val `data`: List<DataStreamers>,
+    val `data`: List<DataStreamingLinks>,
     @SerializedName("links")
     val links: Links4,
     @SerializedName("meta")
