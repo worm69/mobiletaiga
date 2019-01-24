@@ -79,6 +79,8 @@ import pt.dbmg.mobiletaiga.network.response.ReviewsPaged
 import pt.dbmg.mobiletaiga.network.response.ReviewsResource
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncements
 import pt.dbmg.mobiletaiga.network.response.SiteAnnouncementsPaged
+import pt.dbmg.mobiletaiga.network.response.StreamersPaged
+import pt.dbmg.mobiletaiga.network.response.StreamersResource
 import pt.dbmg.mobiletaiga.network.response.UserBlocksError
 import pt.dbmg.mobiletaiga.network.response.UserFavorites
 import pt.dbmg.mobiletaiga.network.response.UserFavoritesPaged
@@ -398,10 +400,10 @@ interface ApiKitsu {
     fun getMediaRelationshipsResource(@Path("id") id: Int): Observable<MediaRelationshipsResource>
 
     @GET("/api/edge/streamers")
-    fun getStreamersCollection()
+    fun getStreamersCollection(): Observable<StreamersPaged>
 
     @GET("/api/edge/streamers/{id}")
-    fun getStreamersResource(@Path("id") id:Int)
+    fun getStreamersResource(@Path("id") id: Int): Observable<StreamersResource>
 
     @GET("/api/edge/streaming-links")
     fun getStreamingLinksCollection()
