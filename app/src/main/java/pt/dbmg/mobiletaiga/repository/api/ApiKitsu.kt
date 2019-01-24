@@ -42,6 +42,8 @@ import pt.dbmg.mobiletaiga.network.response.GroupMemberNotesPaged
 import pt.dbmg.mobiletaiga.network.response.GroupMemberNotesResource
 import pt.dbmg.mobiletaiga.network.response.GroupMembersPaged
 import pt.dbmg.mobiletaiga.network.response.GroupMembersResource
+import pt.dbmg.mobiletaiga.network.response.GroupNeighborsPaged
+import pt.dbmg.mobiletaiga.network.response.GroupNeighborsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -254,6 +256,18 @@ interface ApiKitsu {
 
     @DELETE("/api/edge/group-members/{id}")
     fun deleteGroupMembers(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
+
+    @GET("/api/edge/group-neighbors")
+    fun getGroupNeighborsCollection(@Field("group") group: String): Observable<GroupNeighborsPaged>
+
+    @GET("/api/edge/group-neighbors/{id}")
+    fun getGroupNeighborsResource(@Path("id") id: Int): Observable<GroupNeighborsResource>
+
+    @POST("/api/edge/group-neighbors")
+    fun postGroupNeighbors(@Body data: String): Observable<UserBlocksError>
+
+    @DELETE("/api/edge/group-neighbors/{id}")
+    fun deleteGroupNeighbors(@Path("id") id: Int, @Body data: String): Observable<UserBlocksError>
 
 
     @GET("/api/edge/group-permissions")
