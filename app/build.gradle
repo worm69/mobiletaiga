@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.apollographql.android'
+apply plugin: 'realm-android'
 
 buildscript {
     repositories {
@@ -77,6 +78,8 @@ dependencies {
 
     implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha4'
     implementation "com.apollographql.apollo:apollo-android-support:1.0.0-alpha4"
+
+    implementation 'io.realm:android-adapters:3.0.0'
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version" // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin

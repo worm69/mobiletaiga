@@ -203,7 +203,7 @@ interface ApiKitsu {
     fun getProducersResource(@Path("id") id: Int): Observable<Producers>
     //endregion
 
-    //region Groups
+    //region Groups Done
     @GET("/api/edge/group-action-logs")
     fun getGroupActionLogsCollection(@Field("group") group: String): Observable<GroupActionLogsPaged>
 

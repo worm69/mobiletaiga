@@ -1,18 +1,16 @@
 package pt.dbmg.mobiletaiga
 
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Before
-import org.junit.Test
-import org.mockito.Mockito.`when`
+import org.junit.*
+import org.mockito.Mockito.*
+import pt.dbmg.mobiletaiga.repository.UserRepository
 import pt.dbmg.mobiletaiga.repository.api.UserApi
 import pt.dbmg.mobiletaiga.repository.data.User
 import pt.dbmg.mobiletaiga.repository.db.UserDao
-import pt.dbmg.mobiletaiga.repository.UserRepository
-import java.util.*
+import java.util.UUID
 import kotlin.test.assertEquals
-
 
 class UserRepositoryTest {
 
@@ -71,5 +69,6 @@ class UserRepositoryTest {
         assertEquals(userRepository.cachedUsers, apiData)
     }
 
-    fun aRandomUser() = User("mail@test.com", "John", UUID.randomUUID().toString().take(5))
+    fun aRandomUser() =
+        User("mail@test.com", "John", UUID.randomUUID().toString().take(5))
 }
