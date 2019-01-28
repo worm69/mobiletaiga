@@ -4,7 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 open class SeasonOffline(
-    @PrimaryKey open var id: Int,
-    var anime: AnimeSeason,
-    var info: InfoSeason
+    @PrimaryKey open var id: Int = 0,
+    var anime: AnimeSeason? = null,
+    var info: InfoSeason? = null
 ) : RealmObject()

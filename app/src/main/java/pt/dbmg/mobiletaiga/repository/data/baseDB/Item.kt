@@ -4,7 +4,7 @@ import io.realm.RealmObject
 import java.util.Date
 
 open class Item(
-    var animeId: Int,
-    var episode: Int,
-    var time: Date
+    var animeId: Int = 0,
+    var episode: Int = 0,
+    var time: Date? = null
 ) : RealmObject()
