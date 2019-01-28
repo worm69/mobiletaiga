@@ -29,7 +29,10 @@ components:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
-
+before_install:
+- yes | sdkmanager "platforms;android-27"
+script:
+- ./gradlew build connectedCheck
 #  script:
 #  - ./gradlew clean build connectedCheck -x checkstyleTest --stacktrace --max-workers=2 -x apollo-integration:build -x apollo-integration:connectedCheck
 #  - .buildscript/integration_tests_composite.sh
@@ -50,6 +53,8 @@ sudo: false
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
 
 cache:
   directories:
