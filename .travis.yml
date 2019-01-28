@@ -1,17 +1,14 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/.android/build-cache
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.android/build-cache"
 env:
   global:
   - ANDROID_API=28
@@ -19,9 +16,11 @@ env:
   - ANDROID_BUILD_TOOLS=27.0.3
   - ADB_INSTALL_TIMEOUT=8
   - GRADLE_OPTS="-Xmx2048m"
-  - secure: "nCg39mkZ4hzRkg/Ax/KnaRRL3vTuLL3kbtXe79lCPXOaKnS+Qlaey/4oJ932+isnDiMCXgAECcIP5xh289Zk+ycnQA5RWOgoNEIWCrtImGRJ2XOUr7wHspFtFanoLoX6ikhLSDYFgUl/FHax4mGX5KEV26GN7Vtl0XICML6TEAH9b/axugcQfJmZ3NnSCDjPjQWZkDWaX5CenbwxhZ4vL2HNC7ZjJIkxan29BwyWWWK48Z7cAAyS/pQ3lkouJrbB3zH8TdtSSXDKYWyXwtTXNuTKL+RvLsAFj06HSjsl38S5QDRaz6BZUDZfeWn2L531tjZoj8Xz5jrbWWbTqJyhsE64+NVTRQWZ2OjLp/uuOPd3Orybv8FUawLw85Kv2cC9hW6F/i/r91I6aTM6JL3Qq1TNovKJ0r8ZKCmF9Om85gd5ivox5g/v7pDMwR4LqgzmMJW0qili2R1jFRbvSjF44lXsOB0X3d4QvZ70bsR/uWzqjhb0/0GhW+/7ObgfAlUVqDbJP/S4x6DTjlgIBDZ4/kLSln1gYcu5uQWvn7lZavqs6Hn1Tx0L+oJYDZNOReOSwFWMaqWrSKKp8lDxNRELx/A8lt3FUgiWZIFGgSYWVlVS9JDsVfMLcJ35Djtl5ru1d42zvRiXxOoPhGymCvC+Z28hpD8YSlV3EGnCKRuY/IM="
-  - secure: "a+NvTUgOw05cyC4v/Sl093hmQcdO9Bkwltf+KI6PjQ3H7OczNUHZwNj4HKmlXBHHuhDORH66pkpNsYDSZRz1t3tJoSaySPd6ixpCGsdZIhjwkOClhsds2LJ/qxSc8rUCIu20ligD92ZqGcy4A4MOg/46331MZ53Lieu7ZdY4XTMC9Wxa2WsmcyZ1o3ism9ohJlY8OhTlY8AoQeyyqcfL+n1Z5gyieHwoE3pqUTYHkddFigpD0wzbCbncpyXrPzF/FhIi+MLAerCKdPaevUmV/jV4H8j4rluDVEsZoOQ45wVel1X7rOVoj384XAIginoM+TCQtc8Cj9s/kGDPwJBOasfm2HaLwzZyhsGaQ3YWwVaWDXzE+lftYUHpzX1Nv4JbLH9bMwvAkrGEtamO05yvO2b8aB/oWRJETK46eVLmBPmh74eqk2V9+/+lkVYaWD9KqmsEwQqEy89UKffkc9xvC02ia/Dox7RJkp6ZLxi6VVgrcTq+iYCiK7kYRIezq/3ewd9+w68Ap0D76zBtJWSDJKoeK44Tdj3fFO6g6AfhhHGYZMAdxy8M/5Ji3WSrUtiMnO1VbPaBPWi8+MPON+7aCfzeWJyZi8E1+yv7siqYaRM6+l/vNR0CAAvXISWCgBPm31/hgma99RqhN2hAs4CYFO0aWwxRdmmakf6cOmndwMI="
-
+  - secure: nCg39mkZ4hzRkg/Ax/KnaRRL3vTuLL3kbtXe79lCPXOaKnS+Qlaey/4oJ932+isnDiMCXgAECcIP5xh289Zk+ycnQA5RWOgoNEIWCrtImGRJ2XOUr7wHspFtFanoLoX6ikhLSDYFgUl/FHax4mGX5KEV26GN7Vtl0XICML6TEAH9b/axugcQfJmZ3NnSCDjPjQWZkDWaX5CenbwxhZ4vL2HNC7ZjJIkxan29BwyWWWK48Z7cAAyS/pQ3lkouJrbB3zH8TdtSSXDKYWyXwtTXNuTKL+RvLsAFj06HSjsl38S5QDRaz6BZUDZfeWn2L531tjZoj8Xz5jrbWWbTqJyhsE64+NVTRQWZ2OjLp/uuOPd3Orybv8FUawLw85Kv2cC9hW6F/i/r91I6aTM6JL3Qq1TNovKJ0r8ZKCmF9Om85gd5ivox5g/v7pDMwR4LqgzmMJW0qili2R1jFRbvSjF44lXsOB0X3d4QvZ70bsR/uWzqjhb0/0GhW+/7ObgfAlUVqDbJP/S4x6DTjlgIBDZ4/kLSln1gYcu5uQWvn7lZavqs6Hn1Tx0L+oJYDZNOReOSwFWMaqWrSKKp8lDxNRELx/A8lt3FUgiWZIFGgSYWVlVS9JDsVfMLcJ35Djtl5ru1d42zvRiXxOoPhGymCvC+Z28hpD8YSlV3EGnCKRuY/IM=
+  - secure: a+NvTUgOw05cyC4v/Sl093hmQcdO9Bkwltf+KI6PjQ3H7OczNUHZwNj4HKmlXBHHuhDORH66pkpNsYDSZRz1t3tJoSaySPd6ixpCGsdZIhjwkOClhsds2LJ/qxSc8rUCIu20ligD92ZqGcy4A4MOg/46331MZ53Lieu7ZdY4XTMC9Wxa2WsmcyZ1o3ism9ohJlY8OhTlY8AoQeyyqcfL+n1Z5gyieHwoE3pqUTYHkddFigpD0wzbCbncpyXrPzF/FhIi+MLAerCKdPaevUmV/jV4H8j4rluDVEsZoOQ45wVel1X7rOVoj384XAIginoM+TCQtc8Cj9s/kGDPwJBOasfm2HaLwzZyhsGaQ3YWwVaWDXzE+lftYUHpzX1Nv4JbLH9bMwvAkrGEtamO05yvO2b8aB/oWRJETK46eVLmBPmh74eqk2V9+/+lkVYaWD9KqmsEwQqEy89UKffkc9xvC02ia/Dox7RJkp6ZLxi6VVgrcTq+iYCiK7kYRIezq/3ewd9+w68Ap0D76zBtJWSDJKoeK44Tdj3fFO6g6AfhhHGYZMAdxy8M/5Ji3WSrUtiMnO1VbPaBPWi8+MPON+7aCfzeWJyZi8E1+yv7siqYaRM6+l/vNR0CAAvXISWCgBPm31/hgma99RqhN2hAs4CYFO0aWwxRdmmakf6cOmndwMI=
+  - secure: jQ5ekU/zSqsiyE9uvrmHfuOPCVQC4epXPBCn3kmKAO/DSXf3gqg0go2JXMATX6ZGPT49XJUhzEHB6XKJD+g9F5vz9DM6KGMEHivcrOSpH01ISRPGb9UUrabABW/rCbYci46hIb31eWG0eT8i+cuKFqZXsI5SGJeSCocr3O04CMv+RVIQTGAMBTvFjncXk/5IRHAyLTOCg/Md6TY7zR8StcE57s3s2mR26bgiHwpEnmuEjosMKqYEVVB4vctEdPmMzDoGNaXR3hQEUpYDKBSDQBEeNJYUfWFA9/OA0wROmLZgIb6SF2EJMK0vcrFxB9hhR4AvQITaLI+Q5QDV8jtM3klB2qOiafK+uuioX+//jhKQs+M8igMOI2vZ80LAlw8mE1/So+Dwn11fNnYxIMtgf7nJ0D57YQIOyGqvrNoymD0GgLOgxGp/veO5SMmnJgajzpdVIm2A7RI5gdl8FJ184EPyWrNY9OGv3AvrFLGgXtkkqkKOV0PAc0PvGze1qO4BQNPe+F2eLLc5nTcX99wVUZS5LedHCdaJE3mDYcV15jCcwtFHGKDKtZKWko+p0lOfcc/3MXyN7d3OJak8a0ZmzwBfiWrVP6Q1lyseMzadcp9lNc9GwatVye2wVZOWPbv0+g/MAXdgCOmWAX62pd+aJSI+jMyeUpjBis55ecJ2GvQ=
+  - secure: DXUU8jy0GsA5WD914nl9AG+9mwuJx+ran5z+3N7OXw7CCLoQU/0kRU43f1wzTq1JKodZa1ytrUJYZG4UtMQnIHY3RY0LzWYtKHLf0M/Wc46VKRWmo2Ptzizirpjg7Lp1ns3NT56GUB5swwpo5u4HSAZFOY6RuC+TclMA19VjMXgPRBziEzrCiyltkXQwMlcc1kLw97i9SEGgJRFvs6tNa2PVJHhqPtVPPYR9Na0ffqpFaN8atOLMwGZpBarzIufiCTiI82JFpDkMH76Prq/aUIn+hoVIAeNSsfuqZrZBeWGLDzrRwJpdguKjpbRY+A+Y52IqRUgcbBldB9y2HoUmdlVuWXms3xadTWC9/XWlK/WKipnO1Oqcm+sU8nLcDhAKgc+odRQcUC2c4FI5EpPdCoi607giq+V/Z1MmNSo1XY/bXF2IVjzisHdLtlRMNdykNiAFQ8nVz0AT/cfxQTPcVi+RMmb6Cyg5NEfN4J+3fPjjRiargJJHMc0Evma6t+9EMXgRAIgSdz4/2+0MN7VF17jpeQVM7REVgh/MzMPZ4YUCEFvJN/iy/lBvaNu4/pWCXkBoUAwpemUXc1g3Lth1g8d1H4I1yYiJdQpWHAzf/ohAtZyu245pgC9WtgcRYziGxiCE0bWqgxLkCLHYWWCOkMRiY+us8IteXHKQJdmsGw4=
+  - secure: MUNJLjNuCg1+9UINjx/jweWMQt+mslI909ZR5UboL7aGIilFIieXb0kes7Tcxu5+vNV+26XkR20b1IcpmeF9AmnXSJpA9ldJrNx3DG3wM/Q9bPXINRwGdcpbADJyT75ekf/LGwNeLejOSGvOhqNRIbcWIwD2trt7gKQBh9kqIZjjaAJHG/Gg3MgqU1+9fPbPaOZf2XYsryLwK+khGzEs8XVNymvsEK38vSOvACA7NXcMgfHXNFrSIHkgOoeoSZVTVyqUc/r14eRzHz4nIIZwkcIUuTRj5cxy//r1yfRQMc88vpXfEhjJ4NoHWelVqcwF3QwvBRFdhcA2mCm/xnDcg9ciJcjZV5mKoShd1llzho1g16UV3HCo+qnUOdnLCqkeIjxLHbE1Qq9LDiUdS8mgcZhlcjQq40xaQxcRQjHmT3rBx6l9L/EWWkiTgFuPPukvslKBi6F4jpVxPAaGl1Duz6D6wtznQYZgiHFauAnqwRokchUFx+K7nGLY0KmZmWnx6/W9gYqYeTTNyF7jePGU6XV9UmGlvppHVMOyluUV9dhJ91zQ4fmcpg6YE6bC2hZChIa2xJ5sYUNvjHJvEJCcbncgWsMFA2AwjATB66Koqh7O5yTUv6itHksa4vGFFRh+UE5YM3ltNKmOrh66uaApvw7bmsgRGOVReWkRcZksxa0=
 android:
   components:
   - tools
@@ -34,42 +33,24 @@ android:
   - addon-google_apis-google-19
   - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
   - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
-
   licenses:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
-
-
-before_install:
-- openssl aes-256-cbc -K $encrypted_9295c27c00b0_key -iv $encrypted_9295c27c00b0_iv
-  -in mobileTaiga.jks.enc -out mobileTaiga.jks -d
-- mkdir "$ANDROID_HOME/licenses" || true
-- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-- chmod +x gradlew
-- ./gradlew dependencies || true
-
 before_script:
 - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
 - emulator -avd test -no-skin -no-audio -no-window &
 - android-wait-for-emulator
 - adb shell input keyevent 82 &
-
 script:
 - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
-
-
 before_deploy:
 - cp $TRAVIS_BUILD_DIR/.keystore $HOME
 - cd app/build/outputs/apk/
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/mobileTaiga.jks
   -storepass $storepass -keypass $keypass app-release-unsigned.apk mobileTaiga
-
-# Verification
 - jarsigner -verify app-release-unsigned.apk
 - "${ANDROID_HOME}/build-tools/24.0.2/zipalign -v 4 app-release-unsigned.apk yourapp.apk"
-
 deploy:
   provider: releases
   file: yourapp.apk
@@ -79,12 +60,10 @@ deploy:
     tags: true
     jdk: oraclejdk8
   api_key:
-    secure: "MfYBfMVHLUgUeDsMoUyDSvoWpQR5iXz0f62y8YRX2Es0LP7Y0hfLSIuGdPEfkaez8tYCxIOni8AstG3u6HMzsga7lXgDuDk9FCDn5C6vUURpBe+jOJ+VGV/Cji4NEd0GnNLthtWfE7UWIHqc8XUBjVINvT/MShG4Si+Gj9NgzaQuG3lL93AjcW2Jl1z+U7mjtbeSHy9TR3mpfTELe6F+Zojvk+LxubwovHJYS8BsYXveptgyRifMXn5tIR5Ub7XZPwW/UQAqflH7T12wXuxVedY3JMaPLgps+Qy9bAPVpU/W/iLyoWXZqLyrZICjj+fCwkIzIHSG1BbMIbUxBs2FUxLHwp+VQZ9Ud29dvysLumdWLWvDYWZz81T0mFKH21I/mMljtZszY9r84l9zwwFM+aR6wPtcoN2CePGeb+quD4SV7MyNmJZdf0p6bAg/Jem3Z0ZCN+47Sb0Ci4eR+oS5C+ceiAAa7Q+Z5JMW/Ff3nEk80TksQeTJfwLBYB8yweeOcIQxzv74Tp8K2MKzNnz6z5sF3SMUwVlHDK86e8HsR1BVzcl/2boC0SkE9jSeVh462uxESmSwvxv2bihh58ZVYCkyvfUcHWv+Ve4sIk8bHx/zO7sP+CdLdHr+Nf9mbrdB75elgKw94uguhyJxxD+pw+me/v44bj5QLxiHChCIszU="
-
-
+    secure: BY2JoLCmSTKsZL48FRAWU6Wlp2HsTQKhXyOnMc8fV96BIFNNxsr63JxeC882G063LmDLgN4BGiN9IgV21/S2LQ+MVRtEJIztvG5BjSIdo1v7BUqlQ0pDv25t9gsQpfWQOznPLK/lwHCldLk3WtAZ++rnkTpWZxxRB8Kds/oP2FHCWUdkYeMUkCiA/MaQ0ROkfa2qxeRPB7A6c8+NcWJz8m/8RoeBEMoFuHVhUOSMCpDxR8ab0ZdzRxWZIloh6RnSS+nzHK9VfeVhApMNE1DQNL/X3B2BmIFEmjVGBXg7gTr06WUa/wOpM0FtZCQyYW9idYJEWjilmGwi7RePb4QQm1GFOmRgkYsuudX/g003qrKoh8ajChPz3zYNzbXMalF4jj8stfnA+cQvTzZxdebxnmzEDOYpXHOPyEPbney2R0wEnoXu5fO/Ab+ZN7fm9f0V8dxqDm2Dze0TU69Q5x9qa8xck4ZN4uOuND1wak6t8CSuultuxGumTwi562cSKwpncaTNRhksl/tpGQ4Oth0IifHYPMk3AG2y7MNGCAkz0c2l2kkeNJJw1AZYwkL4wLHC6cpXTwWsbrwkRoK7DAXWWBZNoMhcAIQ6rX54ZzJwhZfWHSCrLhWsJaYxLFroQWBePtamK3WvHq6BN3XjQZWGEty16k7XIPanN8IJmRknFHk=
 notifications:
   email: false
-
 after_failure: cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml
-
-
+before_install:
+- openssl aes-256-cbc -K $encrypted_9295c27c00b0_key -iv $encrypted_9295c27c00b0_iv
+  -in mobileTaiga.jks.enc -out mobileTaiga.jks -d
