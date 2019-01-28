@@ -10,3 +10,5 @@
 .externalNativeBuild
 /.idea/
 /app/fabric.properties
+/app/debug/
+/mobileTaiga.jks

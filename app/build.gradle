@@ -41,7 +41,9 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/java'
     }
-
+    lintOptions {
+        abortOnError false
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
