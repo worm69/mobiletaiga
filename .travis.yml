@@ -16,21 +16,22 @@ env:
   global:
   - ANDROID_API=28
   - EMULATOR_API=28
-  - ANDROID_BUILD_TOOLS=28.0.3
+  - ANDROID_BUILD_TOOLS=27.0.3
   - ADB_INSTALL_TIMEOUT=8
   - GRADLE_OPTS="-Xmx2048m"
   - secure: nCg39mkZ4hzRkg/Ax/KnaRRL3vTuLL3kbtXe79lCPXOaKnS+Qlaey/4oJ932+isnDiMCXgAECcIP5xh289Zk+ycnQA5RWOgoNEIWCrtImGRJ2XOUr7wHspFtFanoLoX6ikhLSDYFgUl/FHax4mGX5KEV26GN7Vtl0XICML6TEAH9b/axugcQfJmZ3NnSCDjPjQWZkDWaX5CenbwxhZ4vL2HNC7ZjJIkxan29BwyWWWK48Z7cAAyS/pQ3lkouJrbB3zH8TdtSSXDKYWyXwtTXNuTKL+RvLsAFj06HSjsl38S5QDRaz6BZUDZfeWn2L531tjZoj8Xz5jrbWWbTqJyhsE64+NVTRQWZ2OjLp/uuOPd3Orybv8FUawLw85Kv2cC9hW6F/i/r91I6aTM6JL3Qq1TNovKJ0r8ZKCmF9Om85gd5ivox5g/v7pDMwR4LqgzmMJW0qili2R1jFRbvSjF44lXsOB0X3d4QvZ70bsR/uWzqjhb0/0GhW+/7ObgfAlUVqDbJP/S4x6DTjlgIBDZ4/kLSln1gYcu5uQWvn7lZavqs6Hn1Tx0L+oJYDZNOReOSwFWMaqWrSKKp8lDxNRELx/A8lt3FUgiWZIFGgSYWVlVS9JDsVfMLcJ35Djtl5ru1d42zvRiXxOoPhGymCvC+Z28hpD8YSlV3EGnCKRuY/IM=
   - secure: kR0cEpbkUu0bRtBpOUeBOrAVDa/hUwQULlW/npLnHJoccs313R7wShWaAvkHf00cjHMtw2ePpSQDx8hNAojJkHelf+7VZ61snPQxq1BhvzH7eV3YRrKrsLyxTBQIvwFb4i94UaMZubIbiJNcE3smcHfGlRIwhZ7ManhEQzMsfT03mZfbV7RKz4RTrZqcxO4sSy8nFmtxr5JGBreJ5LprD30gdODqdmNYkHEcVgND6QOygKQcTIYmT+L+a+08EIHpKUQBVfA6qFHVo8E1kAxfhJvmGDb3RgdGwvEYZIM/tZZWdAcxNbmbkYWYRZ35EFQAzVpRAfYriUxmtDPtYnxxe0WIghJZqBMtH/hOsRQBoJzBpE+BOZGkazL1llGRAp85vInAPfWZER8mbqULz4p+iy45EuMR8TerFJgxXUH/A5sDmyinB0LG056n/ZMq8N/BzmLwoJFt/XWrpaX4DEh4CRYlrm61XgqL4T6+S8Ry4nZEKTE1Nrn4tx1jIvdj1b03VFtJBIvQSGbiwiANssFVTXm90nGzfaIT9VMCU7vHYpXZmJ2cPjeiapBHKbwJZVFGPk5vqQphAVN+/DmtOS3eVpxzOxqFmKtx6nql9zv3QB4Jcy6om4EyUVyoVNqz9B+tzsZe1OmaFr3r5HjToHbm1P0IBx0bpsfJ+rZuxANKorc=
 
-components:
-- tools
+android:
+  components:
+  - tools
   - platform-tools
   - build-tools-$ANDROID_BUILD_TOOLS
   - android-$ANDROID_API
   - android-$EMULATOR_API_LEVEL
   - extra-google-m2repository
-  - extra-android-m2repository # for design library
-  - addon-google_apis-google-19 # google play services
+  - extra-android-m2repository
+  - addon-google_apis-google-19
   - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
   - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
@@ -47,8 +48,7 @@ before_install:
 - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
 - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 - chmod +x gradlew
-- ./gradlew dependencies || true # DON'T ADD unless you are getting "Install missing components using SDK manager"
-#Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
+- ./gradlew dependencies || true
 
 before_script:
 - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
@@ -86,6 +86,5 @@ notifications:
   email: false
 
 after_failure: cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml
-
 
 
