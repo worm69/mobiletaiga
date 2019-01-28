@@ -1,0 +1,1375 @@
+query FindQuery($id:Int!){
+  Media (id: $id, type: ANIME) {
+    id
+    title {
+      romaji
+      english
+      native
+    }
+  }
+}
+
+query FindAnimeWithPagging ($page: Int, $perPage: Int, $search: String) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      currentPage
+      lastPage
+      hasNextPage
+      perPage
+    }
+    media (search: $search) {
+      id
+      title {
+            romaji
+             english
+             native
+      }
+    }
+  }
+}
+
+query Media(
+  $id: Int
+  $idMal: Int
+  $page: Int
+  $perPage: Int
+  $search: String
+  $startDate: FuzzyDateInt
+  $endDate: FuzzyDateInt
+  $season: MediaSeason
+  $seasonYear: Int
+  $type: MediaType
+  $format: MediaFormat
+  $status: MediaStatus
+  $episodes: Int
+  $duration: Int
+  $chapters: Int
+  $volumes: Int
+  $isAdult: Boolean
+  $genre: String
+  $tag: String
+  $tagCategory: String
+  $onList: Boolean
+  $licensedBy: String
+  $averageScore: Int
+  $popularity: Int
+  $source: MediaSource
+  $countryOfOrigin: CountryCode
+  $id_not: Int
+  $id_in: [Int]
+  $id_not_in: [Int]
+  $idMal_not: Int
+  $idMal_in: [Int]
+  $idMal_not_in: [Int]
+  $startDate_greater: FuzzyDateInt
+  $startDate_lesser: FuzzyDateInt
+  $startDate_like: String
+  $endDate_greater: FuzzyDateInt
+  $endDate_lesser: FuzzyDateInt
+  $endDate_like: String
+  $format_in: [MediaFormat]
+  $format_not: MediaFormat
+  $format_not_in: [MediaFormat]
+  $status_in: [MediaStatus]
+  $status_not: MediaStatus
+  $status_not_in: [MediaStatus]
+  $episodes_greater: Int
+  $episodes_lesser: Int
+  $duration_greater: Int
+  $duration_lesser: Int
+  $chapters_greater: Int
+  $chapters_lesser: Int
+  $volumes_greater: Int
+  $volumes_lesser: Int
+  $genre_in: [String]
+  $genre_not_in: [String]
+  $tag_in: [String]
+  $tag_not_in: [String]
+  $tagCategory_in: [String]
+  $tagCategory_not_in: [String]
+  $licensedBy_in: [String]
+  $averageScore_not: Int
+  $averageScore_greater: Int
+  $averageScore_lesser: Int
+  $popularity_not: Int
+  $popularity_greater: Int
+  $popularity_lesser: Int
+  $source_in: [MediaSource]
+  $sort: [MediaSort]
+) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      ...PageInfoFragment
+    }
+    media(
+      id: $id
+      idMal: $idMal
+      startDate: $startDate
+      endDate: $endDate
+      season: $season
+      seasonYear: $seasonYear
+      type: $type
+      format: $format
+      status: $status
+      episodes: $episodes
+      duration: $duration
+      chapters: $chapters
+      volumes: $volumes
+      isAdult: $isAdult
+      genre: $genre
+      tag: $tag
+      tagCategory: $tagCategory
+      onList: $onList
+      licensedBy: $licensedBy
+      averageScore: $averageScore
+      popularity: $popularity
+      source: $source
+      countryOfOrigin: $countryOfOrigin
+      search: $search
+      id_not: $id_not
+      id_in: $id_in
+      id_not_in: $id_not_in
+      idMal_not: $idMal_not
+      idMal_in: $idMal_in
+      idMal_not_in: $idMal_not_in
+      startDate_greater: $startDate_greater
+      startDate_lesser: $startDate_lesser
+      startDate_like: $startDate_like
+      endDate_greater: $endDate_greater
+      endDate_lesser: $endDate_lesser
+      endDate_like: $endDate_like
+      format_in: $format_in
+      format_not: $format_not
+      format_not_in: $format_not_in
+      status_in: $status_in
+      status_not: $status_not
+      status_not_in: $status_not_in
+      episodes_greater: $episodes_greater
+      episodes_lesser: $episodes_lesser
+      duration_greater: $duration_greater
+      duration_lesser: $duration_lesser
+      chapters_greater: $chapters_greater
+      chapters_lesser: $chapters_lesser
+      volumes_greater: $volumes_greater
+      volumes_lesser: $volumes_lesser
+      genre_in: $genre_in
+      genre_not_in: $genre_not_in
+      tag_in: $tag_in
+      tag_not_in: $tag_not_in
+      tagCategory_in: $tagCategory_in
+      tagCategory_not_in: $tagCategory_not_in
+      licensedBy_in: $licensedBy_in
+      averageScore_not: $averageScore_not
+      averageScore_greater: $averageScore_greater
+      averageScore_lesser: $averageScore_lesser
+      popularity_not: $popularity_not
+      popularity_greater: $popularity_greater
+      popularity_lesser: $popularity_lesser
+      source_in: $source_in
+      sort: $sort
+    ) {
+      ...MediaFragment
+    }
+  }
+}
+query MediaTrend(
+  $mediaId: Int
+  $date: Int
+  $trending: Int
+  $averageScore: Int
+  $popularity: Int
+  $episode: Int
+  $releasing: Boolean
+  $mediaId_not: Int
+  $mediaId_in: [Int]
+  $mediaId_not_in: [Int]
+  $date_greater: Int
+  $date_lesser: Int
+  $trending_greater: Int
+  $trending_lesser: Int
+  $trending_not: Int
+  $averageScore_greater: Int
+  $averageScore_lesser: Int
+  $averageScore_not: Int
+  $popularity_greater: Int
+  $popularity_lesser: Int
+  $popularity_not: Int
+  $episode_greater: Int
+  $episode_lesser: Int
+  $episode_not: Int
+  $sort: [MediaTrendSort]
+) {
+  MediaTrend(
+    mediaId: $mediaId
+    date: $date
+    trending: $trending
+    averageScore: $averageScore
+    popularity: $popularity
+    episode: $episode
+    releasing: $releasing
+    mediaId_not: $mediaId_not
+    mediaId_in: $mediaId_in
+    mediaId_not_in: $mediaId_not_in
+    date_greater: $date_greater
+    date_lesser: $date_lesser
+    trending_greater: $trending_greater
+    trending_lesser: $trending_lesser
+    trending_not: $trending_not
+    averageScore_greater: $averageScore_greater
+    averageScore_lesser: $averageScore_lesser
+    averageScore_not: $averageScore_not
+    popularity_greater: $popularity_greater
+    popularity_lesser: $popularity_lesser
+    popularity_not: $popularity_not
+    episode_greater: $episode_greater
+    episode_lesser: $episode_lesser
+    episode_not: $episode_not
+    sort: $sort
+  ) {
+    mediaId
+    date
+    trending
+    averageScore
+    popularity
+    inProgress
+    releasing
+    episode
+  }
+}
+query AiringSchedule(
+  $id: Int
+  $mediaId: Int
+  $episode: Int
+  $airingAt: Int
+  $notYetAired: Boolean
+  $id_not: Int
+  $id_in: [Int]
+  $id_not_in: [Int]
+  $mediaId_not: Int
+  $mediaId_in: [Int]
+  $mediaId_not_in: [Int]
+  $episode_not: Int
+  $episode_in: [Int]
+  $episode_not_in: [Int]
+  $episode_greater: Int
+  $episode_lesser: Int
+  $airingAt_greater: Int
+  $airingAt_lesser: Int
+  $sort: [AiringSort]
+) {
+  AiringSchedule(
+    id: $id
+    mediaId: $mediaId
+    episode: $episode
+    airingAt: $airingAt
+    notYetAired: $notYetAired
+    id_not: $id_not
+    id_in: $id_in
+    id_not_in: $id_not_in
+    mediaId_not: $mediaId_not
+    mediaId_in: $mediaId_in
+    mediaId_not_in: $mediaId_not_in
+    episode_not: $episode_not
+    episode_in: $episode_in
+    episode_not_in: $episode_not_in
+    episode_greater: $episode_greater
+    episode_lesser: $episode_lesser
+    airingAt_greater: $airingAt_greater
+    airingAt_lesser: $airingAt_lesser
+    sort: $sort
+  ) {
+    id
+    airingAt
+    timeUntilAiring
+    episode
+    mediaId
+    media {
+      ...MediaFragment
+    }
+  }
+}
+query Character(
+   $id: Int
+   $search: String
+   $id_not: Int
+   $id_in: [Int]
+   $id_not_in: [Int]
+   $sort: [CharacterSort]
+   $asHtml: Boolean
+ ) {
+   Character(
+     id: $id
+     search: $search
+     id_not: $id_not
+     id_in: $id_in
+     id_not_in: $id_not_in
+     sort: $sort
+   ) {
+     id
+     name {
+       first
+       last
+       native
+       alternative
+     }
+     image {
+       medium
+     }
+     description(asHtml: $asHtml)
+     isFavourite
+     siteUrl
+     updatedAt
+     favourites
+   }
+ }
+
+query Staff(
+  $id: Int
+  $search: String
+  $id_not: Int
+  $id_in: [Int]
+  $id_not_in: [Int]
+  $sort: [StaffSort]
+  $asHtml: Boolean
+  $sortMedia: [MediaSort]
+  $typeMedia: MediaType
+  $pageMedia: Int
+  $perPageMedia: Int
+  $sortChar: [CharacterSort]
+  $pageChar: Int
+  $perPageChar: Int
+) {
+  Staff(
+    id: $id
+    search: $search
+    id_not: $id_not
+    id_in: $id_in
+    id_not_in: $id_not_in
+    sort: $sort
+  ) {
+    id
+    name {
+      first
+      last
+      native
+    }
+    language
+    image {
+      medium
+    }
+    description(asHtml: $asHtml)
+    isFavourite
+    siteUrl
+    staffMedia(
+      sort: $sortMedia
+      type: $typeMedia
+      page: $pageMedia
+      perPage: $perPageMedia
+    ) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+    }
+    characters(sort: $sortChar, page: $pageChar, perPage: $perPageChar) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+    }
+    updatedAt
+    submitter {
+      ...SubmitterFragment
+    }
+    submissionStatus
+    submissionNotes
+    favourites
+  }
+}
+query MediaList(
+  $id: Int
+  $userId: Int
+  $userName: String
+  $type: MediaType
+  $status: MediaListStatus
+  $mediaId: Int
+  $isFollowing: Boolean
+  $notes: String
+  $startedAt: FuzzyDateInt
+  $completedAt: FuzzyDateInt
+  $compareWithAuthList: Boolean
+  $userId_in: [Int]
+  $status_in: [MediaListStatus]
+  $status_not_in: [MediaListStatus]
+  $status_not: MediaListStatus
+  $notes_like: String
+  $startedAt_greater: FuzzyDateInt
+  $startedAt_lesser: FuzzyDateInt
+  $startedAt_like: String
+  $completedAt_greater: FuzzyDateInt
+  $completedAt_lesser: FuzzyDateInt
+  $completedAt_like: String
+  $sort: [MediaListSort]
+  $asArray: Boolean
+) {
+  MediaList(
+    id: $id
+    userId: $userId
+    userName: $userName
+    type: $type
+    status: $status
+    mediaId: $mediaId
+    isFollowing: $isFollowing
+    notes: $notes
+    startedAt: $startedAt
+    completedAt: $completedAt
+    compareWithAuthList: $compareWithAuthList
+    userId_in: $userId_in
+    status_in: $status_in
+    status_not_in: $status_not_in
+    status_not: $status_not
+    notes_like: $notes_like
+    startedAt_greater: $startedAt_greater
+    startedAt_lesser: $startedAt_lesser
+    startedAt_like: $startedAt_like
+    completedAt_greater: $completedAt_greater
+    completedAt_lesser: $completedAt_lesser
+    completedAt_like: $completedAt_like
+    sort: $sort
+  ) {
+    id
+    userId
+    mediaId
+    status
+    score(format: POINT_10_DECIMAL)
+    progress
+    progressVolumes
+    repeat
+    priority
+    private
+    notes
+    hiddenFromStatusLists
+    customLists(asArray: $asArray)
+    advancedScores
+    startedAt {
+      year
+      month
+      day
+    }
+    completedAt {
+      year
+      month
+      day
+    }
+    updatedAt
+    createdAt
+    media {
+      ...MediaFragment
+    }
+    user {
+      ...UserFragment
+    }
+  }
+}
+
+query MediaListCollection(
+  $userId: Int
+  $userName: String
+  $type: MediaType
+  $status: MediaListStatus
+  $notes: String
+  $startedAt: FuzzyDateInt
+  $completedAt: FuzzyDateInt
+  $forceSingleCompletedList: Boolean
+  $chunk: Int
+  $perChunk: Int
+  $status_in: [MediaListStatus]
+  $status_not_in: [MediaListStatus]
+  $status_not: MediaListStatus
+  $notes_like: String
+  $startedAt_greater: FuzzyDateInt
+  $startedAt_lesser: FuzzyDateInt
+  $startedAt_like: String
+  $completedAt_greater: FuzzyDateInt
+  $completedAt_lesser: FuzzyDateInt
+  $completedAt_like: String
+  $sort: [MediaListSort]
+) {
+  MediaListCollection(
+    userId: $userId
+    userName: $userName
+    type: $type
+    status: $status
+    notes: $notes
+    startedAt: $startedAt
+    completedAt: $completedAt
+    forceSingleCompletedList: $forceSingleCompletedList
+    chunk: $chunk
+    perChunk: $perChunk
+    status_in: $status_in
+    status_not_in: $status_not_in
+    status_not: $status_not
+    notes_like: $notes_like
+    startedAt_greater: $startedAt_greater
+    startedAt_lesser: $startedAt_lesser
+    startedAt_like: $startedAt_like
+    completedAt_greater: $completedAt_greater
+    completedAt_lesser: $completedAt_lesser
+    completedAt_like: $completedAt_like
+    sort: $sort
+  ) {
+    lists {
+      entries {
+        id
+        userId
+        mediaId
+        status
+        score
+        progress
+        progressVolumes
+        repeat
+        priority
+        private
+        notes
+      }
+      name
+      isCustomList
+      isSplitCompletedList
+      status
+    }
+    user {
+      ...UserFragment
+    }
+    hasNextChunk
+  }
+}
+query GenreCollection {
+  GenreCollection
+}
+query MediaTagCollection($status: Int) {
+  MediaTagCollection(status: $status) {
+    id
+    name
+    description
+    category
+    rank
+    isGeneralSpoiler
+    isMediaSpoiler
+    isAdult
+  }
+}
+query User(
+  $id: Int
+  $name: String
+  $search: String
+  $sort: [UserSort]
+  $asHtml: Boolean
+) {
+  User(id: $id, name: $name, search: $search, sort: $sort) {
+    id
+    name
+    about(asHtml: $asHtml)
+    avatar {
+      medium
+    }
+    bannerImage
+    isFollowing
+    isBlocked
+    bans
+    options {
+      titleLanguage
+      displayAdultContent
+      airingNotifications
+      profileColor
+      notificationOptions {
+        type
+        enabled
+      }
+    }
+    mediaListOptions {
+      scoreFormat
+      rowOrder
+      useLegacyLists
+      animeList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+      mangaList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+    }
+    stats {
+      watchedTime
+      chaptersRead
+      activityHistory {
+        date
+        amount
+        level
+      }
+      animeStatusDistribution {
+        status
+        amount
+      }
+      mangaStatusDistribution {
+        status
+        amount
+      }
+      animeScoreDistribution {
+        score
+        amount
+      }
+      mangaStatusDistribution {
+        status
+        amount
+      }
+      animeScoreDistribution {
+        score
+        amount
+      }
+      mangaListScores {
+        meanScore
+        standardDeviation
+      }
+    }
+    unreadNotificationCount
+    siteUrl
+    donatorTier
+    donatorBadge
+    moderatorStatus
+    updatedAt
+  }
+}
+query Viewer($asHtml: Boolean) {
+  Viewer {
+    id
+    name
+    about(asHtml: $asHtml)
+    avatar {
+      medium
+    }
+    bannerImage
+    isFollowing
+    isBlocked
+    bans
+    options {
+      titleLanguage
+      displayAdultContent
+      airingNotifications
+      profileColor
+      notificationOptions {
+        type
+        enabled
+      }
+    }
+    mediaListOptions {
+      scoreFormat
+      rowOrder
+      useLegacyLists
+      animeList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+      mangaList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+    }
+    stats {
+      watchedTime
+    }
+    unreadNotificationCount
+    siteUrl
+    donatorTier
+    donatorBadge
+    moderatorStatus
+    updatedAt
+  }
+}
+query Notification(
+  $type: NotificationType
+  $resetNotificationCount: Boolean
+  $type_in: [NotificationType]
+) {
+  Notification(
+    type: $type
+    resetNotificationCount: $resetNotificationCount
+    type_in: $type_in
+  ) {
+    __typename
+  }
+}
+query Studio(
+  $id: Int
+  $search: String
+  $id_not: Int
+  $id_in: [Int]
+  $id_not_in: [Int]
+  $sort: [StudioSort]
+  $sortMedia: [MediaSort]
+  $isMain: Boolean
+  $page: Int
+  $perPage: Int
+) {
+  Studio(
+    id: $id
+    search: $search
+    id_not: $id_not
+    id_in: $id_in
+    id_not_in: $id_not_in
+    sort: $sort
+  ) {
+    id
+    name
+    media(sort: $sortMedia, isMain: $isMain, page: $page, perPage: $perPage) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+    }
+    siteUrl
+    isFavourite
+    favourites
+  }
+}
+query Review(
+  $id: Int
+  $mediaId: Int
+  $userId: Int
+  $mediaType: MediaType
+  $sort: [ReviewSort]
+  $asHtml: Boolean
+) {
+  Review(
+    id: $id
+    mediaId: $mediaId
+    userId: $userId
+    mediaType: $mediaType
+    sort: $sort
+  ) {
+    id
+    userId
+    mediaId
+    mediaType
+    summary
+    body(asHtml: $asHtml)
+    rating
+    ratingAmount
+    userRating
+    score
+    private
+    siteUrl
+    createdAt
+    updatedAt
+    user {
+      id
+      name
+      about
+      avatar {
+        medium
+      }
+      bannerImage
+      isFollowing
+      isBlocked
+      bans
+      options {
+        titleLanguage
+        displayAdultContent
+        airingNotifications
+        profileColor
+        notificationOptions {
+          type
+          enabled
+        }
+      }
+    }
+    media {
+      ...MediaFragment
+    }
+  }
+}
+query Activity(
+  $id: Int
+  $userId: Int
+  $messengerId: Int
+  $mediaId: Int
+  $type: ActivityType
+  $isFollowing: Boolean
+  $hasReplies: Boolean
+  $hasRepliesOrTypeText: Boolean
+  $createdAt: Int
+  $id_not: Int
+  $id_in: [Int]
+  $id_not_in: [Int]
+  $userId_not: Int
+  $userId_in: [Int]
+  $userId_not_in: [Int]
+  $messengerId_not: Int
+  $messengerId_in: [Int]
+  $messengerId_not_in: [Int]
+  $mediaId_not: Int
+  $mediaId_in: [Int]
+  $mediaId_not_in: [Int]
+  $type_not: ActivityType
+  $type_in: [ActivityType]
+  $type_not_in: [ActivityType]
+  $createdAt_greater: Int
+  $createdAt_lesser: Int
+  $sort: [ActivitySort]
+) {
+  Activity(
+    id: $id
+    userId: $userId
+    messengerId: $messengerId
+    mediaId: $mediaId
+    type: $type
+    isFollowing: $isFollowing
+    hasReplies: $hasReplies
+    hasRepliesOrTypeText: $hasRepliesOrTypeText
+    createdAt: $createdAt
+    id_not: $id_not
+    id_in: $id_in
+    id_not_in: $id_not_in
+    userId_not: $userId_not
+    userId_in: $userId_in
+    userId_not_in: $userId_not_in
+    messengerId_not: $messengerId_not
+    messengerId_in: $messengerId_in
+    messengerId_not_in: $messengerId_not_in
+    mediaId_not: $mediaId_not
+    mediaId_in: $mediaId_in
+    mediaId_not_in: $mediaId_not_in
+    type_not: $type_not
+    type_in: $type_in
+    type_not_in: $type_not_in
+    createdAt_greater: $createdAt_greater
+    createdAt_lesser: $createdAt_lesser
+    sort: $sort
+  ) {
+    __typename
+  }
+}
+query ActivityReply($id: Int, $activityId: Int, $asHtml: Boolean) {
+  ActivityReply(id: $id, activityId: $activityId) {
+    id
+    userId
+    activityId
+    text(asHtml: $asHtml)
+    createdAt
+    user {
+      ...UserFragment
+    }
+    likes {
+      ...LikeFragment
+    }
+  }
+}
+query Following($userId: Int!, $sort: [UserSort]) {
+  Following(userId: $userId, sort: $sort) {
+    id
+    name
+    about(asHtml: false)
+    avatar {
+      medium
+    }
+    bannerImage
+    isFollowing
+    isBlocked
+    bans
+    options {
+      titleLanguage
+      displayAdultContent
+      airingNotifications
+      profileColor
+      notificationOptions {
+        type
+        enabled
+      }
+    }
+    mediaListOptions {
+      scoreFormat
+      rowOrder
+      useLegacyLists
+      animeList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+      mangaList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+    }
+    stats {
+      watchedTime
+    }
+    unreadNotificationCount
+    siteUrl
+    donatorTier
+    donatorBadge
+    moderatorStatus
+    updatedAt
+  }
+}
+query Follower($userId: Int!, $sort: [UserSort]) {
+  Follower(userId: $userId, sort: $sort) {
+    id
+    name
+    about(asHtml: false)
+    avatar {
+      medium
+    }
+    bannerImage
+    isFollowing
+    isBlocked
+    bans
+    options {
+      titleLanguage
+      displayAdultContent
+      airingNotifications
+      profileColor
+      notificationOptions {
+        type
+        enabled
+      }
+    }
+    mediaListOptions {
+      scoreFormat
+      rowOrder
+      useLegacyLists
+      animeList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+      mangaList {
+        sectionOrder
+        splitCompletedSectionByFormat
+        customLists
+        advancedScoring
+        advancedScoringEnabled
+      }
+    }
+    stats {
+      watchedTime
+    }
+    unreadNotificationCount
+    siteUrl
+    donatorTier
+    donatorBadge
+    moderatorStatus
+    updatedAt
+  }
+}
+query Thread(
+  $id: Int
+  $userId: Int
+  $replyUserId: Int
+  $subscribed: Boolean
+  $categoryId: Int
+  $mediaCategoryId: Int
+  $search: String
+  $id_in: [Int]
+  $sort: [ThreadSort]
+) {
+  Thread(
+    id: $id
+    userId: $userId
+    replyUserId: $replyUserId
+    subscribed: $subscribed
+    categoryId: $categoryId
+    mediaCategoryId: $mediaCategoryId
+    search: $search
+    id_in: $id_in
+    sort: $sort
+  ) {
+    id
+    title
+    body(asHtml: false)
+    userId
+    replyUserId
+    replyCommentId
+    replyCount
+    viewCount
+    isLocked
+    isSticky
+    isSubscribed
+    repliedAt
+    createdAt
+    updatedAt
+    user {
+      ...UserFragment
+    }
+    replyUser {
+      ...UserFragment
+    }
+    likes {
+      ...LikeFragment
+    }
+    siteUrl
+    categories {
+      id
+      name
+    }
+    mediaCategories {
+      ...MediaFragment
+    }
+  }
+}
+query ThreadComment($id: Int, $threadId: Int, $userId: Int) {
+  ThreadComment(id: $id, threadId: $threadId, userId: $userId) {
+    id
+    userId
+    threadId
+    comment(asHtml: false)
+    siteUrl
+    createdAt
+    updatedAt
+    user {
+      ...UserFragment
+    }
+    likes {
+      ...LikeFragment
+    }
+    childComments
+  }
+}
+
+fragment MediaFragment on Media {
+  id
+  idMal
+  startDate {
+    day
+    month
+    year
+  }
+  endDate {
+    day
+    month
+    year
+  }
+  season
+  seasonInt
+  episodes
+  duration
+  chapters
+  volumes
+  countryOfOrigin
+  isLicensed
+  source
+  hashtag
+  trailer {
+    id
+    site
+    thumbnail
+  }
+  updatedAt
+  coverImage {
+    color
+    medium
+    large
+    extraLarge
+  }
+  bannerImage
+  genres
+  synonyms
+  averageScore
+  meanScore
+  popularity
+  isLocked
+  trending
+  favourites
+  tags {
+    id
+    name
+    description
+    category
+    rank
+    isGeneralSpoiler
+    isMediaSpoiler
+    isAdult
+  }
+  relations {
+    edges {
+      id
+      relationType
+      isMainStudio
+      characters {
+        ...CharacterFragment
+      }
+      characterRole
+      staffRole
+      voiceActors {
+        ...VoiceActorsFragment
+      }
+      favouriteOrder
+    }
+    pageInfo {
+      ...PageInfoFragment
+    }
+  }
+  isFavourite
+  isAdult
+  nextAiringEpisode {
+    id
+    airingAt
+    timeUntilAiring
+    episode
+    mediaId
+  }
+  externalLinks {
+    id
+    url
+    site
+  }
+  streamingEpisodes {
+    title
+    thumbnail
+    url
+    site
+  }
+  rankings {
+    id
+    rank
+    type
+    format
+    year
+    season
+    allTime
+    context
+  }
+  mediaListEntry {
+    id
+    userId
+    mediaId
+    status
+    score
+    progress
+    progressVolumes
+    repeat
+    priority
+    private
+    notes
+    hiddenFromStatusLists
+    customLists
+    advancedScores
+    startedAt {
+      year
+      month
+      day
+    }
+    completedAt {
+      year
+      month
+      day
+    }
+    updatedAt
+    createdAt
+  }
+  status
+  siteUrl
+  autoCreateForumThread
+  modNotes
+}
+fragment CharacterFragment on Character {
+  id
+  name {
+    first
+    last
+    native
+    alternative
+  }
+  image {
+    large
+    medium
+  }
+  description
+  isFavourite
+  siteUrl
+  updatedAt
+  favourites
+}
+fragment CharacterConnectionFragment on Media {
+  characters(perPage: 3) {
+    pageInfo {
+      ...PageInfoFragment
+    }
+  }
+}
+fragment PageInfoFragment on PageInfo {
+  total
+  perPage
+  currentPage
+  lastPage
+  hasNextPage
+}
+fragment VoiceActorsFragment on Staff {
+  id
+  name {
+    first
+    last
+    native
+  }
+  language
+  image {
+    large
+    medium
+  }
+  description
+  isFavourite
+  siteUrl
+  updatedAt
+  submitter {
+    id
+    name
+    about
+    avatar {
+      large
+      medium
+    }
+  }
+  favourites
+}
+fragment SubmitterFragment on User {
+  id
+  name
+  avatar {
+    medium
+  }
+  bannerImage
+  isFollowing
+  isBlocked
+  bans
+  options {
+    titleLanguage
+    displayAdultContent
+    airingNotifications
+    profileColor
+    notificationOptions {
+      type
+      enabled
+    }
+  }
+  mediaListOptions {
+    scoreFormat
+    rowOrder
+    useLegacyLists
+  }
+}
+fragment UserFragment on User {
+  id
+  name
+  about(asHtml: false)
+  avatar {
+    medium
+  }
+  bannerImage
+  isFollowing
+  isBlocked
+  bans
+  options {
+    titleLanguage
+    displayAdultContent
+    airingNotifications
+    profileColor
+    notificationOptions {
+      type
+      enabled
+    }
+  }
+  mediaListOptions {
+    scoreFormat
+    rowOrder
+    useLegacyLists
+    animeList {
+      sectionOrder
+      splitCompletedSectionByFormat
+      customLists
+      advancedScoring
+      advancedScoringEnabled
+    }
+    mangaList {
+      sectionOrder
+      splitCompletedSectionByFormat
+      customLists
+      advancedScoring
+      advancedScoringEnabled
+    }
+  }
+  stats {
+    watchedTime
+  }
+  unreadNotificationCount
+  siteUrl
+  donatorTier
+  donatorBadge
+  moderatorStatus
+  updatedAt
+}
+fragment LikeFragment on User {
+  id
+  name
+  about(asHtml: false)
+  avatar {
+    medium
+  }
+  bannerImage
+  isFollowing
+  isBlocked
+  bans
+  options {
+    titleLanguage
+    displayAdultContent
+    airingNotifications
+    profileColor
+    notificationOptions {
+      type
+      enabled
+    }
+  }
+  mediaListOptions {
+    scoreFormat
+    rowOrder
+    useLegacyLists
+    animeList {
+      sectionOrder
+      splitCompletedSectionByFormat
+      customLists
+      advancedScoring
+      advancedScoringEnabled
+    }
+    mangaList {
+      sectionOrder
+      splitCompletedSectionByFormat
+      customLists
+      advancedScoring
+      advancedScoringEnabled
+    }
+  }
+  stats {
+    watchedTime
+  }
+  unreadNotificationCount
+  siteUrl
+  donatorTier
+  donatorBadge
+  moderatorStatus
+  updatedAt
+}
