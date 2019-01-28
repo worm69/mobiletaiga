@@ -16,8 +16,8 @@ env:
   - ANDROID_BUILD_TOOLS=27.0.3
   - ADB_INSTALL_TIMEOUT=8
   - GRADLE_OPTS="-Xmx2048m"
-  - secure: N9MNPrV8uyei/3ItU4WMGfSeUp9XyP9g2SjS12EC6mPE4I3ywO0R709dYTrGNliiT5EGLtxyFZ3SCYGUSxq/Q2AIHOdzIouMCxoliY77ZiChCyRDAL9obR0dh23/ItAVaJKsc8FR5DbGaSmmEWj+oeZVIVJULdTLOrg0trc886S4tH0J7AbYvTDuPRuehMNqZuUqct7Vy0znqXtFtV6KgUC6kMGPXiMRVqJjr+UuPZ7Hu9+i3KtGsuludFUHxbyToWaCdCT9WoVNXKX6hcLsbffIMNV6Fn/hCl1WW4BDLF9JwojHEPbg5GD90iQhpwoC64NgJkPoJouaqPzWSVJLz6J07ohvn0j/gwMj8PlYWgev82M7pOCV5GnLugNFmqnvMFP6Hmb9IDa9H7isqwpnmscHQrGJCD4imZpjZFtSEFL3bHaz7Bv71c38uf+s0x0V8x4/wzOhqtBtnEV0e9Ve8P9kYGrBL0+W5G0H2fJ00iZBN1i4A4jVeX86z3bV+X6FlDpyWtHzOYavb829PbQRa2XaDS6PywCII2/Prin9T5bcJSN4l7TRlGV8lB3Dh7TrVeMugjcj/6/1oGoz0gidWSwwITp3RtkW4ewCaZ1s19FNqDuVm/LXyDXo5iRBM93aZflPXmJSu2hMOGHzDv0e0ZsWcBI4qfkpDn4AN4NEguU=
-  - secure: N/E+u+ICcH0xIfKgrHqpbIgWBVrlUsEf8Oc50mnnse65aVv/+7Ejg/b0/uNLdN8xaivRnnaB70f0XowXhvOfa+wmhTt8jQXbs0L5LrzuUPhih0O199qQZfI5VekEGFGQCh4lldQnJchhQMG97iIAcd2PWr+X5cCxLeeRPI38gtQTkPt5fEwrWsvYpBfjvYG54bypOR+5YBYNJ6nI9e6aOhodkFxZKOCpvfhRNznddKDh5aKrMyXWosviKqtXhWHpgEn6K7TI1gAsMYlKfJqdY1k5ikeXKlNvIpP89ADRVO9v4gbYZkQbXJksgnq+CbpI4j9+QNZcUxL/vHXkxI3LUtg2f2jQgMcT63TqAON18GZFJQyOWcAUv8sX6Hz0lX9RaRiVHqaopIzKqvliPgoFIV8qMrNLWzB5lXw0RZvlyBK8hBZBaFVuh2Sd4x4wgsNkc9So6WDqsU1+5zw4vZBNTvQDzwNwDxNrjOpQCA2Hjj4ZyvpIIQxd1HiKldw/SBR6SVwDc3R2I1jR2jUO02Z5ni5mSg2p/g5BSA5T7l+6p7gj8HLODkUH0PCgcuJtEeOevD37Q2RrKrqLGi0kiJVyHzsmHjZAFl1iGTkYNhX9AyR4AsaFGsFehhf8Y4ybJeqgEvT3V5GPxA5J+vYD1s5xwq55Cfv99Bz3dh838ixPUVg=
+  - secure: BhtPn4L2myebqxdKXOfbhTqSxH/dVMvCRq/ozkYML9tO0NbM36HtgSR4YZuaXrIVwj0It8+OHWQjdDjz1XP6m6zIr6nBmQ9nX/czNJofZDmX8xy1ErbKpX+x6vsZrEqdiIU6L+z/9YhmOtNe1qIQHIDK0/x1Ge0jMyI63xRjTi9t4OyCu0eAggFAsRelM20L+SJXcGujRYhRAG6AqcXj/koEbg97XUXl0dDI9MRLk9i7yR2VR8JAq1EvMIWW7Qq4PEFJb0OQh7KGxB7YEHPDeD0q+nJj3OnAkud3rYhYj+OImeQKqaW/xPsFqb7sCbZKHUH4MbR6YfVmQ5cu7RD/Q4WSLWaMd4M4i61hI1YzBcTNLPvKTk11nXiWQ5PplnnRoDkjPcIDpy5HfAT/3f4SDyRSgNFSHUTYmr4DAg9EBjWxKl+Nb/GgQnzASd3f97+1gfGFmS5t5R2sGQRvt9DSDeTahDmukkb8ORBRzLYVR4Q1gZh2mrcGIfdHLt/aScXDvVo4u0tdkPbgz077cl45qFc3PanMCJcAx18yxwGt1zybOLTAYAL0hQj5dribRTVqNCZPM2HZ26dmMnbO+yf3DQ7CwSh8r4Sh50khLjrTcqjE6WYiv1+6LRhOtIVksvOQXS+CPFoz5iFuaR+DO6s5NT1Y31zSoDQ0uVeoxtRugZ8=
+  - secure: S5jQAQ5YI+B4p37VMMe6jNgLC6RTfPM1rT0YZNVhFAIXV/QNdSHTxaq8tMvVVM5tOPiMb15DCA2uW//WOhVum/EhMRD73afskGfbhsuj03FeVR0CncP9cyY90iSPkswSF6FNVF6B126XJIvEHccuXC2YwJLcXSJEmwYXxUJDa860DVtpzH2RecKmEbdyck7jr2zq24J38sKSEwgYixi82w98aRpkCCGBij5BF2AFnTxj63rVQD+qoZDYROVG/BTc/Ft1yJabPundatLSHoDcA9ufDQ1X6o/t27LPmuvGesPHbX6NIW3cTwBZSPS/Hrw7V77D4ICbZhq+ry60FAsk1dH9TwjvL0VGQFNv/y4azR4MZIc93tjfONyl/n5xu8rI8iOTIryBacImXqajFNxyUxJ6mjRkNUIrCCD7D9vyzcJqzweZIoxTxZu4sjj/lu2NLjkyFLLr6Ath1oHgDF9Bms7ve8IB29wXJ2vjfcf5cOsOGy9uF0LRviC+TIhtUJJPd6S9v9wkyelJTT+GlvnC5LYhUPPcV1f8xXQ17S8N6lEPHaAKvXWiOXWNvTUvPcJtOVaQLD0Ixs9z0eogqjGtErYKgmi6jftfidL81MHPOxJPbgmcgDQKZtlCu+croJZZ5FvCS7QEw+C9t2J4y2Q+JvI0Uqfa7aEdjD8GFDOAvt4=
 android:
   components:
   - tools
@@ -34,6 +34,14 @@ android:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
+before_install:
+- openssl aes-256-cbc -K $encrypted_c0801aa05af4_key -iv $encrypted_c0801aa05af4_iv
+  -in example_keystore.jks.enc -out example_keystore.jks -d
+- mkdir "$ANDROID_HOME/licenses" || true
+- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+- chmod +x gradlew
+- "./gradlew dependencies || true"
 before_script:
 - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
 - emulator -avd test -no-skin -no-audio -no-window &
@@ -61,6 +69,3 @@ deploy:
 notifications:
   email: false
 after_failure: cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml
-before_install:
-- openssl aes-256-cbc -K $encrypted_9295c27c00b0_key -iv $encrypted_9295c27c00b0_iv
-  -in mobileTaiga.jks.enc -out mobileTaiga.jks -d
