@@ -11,9 +11,9 @@ cache:
   - "$HOME/.android/build-cache"
 env:
   global:
-  - ANDROID_API=24
-  - EMULATOR_API=21
-  - ANDROID_BUILD_TOOLS=27.0.3
+  - ANDROID_API=28
+  - EMULATOR_API=22
+  - ANDROID_BUILD_TOOLS=28.0.3
   - ADB_INSTALL_TIMEOUT=8
   - GRADLE_OPTS="-Xmx2048m"
   - secure: BhtPn4L2myebqxdKXOfbhTqSxH/dVMvCRq/ozkYML9tO0NbM36HtgSR4YZuaXrIVwj0It8+OHWQjdDjz1XP6m6zIr6nBmQ9nX/czNJofZDmX8xy1ErbKpX+x6vsZrEqdiIU6L+z/9YhmOtNe1qIQHIDK0/x1Ge0jMyI63xRjTi9t4OyCu0eAggFAsRelM20L+SJXcGujRYhRAG6AqcXj/koEbg97XUXl0dDI9MRLk9i7yR2VR8JAq1EvMIWW7Qq4PEFJb0OQh7KGxB7YEHPDeD0q+nJj3OnAkud3rYhYj+OImeQKqaW/xPsFqb7sCbZKHUH4MbR6YfVmQ5cu7RD/Q4WSLWaMd4M4i61hI1YzBcTNLPvKTk11nXiWQ5PplnnRoDkjPcIDpy5HfAT/3f4SDyRSgNFSHUTYmr4DAg9EBjWxKl+Nb/GgQnzASd3f97+1gfGFmS5t5R2sGQRvt9DSDeTahDmukkb8ORBRzLYVR4Q1gZh2mrcGIfdHLt/aScXDvVo4u0tdkPbgz077cl45qFc3PanMCJcAx18yxwGt1zybOLTAYAL0hQj5dribRTVqNCZPM2HZ26dmMnbO+yf3DQ7CwSh8r4Sh50khLjrTcqjE6WYiv1+6LRhOtIVksvOQXS+CPFoz5iFuaR+DO6s5NT1Y31zSoDQ0uVeoxtRugZ8=
@@ -43,7 +43,7 @@ before_install:
 - chmod +x gradlew
 - "./gradlew dependencies || true"
 before_script:
-- echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+- echo no | android create avd --force -n test -t android-$EMULATOR_API --abi armeabi-v7a
 - emulator -avd test -no-skin -no-audio -no-window &
 - android-wait-for-emulator
 - adb shell input keyevent 82 &
