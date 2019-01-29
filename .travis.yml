@@ -1,13 +1,13 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-install:
-- echo y | android update sdk -u -a -t tools
-- echo y | android update sdk -u -a -t platform-tools
-- echo y | android update sdk -u -a -t build-tools-25.0.2
-- echo y | android update sdk -u -a -t android-25
-- echo y | android update sdk -u -a -t extra-google-m2repository
-- echo y | android update sdk -u -a -t extra-android-m2repository
+#install:
+#- echo y | android update sdk -u -a -t tools
+#- echo y | android update sdk -u -a -t platform-tools
+#- echo y | android update sdk -u -a -t build-tools-25.0.2
+#- echo y | android update sdk -u -a -t android-25
+#- echo y | android update sdk -u -a -t extra-google-m2repository
+#- echo y | android update sdk -u -a -t extra-android-m2repository
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -61,7 +61,7 @@ before_install:
 - chmod +x gradlew
 - "./gradlew dependencies || true"
 before_script:
-#- android list target
+- android list target
 #- echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
 #- android list sdk --extended --no-ui --all
 #- echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-25,sys-img-x86_64-android-28
