@@ -1,11 +1,12 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/code
+    working_directory: ~/amdroid-mvvm-rx-master
     docker:
-    - image: circleci/android:api-25-alpha
+    - image: circleci/android:api-28-alpha
     environment:
-      JVM_OPTS: -Xmx3200m
+      GRADLE_OPTS: -Xmx4g -Dorg.gradle.daemon=false
+      JVM_OPTS: -Xmx4g
     steps:
     - checkout
     - restore_cache:
