@@ -23,7 +23,9 @@ jobs:
 
     steps:
     - checkout
-
+    - run:
+        name: chmod permissions
+        command: chmod +x ./gradlew
     # Download and cache dependencies
     - restore_cache:
         keys:
