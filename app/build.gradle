@@ -20,6 +20,7 @@ apply plugin: 'io.fabric'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
+
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
