@@ -1,13 +1,6 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-#install:
-#- echo y | android update sdk -u -a -t tools
-#- echo y | android update sdk -u -a -t platform-tools
-#- echo y | android update sdk -u -a -t build-tools-25.0.2
-#- echo y | android update sdk -u -a -t android-25
-#- echo y | android update sdk -u -a -t extra-google-m2repository
-#- echo y | android update sdk -u -a -t extra-android-m2repository
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -19,7 +12,7 @@ cache:
 env:
   global:
   - ANDROID_API=28
-  - EMULATOR_API=25
+  - EMULATOR_API=24
   - ANDROID_ABI=armeabi-v7a
   - ANDROID_BUILD_TOOLS=28.0.3
   - ADB_INSTALL_TIMEOUT=12
@@ -33,10 +26,6 @@ android:
   - android-$EMULATOR_API_LEVEL
   - extra-google-m2repository
   - extra-android-m2repository
-  #  - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
-  #  - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
-  #  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
-  #  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
   - extra-android-support
   - sys-img-${ANDROID_ABI}-${EMULATOR_API}
   licenses:
@@ -53,16 +42,11 @@ before_install:
 - chmod +x gradlew
 - "./gradlew dependencies || true"
 before_script:
-#- android list target
-#- echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-#- android list sdk --extended --no-ui --all
-#- echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-25,sys-img-x86_64-android-28
-#- echo "n" | android create avd --name myandroid28 -t "sys-img-armeabi-v7a-google_apis-25" --abi armeabi-v7a
-#- echo no | android create avd --force -n test -t android-$EMULATOR_API --abi armeabi-v7a
-- echo y | android update sdk -a --no-ui --filter android-25
-- echo y | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-25
+- android list target
+- echo y | android update sdk -a --no-ui --filter android-${EMULATOR_API}
+- echo y | android update sdk -a --no-ui --filter sys-img-${ANDROID_ABI}-${EMULATOR_API}
 - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
-- echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
+- echo no | android create avd --force -n test -t android-${EMULATOR_API} --abi armeabi-v7a
 - emulator -avd test -gpu off -no-boot-anim -no-window &
 - android-wait-for-emulator
 - adb shell input keyevent 82 &
