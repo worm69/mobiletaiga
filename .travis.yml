@@ -60,12 +60,12 @@ script:
 - bash <(curl -s https://codecov.io/bash)
 before_deploy:
 - cp $TRAVIS_BUILD_DIR/mobileTaiga.jks $HOME
-- cd app/build/outputs/apk/
+- cd app/build/outputs/apk/release
 - ls -la
 #- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/mobileTaiga.jks -storepass $storepass -keypass $keypass app-release-unsigned key0
-- jarsigner -verbose -tsa http://timestamp.comodoca.com/rfc3161 -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/mobileTaiga.jks -storepass $storepass -keypass $keypass app-release-unaligned.apk key0
-- jarsigner -verify app-release-unsigned.apk
-- "${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}/zipalign -v 4 app-release-unsigned.apk mobiletaiga.apk"
+- jarsigner -verbose -tsa http://timestamp.comodoca.com/rfc3161 -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/mobileTaiga.jks -storepass $storepass -keypass $keypass app-release.apk key0
+- jarsigner -verify app-release.apk
+- "${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}/zipalign -v 4 app-release.apk mobiletaiga.apk"
 deploy:
   provider: releases
   file: mobiletaiga.apk
