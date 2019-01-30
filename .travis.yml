@@ -19,7 +19,7 @@ cache:
 env:
   global:
   - ANDROID_API=28
-  - EMULATOR_API=24
+  - EMULATOR_API=25
   - ANDROID_ABI=armeabi-v7a
   - ANDROID_BUILD_TOOLS=28.0.3
   - ADB_INSTALL_TIMEOUT=12
@@ -59,8 +59,8 @@ before_script:
 #- echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-25,sys-img-x86_64-android-28
 #- echo "n" | android create avd --name myandroid28 -t "sys-img-armeabi-v7a-google_apis-25" --abi armeabi-v7a
 #- echo no | android create avd --force -n test -t android-$EMULATOR_API --abi armeabi-v7a
-- echo y | android update sdk -a --no-ui --filter android-24
-- echo y | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-24
+- echo y | android update sdk -a --no-ui --filter android-25
+- echo y | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-25
 - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
 - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
 - emulator -avd test -gpu off -no-boot-anim -no-window &
