@@ -61,7 +61,7 @@ script:
 # Codecov.io
 - bash <(curl -s https://codecov.io/bash)
 before_deploy:
-- cp $TRAVIS_BUILD_DIR/.keystore $HOME
+- cp $TRAVIS_BUILD_DIR/mobileTaiga.jks $HOME
 - cd app/build/outputs/apk/
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/mobileTaiga.jks
   -storepass $storepass -keypass $keypass app-release-unsigned.apk mobileTaiga
