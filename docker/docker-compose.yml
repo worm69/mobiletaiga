@@ -1,0 +1,43 @@
+version: "3.7"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:latest
+    environment:
+    - USER_UID=1000
+    - USER_GID=1000
+    - DB_TYPE=mysql
+    - DB_HOST=db:3306
+    - DB_NAME=gitea
+    - DB_USER=gitea
+    - DB_PASSWD=gitea
+    restart: always
+    networks:
+    - gitea
+    volumes:
+    - ./gitea:/data
+    ports:
+    - "3000:3000"
+    - "222:22"
+    depends_on:
+    - db
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+    - MYSQL_ROOT_PASSWORD=gitea
+    - MYSQL_USER=gitea
+    - MYSQL_PASSWORD=gitea
+    - MYSQL_DATABASE=gitea
+    command: mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
+    ports:
+    - "3306:3306"
+    networks:
+    - gitea
+    volumes:
+    - ./db:/var/lib/mysql
+    - ./innodb-fix.cnf:/etc/mysql/conf.d/innodb-fix.cnf
