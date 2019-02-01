@@ -1,43 +1,57 @@
-version: "3.7"
-
+version: '3'
 networks:
-  gitea:
-    external: false
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
+
+volumes:
+  git:
+  db:
 
 services:
-  server:
-    image: gitea/gitea:latest
-    environment:
-    - USER_UID=1000
-    - USER_GID=1000
-    - DB_TYPE=mysql
-    - DB_HOST=db:3306
-    - DB_NAME=gitea
-    - DB_USER=gitea
-    - DB_PASSWD=gitea
-    restart: always
+  postgres:
+    image: postgres:alpine
     networks:
-    - gitea
+    - backend
     volumes:
-    - ./gitea:/data
-    ports:
-    - "3000:3000"
-    - "222:22"
+    - db:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_USER=gitea
+    - POSTGRES_PASSWORD=test
+    - POSTGRES_DB=gitea
+    labels:
+    - traefik.enable=false
+
+  gitea:
+    image: whatever4711/gitea
     depends_on:
-    - db
-  db:
-    image: mysql:8
-    restart: always
-    environment:
-    - MYSQL_ROOT_PASSWORD=gitea
-    - MYSQL_USER=gitea
-    - MYSQL_PASSWORD=gitea
-    - MYSQL_DATABASE=gitea
-    command: mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
-    ports:
-    - "3306:3306"
-    networks:
-    - gitea
+    - postgres
     volumes:
-    - ./db:/var/lib/mysql
-    - ./innodb-fix.cnf:/etc/mysql/conf.d/innodb-fix.cnf
+    - git:/data
+    ports:
+    - 22:22
+    networks:
+    - frontend
+    - backend
+    labels:
+    - traefik.backend=gitea
+    - traefik.port=3000
+    - traefik.frontend.rule=Host:gitea.localdomain
+    - traefik.docker.network=dockergitea_frontend
+
+  traefik:
+    image: traefik
+    command: --docker --docker.domain=localdomain --docker.watch --web
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    - 80:80
+    - 443:443
+    networks:
+    - frontend
+    labels:
+    - traefik.backend=traefik
+    - traefik.port=8080
+    - traefik.frontend.rule=Host:traefik.localdomain
+    - traefik.docker.network=dockergitea_frontend
