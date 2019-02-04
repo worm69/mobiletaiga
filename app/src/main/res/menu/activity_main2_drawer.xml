@@ -5,33 +5,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_account_box"
+            android:title="@string/view_profile" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_report_bug"
+            android:icon="@drawable/ic_bug_report_black_24dp"
+            android:title="@string/report_bug" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_contact_us"
+            android:icon="@drawable/ic_mail_outline_black_24dp"
+            android:title="@string/contact_us" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/settings">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_what_anime_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/what_anime_settings" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_app_settings"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/app_settings" />
         </menu>
     </item>
 

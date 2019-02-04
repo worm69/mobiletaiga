@@ -23,8 +23,12 @@ import okhttp3.OkHttpClient
 import pt.dbmg.mobiletaiga.R.layout.activity_main
 import pt.dbmg.mobiletaiga.R.string
 import java.util.logging.Logger
+import android.content.Intent
+import androidx.navigation.findNavController
+import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity
+import pt.dbmg.mobiletaiga.ui.fragment.SearchFragment
 
-class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener  {
+class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener  {
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -37,7 +41,9 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Fabric.with(this, Crashlytics())
+        if (!BuildConfig.DEBUG) {
+            Fabric.with(this, Crashlytics())
+        }
         setContentView(activity_main)
         setSupportActionBar(toolbar)
         nav_button_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -111,22 +117,29 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.nav_profile -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_report_bug -> {
 
             }
-            R.id.nav_manage -> {
-
+            R.id.nav_contact_us -> {
+                  val emailIntent = Intent(
+                    Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", getString(R.string.dev_email), null
+                    )
+                )
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Mobile Taiga")
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                startActivity(Intent.createChooser(emailIntent, "Send email..."))
             }
-            R.id.nav_share -> {
 
+            R.id.nav_what_anime_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivityForResult(intent, 1)
             }
-            R.id.nav_send -> {
+
+            R.id.nav_app_settings -> {
 
             }
         }
@@ -159,12 +172,21 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
                 Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_search -> {
                 Toast.makeText(this, "DashBoard", Toast.LENGTH_SHORT).show()
+                NavHostFragment.findNavController(nav_host_fragment).navigate(R.id.action_homeFragment_to_searchFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 Toast.makeText(this, "Notifications", Toast.LENGTH_SHORT).show()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_quick_update -> {
+                Toast.makeText(this, "Quick Update", Toast.LENGTH_SHORT).show()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_library -> {
+                Toast.makeText(this, "Library", Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
         }
