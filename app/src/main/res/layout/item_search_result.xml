@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_item_search_result"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_between_views">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:layout_marginEnd="@dimen/space_between_views"
+            android:layout_marginRight="@dimen/space_between_views"
+            android:background="@android:color/darker_gray"
+            app:layout_widthPercent="40%" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_item_photo"
+            android:layout_alignEnd="@+id/iv_item_photo"
+            android:layout_alignRight="@+id/iv_item_photo"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@android:color/black"
+            android:text="00:00:00"
+            android:textColor="@android:color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_item_photo"
+            android:layout_toRightOf="@+id/iv_item_photo"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/app_name"
+            android:textColor="@android:color/black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_episode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_item_title"
+            android:layout_alignStart="@+id/tv_item_title"
+            android:layout_below="@+id/tv_item_title"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/app_name"
+            android:textColor="@android:color/holo_red_light" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_similarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_item_title"
+            android:layout_alignStart="@+id/tv_item_title"
+            android:layout_below="@+id/tv_item_episode"
+            android:maxLines="1"
+            android:text="100.0%"
+            android:textColor="@android:color/holo_green_dark" />
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+</androidx.cardview.widget.CardView>

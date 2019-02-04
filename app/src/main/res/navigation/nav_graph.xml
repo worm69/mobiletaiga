@@ -14,5 +14,13 @@
         android:id="@+id/homeFragment"
         android:name="pt.dbmg.mobiletaiga.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="pt.dbmg.mobiletaiga.ui.fragment.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>
