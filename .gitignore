@@ -12,3 +12,9 @@
 /app/fabric.properties
 /app/debug/
 /mobileTaiga.jks
+/.scannerwork/.sonar_lock
+.scannerwork/
+app/release/
+app/src/main/java/pt/dbmg/mobiletaiga/network/request/
+docker/gitea/
+docker/innodb-fix.cnf/
