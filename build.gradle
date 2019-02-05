@@ -1,11 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.11'
+    ext.kotlin_version = '1.3.20'
     ext.dokka_version = '0.9.17'
+    ext.jacoco_version = '0.8.2'
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         //https://stackoverflow.com/questions/52412023/api-variant-getexternalnativebuildtasks-is-obsolete-and-has-been-replaced-wi/52487634#52487634
@@ -15,6 +19,7 @@ buildscript {
         classpath 'com.apollographql.apollo:apollo-gradle-plugin:1.0.0-alpha4'
         classpath 'io.realm:realm-gradle-plugin:5.8.0'
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -26,9 +31,47 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://maven.google.com' }
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+apply plugin: "org.sonarqube"
+
+sonarqube {
+    androidVariant 'debug'
+
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.verbose", true
+        property "sonar.host.url", "http://192.168.99.100:9000"
+
+        property "sonar.projectName", "Mobile Taiga"
+        property "sonar.projectKey", "mobile-taiga"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.projectVersion", "0.1"
+        property "sonar.issuesReport.html.enable", "true"
+        property "sonar.issuesReport.console.enable", "true"
+
+        property "sonar.coverage.jacoco.xmlReportPaths", findAllReports()
+        property "detekt.sonar.kotlin.config.path", "${rootProject.projectDir}/detekt-config.yml"
+        property "sonar.scm.provider", "git"
+        property "sonar.login","c778a2de6a5124cad4c6cef87063c5b0e5b3c551"
+        property "sonar.java.coveragePlugin", "jacoco"
+    }
+}
+
+String findAllReports() {
+    def file = "${rootProject.buildDir}/reports"
+
+    def sonarEnabledProjects = rootProject.subprojects
+            .findAll { p -> p.sonarqube.getProperties().get("skipProject") == false }
+            *.name
+            .collect { projectName -> "$file/jacocoTestReport-${projectName}.xml" }
+            .join(",")
+
+    return sonarEnabledProjects
 }

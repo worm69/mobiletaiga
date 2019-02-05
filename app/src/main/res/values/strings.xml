@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">MVVM-RX</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Mobile Taiga</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -10,4 +8,80 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="error_permissions_denied">Permission denied</string>
+    <string name="error_image_recovered_from_storage">Error in recovering image from storage</string>
+    <string name="indicator_searching_anime">Searching anime…</string>
+    <string name="error_service_unknown">Error unknown in service</string>
+    <string name="error_service_response_or_body_null">Response or entity body is null</string>
+    <string name="indicator_choose_gallery_app">Choose a gallery app</string>
+    <string name="action_close">Close</string>
+    <string name="tag_episode_number">Episode</string>
+    <string name="tag_no_episode_number">Anime</string>
+    <string name="error_encoding_image">Error in encoding image</string>
+    <string name="menu_information">Information</string>
+    <string name="action_share">Share</string>
+    <string name="share_founded_with">was founded by</string>
+    <string name="error_service_quota_all_used">Your quota remaining is 0. Seconds to have new quota:</string>
+    <string name="information_app_description">A modern and easy to use application to search an anime or search the episode with only an image of the scene</string>
+    <string name="information_app_privacy_policy">\nWhatAnime don\'t collect personal information such as your name or email. This app can store some preference setting to the app usage.This settings don\'t be transferred outside of your device.</string>
+    <string name="title_privacy_policy">Privacy policy</string>
+    <string name="information_app_permission">\nWhatAnime use the following permission:
+        \n\n- WRITE_EXTERNAL_STORAGE and READ_EXTERNAL_STORAGE to read and select an image from your gallery.
+        \n\n- INTERNET to use whatanime.ga API and other logs with Crashlytics(Fabric).
+        \n\n- WAKE_LOCK to keep the screen on while searching operation is working.</string>
+    <string name="indicator_choose_browser">Choose browser</string>
+    <string name="error_internet_connection">Internet connection not available</string>
+    <string name="error_service_not_initialized">Service connection not initialized</string>
+    <string name="error_video_recovered_from_storage">Error in recovering video from storage</string>
+    <string name="title_select_video_frame">Select a frame</string>
+    <string name="error_video_not_loaded">Video not ready</string>
+    <string name="input_source_image">Image</string>
+    <string name="input_source_video">Video</string>
+    <string name="input_source_url">Url</string>
+    <string name="action_ok">OK</string>
+    <string name="menu_changelog">Changelog</string>
+    <string name="error_url_invalid">Invalid URL</string>
+    <string name="title_select_source">Select a source</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_menu_general">General</string>
+    <string name="setting_description_changelog">Check new features, changes and bug fixes</string>
+    <string name="setting_label_app_version">App version</string>
+    <string name="setting_label_terms">Terms and conditions</string>
+    <string name="setting_description_terms">Tap here to read terms and conditions</string>
+    <string name="title_menu_contributions">Authors</string>
+    <string name="setting_label_developer_app">maddog05</string>
+    <string name="setting_description_developer_app">App developer</string>
+    <string name="setting_label_developer_api">soruly</string>
+    <string name="setting_description_developer_api">WhatAnime API developer</string>
+    <string name="setting_label_project_github">Github</string>
+    <string name="setting_description_project_github">Project website</string>
+    <string name="setting_label_project_store">Google Play</string>
+    <string name="setting_description_project_store">Open store link</string>
+
+    <string name="indicator_tutorial">Select an image from your gallery and search your anime</string>
+    <string name="input_search_quota">Search quota: %s</string>
+    <string name="input_search_per_minute">Searchs per minute: %s</string>
+    <string name="error_image_not_selected">Image not selected</string>
+    <string name="indicator_quota_info">You have a daily search quota that is renewed in 24 hours. In addition, you have a search limit per minute due to API usage policies.</string>
+    <string name="setting_label_enable_h_content">Enable H content</string>
+    <string name="setting_description_enable_h_content">Show H content in search results</string>
+    <string name="setting_label_report">Report issue</string>
+    <string name="setting_description_report">Report issue in WhatAnime\'s GitHub</string>
+    <string name="input_h_content_accept">I declare that I am of legal age to view this type of content and will not respond to the developer about my actions on WhatAnime</string>
+    <string name="indicator_h_content">By default, the H-content display option is disabled. These can appear in the search results and are filtering to not be visualized for you.</string>
+    <string name="settings">Settings</string>
+    <string name="what_anime_settings">What Anime Settings</string>
+    <string name="app_settings">App Settings</string>
+    <string name="view_profile">View Profile</string>
+    <string name="report_bug">Report Bug</string>
+    <string name="contact_us">Contact us</string>
+
+    <!--BottomNavigationView-->
+    <string name="bnv_home">Home</string>
+    <string name="bnv_search">Search</string>
+    <string name="bnv_quick_update">Quick Update</string>
+    <string name="bnv_notifications">Notifications</string>
+    <string name="bnv_library">Library</string>
+
+
 </resources>
