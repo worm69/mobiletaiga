@@ -36,62 +36,52 @@ android {
         versionName "0.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-
-//        ndk {
-////            abiFilters "armeabi", "armeabi-v7a", "mips", "x86"
-//            abiFilters.clear()
-//        }
     }
-    //Split into platform dependent APK
-//    splits {
-//        abi {
-//            def isReleaseBuild = false
-//
-//            gradle.startParameter.taskNames.find {
-//                // Enable split for release builds in different build flavors
-//                // (assemblePaidRelease, assembleFreeRelease, etc.).
-//                if (it ==~ /:app:assemble.*Release/) {
-//                    isReleaseBuild = true
-//                    return true // break
-//                }
-//
-//                return false // continue
-//            }
-//
-//            // Enables building multiple APKs per ABI.
-//            enable isReleaseBuild
-//            reset()
-////            include 'mips','mips64', 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64' //select ABIs to build APKs for
-//            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-//            universalApk true //generate an additional APK that contains all the ABIs
-//        }
-//    }
+//    Split into platform dependent APK
+    splits {
+        abi {
+            def isReleaseBuild = false
+
+            gradle.startParameter.taskNames.find {
+                // Enable split for release builds in different build flavors
+                // (assemblePaidRelease, assembleFreeRelease, etc.).
+                if (it ==~ /:app:assemble.*Release/) {
+                    isReleaseBuild = true
+                    return true // break
+                }
+
+                return false // continue
+            }
+
+            // Enables building multiple APKs per ABI.
+            enable isReleaseBuild
+            reset()
+//            include 'mips','mips64', 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64' //select ABIs to build APKs for
+            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            universalApk true //generate an additional APK that contains all the ABIs
+        }
+    }
+
 // map for the version code
-//    project.ext.versionCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3, 'x86_64': 4]
-//// Rename with proper versioning
-//    android.applicationVariants.all { variant ->
-//        // assign different version code for each output
-//        variant.outputs.each { output ->
-//            output.versionCodeOverride =
-//                    project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) *
-//                            1000000 +
-//                            android.defaultConfig.versionCode
-//        }
-//    }
+    project.ext.versionCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3, 'x86_64': 4]
+// Rename with proper versioning
+    android.applicationVariants.all { variant ->
+        // assign different version code for each output
+        variant.outputs.each { output ->
+            output.versionCodeOverride =
+                    project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) *
+                            1000000 +
+                            android.defaultConfig.versionCode
+        }
+    }
     buildTypes {
         release {
-            ndk {
-                abiFilters "arm64-v8a", "armeabi-v7a"
-            }
             minifyEnabled false
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', ReleaseIsLoggerEnabled
         }
         debug {
-            ndk {
-                abiFilters "arm64-v8a", "armeabi-v7a", "x86 ", "x86_64"
-            }
             //use resConfig("en", "xxhdpi") Including Minimal Resources
             //disable this build id for development build.
             ext.alwaysUpdateBuildId = false
@@ -103,10 +93,6 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'TOKEN', WhatAnimeToken
         it.buildConfigField 'String', 'SERVER_DOMAIN', WhatAnimeDomain
-    }
-    if (project.hasProperty('devBuild')) {
-        splits.abi.enable = false
-        splits.density.enable = false
     }
     sourceSets {
         main.java.srcDirs += 'src/main/java'
@@ -145,7 +131,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
