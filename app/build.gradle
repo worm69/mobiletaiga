@@ -28,7 +28,6 @@ repositories {
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
-
     defaultConfig {
         applicationId "pt.dbmg.mobiletaiga"
         minSdkVersion 21
@@ -38,6 +37,43 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+//    Split into platform dependent APK
+    splits {
+        abi {
+            def isReleaseBuild = false
+
+            gradle.startParameter.taskNames.find {
+                // Enable split for release builds in different build flavors
+                // (assemblePaidRelease, assembleFreeRelease, etc.).
+                if (it ==~ /:app:assemble.*Release/) {
+                    isReleaseBuild = true
+                    return true // break
+                }
+
+                return false // continue
+            }
+
+            // Enables building multiple APKs per ABI.
+            enable isReleaseBuild
+            reset()
+//            include 'mips','mips64', 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64' //select ABIs to build APKs for
+            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            universalApk true //generate an additional APK that contains all the ABIs
+        }
+    }
+
+// map for the version code
+    project.ext.versionCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3, 'x86_64': 4]
+// Rename with proper versioning
+    android.applicationVariants.all { variant ->
+        // assign different version code for each output
+        variant.outputs.each { output ->
+            output.versionCodeOverride =
+                    project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) *
+                            1000000 +
+                            android.defaultConfig.versionCode
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -46,10 +82,17 @@ android {
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', ReleaseIsLoggerEnabled
         }
         debug {
+            //use resConfig("en", "xxhdpi") Including Minimal Resources
+            //disable this build id for development build.
+            ext.alwaysUpdateBuildId = false
             minifyEnabled false
             useProguard false
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', DebugIsLoggerEnabled
         }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'TOKEN', WhatAnimeToken
+        it.buildConfigField 'String', 'SERVER_DOMAIN', WhatAnimeDomain
     }
     sourceSets {
         main.java.srcDirs += 'src/main/java'
@@ -57,12 +100,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    buildTypes.each {
-        it.buildConfigField 'String', 'TOKEN', WhatAnimeToken
-        it.buildConfigField 'String', 'SERVER_DOMAIN', WhatAnimeDomain
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -75,7 +112,6 @@ android {
 }
 
 dependencies {
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     def nav_version = "1.0.0-alpha11"
     def futures_version = "1.0.0-alpha02"
@@ -91,13 +127,11 @@ dependencies {
     implementation "androidx.cardview:cardview:$android_support_library"
     implementation "androidx.percentlayout:percentlayout:$android_support_library"
     implementation "androidx.recyclerview:recyclerview:$android_support_library"
-
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
@@ -106,35 +140,45 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version" // use -ktx for Kotlin
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
+    // use -ktx for Kotlin
     implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha4'
-    implementation "com.apollographql.apollo:apollo-android-support:1.0.0-alpha4"
-
+    implementation 'com.apollographql.apollo:apollo-android-support:1.0.0-alpha4'
     implementation 'io.realm:android-adapters:3.0.0'
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
 
-    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version" // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
+    // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+
+    // use -ktx for Kotlin
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.concurrent:concurrent-futures:$futures_version"
+
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.8@aar') {
         transitive = true
     }
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version" // use kapt for Kotlin
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    // use kapt for Kotlin
 
     // optional - ReactiveStreams support for LiveData
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version" // use -ktx for Kotlin
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
+
+    // use -ktx for Kotlin
 
     //Images
     implementation('com.github.bumptech.glide:glide:4.8.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+
     //Videos
     implementation('com.devbrackets.android:exomedia:4.3.0') {
         exclude group: 'com.google.android', module: 'support-v7'
     }
+
     //Utilities
     implementation('com.github.maddog05:MaddogUtilities:1.0.1') {
         exclude group: 'com.android.support', module: 'support-v7'
@@ -144,9 +188,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
     // Test helpers
+
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -159,7 +203,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.gridlayout:gridlayout:1.0.0'// use -ktx for Kotlin
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    // use -ktx for Kotlin
 }
 
 dokka {
