@@ -174,7 +174,10 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
             }
             R.id.navigation_search -> {
                 Toast.makeText(this, "DashBoard", Toast.LENGTH_SHORT).show()
-                NavHostFragment.findNavController(nav_host_fragment).navigate(R.id.action_homeFragment_to_searchFragment)
+                //check current fragment before navigate
+                if (NavHostFragment.findNavController(nav_host_fragment).currentDestination?.id != R.id.searchFragment) {
+                    NavHostFragment.findNavController(nav_host_fragment).navigate(R.id.action_homeFragment_to_searchFragment)
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
