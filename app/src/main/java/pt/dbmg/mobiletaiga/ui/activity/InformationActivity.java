@@ -1,11 +1,11 @@
 package pt.dbmg.mobiletaiga.ui.activity;
 
 
+import android.os.Bundle;
+import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
 import pt.dbmg.mobiletaiga.R;
 
 public class InformationActivity extends AppCompatActivity {

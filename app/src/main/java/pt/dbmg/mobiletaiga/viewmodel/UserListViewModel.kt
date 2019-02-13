@@ -1,8 +1,8 @@
 package pt.dbmg.mobiletaiga.viewmodel
 
 import io.reactivex.Observable
-import pt.dbmg.mobiletaiga.viewmodel.data.UsersList
 import pt.dbmg.mobiletaiga.repository.UserRepository
+import pt.dbmg.mobiletaiga.viewmodel.data.UsersList
 import timber.log.Timber
 
 class UserListViewModel(private val userRepository: UserRepository) {

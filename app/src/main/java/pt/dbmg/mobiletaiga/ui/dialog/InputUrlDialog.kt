@@ -1,11 +1,11 @@
 package pt.dbmg.mobiletaiga.ui.dialog
 
 import android.content.Context
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatEditText
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatEditText
 import com.maddog05.maddogutilities.callback.Callback
 import pt.dbmg.mobiletaiga.R
 

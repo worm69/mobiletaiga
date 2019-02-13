@@ -8,12 +8,12 @@ import android.provider.MediaStore;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
-import pt.dbmg.mobiletaiga.ui.activity.VideoSelectActivity;
-import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity;
 import pt.dbmg.mobiletaiga.R;
 import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail;
 import pt.dbmg.mobiletaiga.ui.activity.InformationActivity;
+import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity;
 import pt.dbmg.mobiletaiga.ui.activity.VideoPreviewActivity;
+import pt.dbmg.mobiletaiga.ui.activity.VideoSelectActivity;
 import pt.dbmg.mobiletaiga.util.C;
 
 /*

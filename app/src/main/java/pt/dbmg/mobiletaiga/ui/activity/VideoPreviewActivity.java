@@ -2,23 +2,19 @@ package pt.dbmg.mobiletaiga.ui.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.maddog05.maddogutilities.android.Checkers;
-
-
 import es.dmoral.toasty.Toasty;
 import pt.dbmg.mobiletaiga.R;
 import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail;
