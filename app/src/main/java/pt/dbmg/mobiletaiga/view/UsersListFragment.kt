@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.users_fragment.*
+import kotlinx.android.synthetic.main.users_fragment.usersList
 import pt.dbmg.mobiletaiga.App
 import pt.dbmg.mobiletaiga.R
 import pt.dbmg.mobiletaiga.viewmodel.data.UsersList

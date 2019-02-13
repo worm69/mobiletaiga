@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class DataTrendingAnime(
     @SerializedName("attributes")
-    val attributes: AttributesTrendingAnime,
+    val attributes: AttributesAnime,
     @SerializedName("id")
     val id: String, // 1
     @SerializedName("links")

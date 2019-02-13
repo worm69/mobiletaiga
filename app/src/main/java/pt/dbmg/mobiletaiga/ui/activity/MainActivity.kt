@@ -19,16 +19,25 @@ import com.maddog05.maddogutilities.android.Permissions
 import com.maddog05.maddogutilities.callback.Callback
 import com.maddog05.maddogutilities.image.Images
 import com.maddog05.maddogutilities.string.Strings
+import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_main_two.btn_main_info_quota
+import kotlinx.android.synthetic.main.activity_main_two.fab_main_search
+import kotlinx.android.synthetic.main.activity_main_two.iv_main_photo
+import kotlinx.android.synthetic.main.activity_main_two.layout_main_loading
+import kotlinx.android.synthetic.main.activity_main_two.rv_main_results
+import kotlinx.android.synthetic.main.activity_main_two.toolbar
+import kotlinx.android.synthetic.main.activity_main_two.tv_main_search_per_minute
+import kotlinx.android.synthetic.main.activity_main_two.tv_main_search_quota
+import kotlinx.android.synthetic.main.activity_main_two.tv_main_tutorial
+import pt.dbmg.mobiletaiga.R
+import pt.dbmg.mobiletaiga.R.string
+import pt.dbmg.mobiletaiga.mvp.presenter.MainPresenter
 import pt.dbmg.mobiletaiga.mvp.view.MainView
+import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail
 import pt.dbmg.mobiletaiga.ui.adapter.AdapterMain
+import pt.dbmg.mobiletaiga.ui.dialog.ChangelogDialog
 import pt.dbmg.mobiletaiga.ui.dialog.InputUrlDialog
 import pt.dbmg.mobiletaiga.ui.dialog.QuotaInfoDialog
-import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_main_two.*
-import pt.dbmg.mobiletaiga.R
-import pt.dbmg.mobiletaiga.mvp.presenter.MainPresenter
-import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail
-import pt.dbmg.mobiletaiga.ui.dialog.ChangelogDialog
 import pt.dbmg.mobiletaiga.ui.tor.Navigator
 import pt.dbmg.mobiletaiga.util.Mapper
 import pt.dbmg.mobiletaiga.util.image.GlideLoader
@@ -98,37 +107,49 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             REQUEST_PHOTO_GALLERY -> {
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    val pair = Images.getOutputPhotoGalleryCompressed(this, data, 512)
-                    val bitmap = pair.bitmap
-                    if (bitmap != null)
-                        processBitmap(bitmap)
-                    else
-                        showErrorGeneric(getString(R.string.error_image_recovered_from_storage))
-                } else {
-                    showErrorGeneric(getString(R.string.error_image_recovered_from_storage))
-                }
+                requestPhotoGallery(resultCode, data)
             }
             REQUEST_VIDEO_GALLERY -> {
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    val uri = data.data
-                    val path = Mapper.parseLocalVideoPath(this, uri)
-                    if (path != null) {
-                        Navigator.goToSelectVideo(this, path, REQUEST_FRAME_VIDEO)
-                    } else {
-                        showErrorGeneric(getString(R.string.error_video_recovered_from_storage))
-                    }
-                }
+                requestVideoGallery(resultCode, data)
             }
             REQUEST_FRAME_VIDEO -> {
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    val bitmap = Mapper.parseVideoFrameFromSelectFrame(data)
-                    if (bitmap != null)
-                        processBitmap(bitmap)
-                    else
-                        showErrorGeneric(getString(R.string.error_image_recovered_from_storage))
-                }
+                requestFrameVideo(resultCode, data)
             }
+        }
+    }
+
+    private fun requestFrameVideo(resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val bitmap = Mapper.parseVideoFrameFromSelectFrame(data)
+            if (bitmap != null)
+                processBitmap(bitmap)
+            else
+                showErrorGeneric(getString(string.error_image_recovered_from_storage))
+        }
+    }
+
+    private fun requestVideoGallery(resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val uri = data.data
+            val path = Mapper.parseLocalVideoPath(this, uri)
+            if (path != null) {
+                Navigator.goToSelectVideo(this, path, REQUEST_FRAME_VIDEO)
+            } else {
+                showErrorGeneric(getString(string.error_video_recovered_from_storage))
+            }
+        }
+    }
+
+    private fun requestPhotoGallery(resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val pair = Images.getOutputPhotoGalleryCompressed(this, data, 512)
+            val bitmap = pair.bitmap
+            if (bitmap != null)
+                processBitmap(bitmap)
+            else
+                showErrorGeneric(getString(string.error_image_recovered_from_storage))
+        } else {
+            showErrorGeneric(getString(string.error_image_recovered_from_storage))
         }
     }
 

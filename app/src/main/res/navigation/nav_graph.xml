@@ -23,4 +23,9 @@
         android:id="@+id/searchFragment"
         android:name="pt.dbmg.mobiletaiga.ui.fragment.SearchFragment"
         android:label="SearchFragment" />
+    <activity
+        android:id="@+id/login"
+        android:name="pt.dbmg.mobiletaiga.ui.activity.Login"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

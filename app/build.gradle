@@ -6,7 +6,7 @@ apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.apollographql.android'
 apply plugin: 'realm-android'
 apply plugin: 'jacoco-android'
-
+apply plugin: 'io.fabric'
 apply from: '../jacoco.gradle'
 apply from: '../sonar.gradle'
 
@@ -20,7 +20,6 @@ buildscript {
     }
 }
 
-apply plugin: 'io.fabric'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
@@ -93,6 +92,13 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'TOKEN', WhatAnimeToken
         it.buildConfigField 'String', 'SERVER_DOMAIN', WhatAnimeDomain
+        it.buildConfigField 'String', 'CALLBACKURL', CallbackURL
+        it.buildConfigField 'String', 'AUTHURL', AuthURL
+        it.buildConfigField 'String', 'ACCESSTOKENURL', AccessTokenURL
+        it.buildConfigField 'String', 'CLIENTID', ClientId
+        it.buildConfigField 'String', 'CLIENTSECRET', ClientSecret
+        it.buildConfigField 'String', 'AUTH_TOKEN_TEST_ANILIST', AUTH_TOKEN
+
     }
     sourceSets {
         main.java.srcDirs += 'src/main/java'
@@ -113,7 +119,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    def nav_version = "1.0.0-alpha11"
+    def nav_version = "1.0.0-beta02"
     def futures_version = "1.0.0-alpha02"
     def lifecycle_version = "2.0.0"
     def room_version = "2.1.0-alpha04"
@@ -130,13 +136,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
     implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.jakewharton.timber:timber:4.6.1'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -147,7 +153,6 @@ dependencies {
     implementation 'com.apollographql.apollo:apollo-android-support:1.0.0-alpha4'
     implementation 'io.realm:android-adapters:3.0.0'
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-
     // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
@@ -157,7 +162,7 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.8@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
         transitive = true
     }
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
@@ -197,7 +202,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "androidx.room:room-testing:$room_version"
-    testImplementation 'com.nhaarman:mockito-kotlin:1.1.0'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
@@ -205,7 +210,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
-    // use -ktx for Kotlin
+    compile project(path: ':anilistclient')
 }
 
 dokka {

@@ -82,6 +82,17 @@
     <string name="bnv_quick_update">Quick Update</string>
     <string name="bnv_notifications">Notifications</string>
     <string name="bnv_library">Library</string>
+    <string name="login_user">User or Email</string>
+    <string name="mobile_taiga_logo_cd">Mobile Taiga Logo</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="skip">Skip</string>
 
+
+    <string-array name="service_array">
+        <item>Select</item>
+        <item>Kitsu</item>
+        <item>Anilist</item>
+    </string-array>
 
 </resources>

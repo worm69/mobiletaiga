@@ -4,11 +4,9 @@ package pt.dbmg.mobiletaiga.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.maddog05.maddogutilities.string.Strings;
-
 import java.util.ArrayList;
 import java.util.List;
 import pt.dbmg.mobiletaiga.R;
