@@ -3,19 +3,47 @@ package pt.dbmg.mobiletaiga.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_login.et_password
 import kotlinx.android.synthetic.main.activity_login.et_user
 import kotlinx.android.synthetic.main.activity_login.sp_service
 import pt.dbmg.anilistclient.LoginAnilistActivity
+import pt.dbmg.mobiletaiga.BuildConfig
+import pt.dbmg.mobiletaiga.network.response.KitsuToken
+import pt.dbmg.mobiletaiga.repository.api.ApiKitsu
 import pt.dbmg.mobiletaiga.repository.data.settingsDB.Anilist
+import pt.dbmg.mobiletaiga.repository.data.settingsDB.Kitsu
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import io.realm.RealmConfiguration
+import io.realm.annotations.RealmModule
+import pt.dbmg.mobiletaiga.repository.data.settingsDB.Myanimelist
+import pt.dbmg.mobiletaiga.repository.data.settingsDB.Settings
+import pt.dbmg.mobiletaiga.repository.data.settingsDB.Update
+import java.io.File
 
 class Login : AppCompatActivity() {
     private val SECOND_ACTIVITY_REQUEST_CODE = 0
+
+    //For the sake of simplicity, for now we use this instead of Dagger
+    companion object {
+        init {
+            System.loadLibrary("keys")
+        }
+        private lateinit var retrofit: Retrofit
+        private lateinit var kitsuApi: ApiKitsu
+        private lateinit var disposable: Disposable
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +62,22 @@ class Login : AppCompatActivity() {
                 }
             }
         }
-    }
+        val key1 = Base64.decode(getNativeKey1(),Base64.DEFAULT)
+        Realm.init(this)
+        val realmConfig = RealmConfiguration.Builder()
+            .name("mobile-taiga.realm")
+            .deleteRealmIfMigrationNeeded() //colocar quando se mudar a estrutura da db
+            .addModule(SettingsDB())    //modulo com informações para encryptar
+            .encryptionKey(key1) //Encryp db
+            .schemaVersion(0)
+            .build()
+        when {
+            File(realmConfig.path).exists() -> Log.d(this.toString(), " Realm DB Exist")
+            else -> Log.d(this.toString(), " Realm DB dont Exist")
+        }
+        Realm.setDefaultConfiguration(realmConfig)
 
+    }
     fun doLogin(view: View?) {
         if (view?.id == pt.dbmg.mobiletaiga.R.id.btn_login) {
             //TODO check selected service
@@ -46,16 +88,12 @@ class Login : AppCompatActivity() {
 
             }
             //warning  dialog
-            //get token
-            //store values
         }
     }
 
     private fun getAnimistCredentials() {
         val intent = Intent(this, LoginAnilistActivity::class.java)
-//        intent.putExtra("token", "");
-//        setResult(Activity.RESULT_OK, intent);
-          startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
+        startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
     }
 
     // This method is called when the second activity finishes
@@ -71,7 +109,6 @@ class Login : AppCompatActivity() {
                 val refreshToken = data!!.getStringExtra("refreshToken")
 
                 Log.d("Login Success", "$token $tokenExpires $refreshToken")
-                Realm.init(this);
                 val realm = Realm.getDefaultInstance()
                 realm.beginTransaction()
                 realm.insert(Anilist("test", "POINT_10", token, tokenExpires, refreshToken))
@@ -81,12 +118,64 @@ class Login : AppCompatActivity() {
         }
     }
 
-
     private fun showWarningPopUp() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun getKitsuCredencials() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .baseUrl(BuildConfig.KITSUURL)
+            .build()
+
+        kitsuApi = retrofit.create(ApiKitsu::class.java)
+
+        getTokenKitsu(kitsuApi)
     }
+
+    private fun getTokenKitsu(apiKitsu: ApiKitsu) {
+        val context = this
+        val user = et_user.editableText.toString()
+        val password= et_password.editableText.toString()
+        apiKitsu.getToken("password", user, password)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(object : Observer<KitsuToken> {
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.d("Subscriber Error ", e.toString())
+                }
+
+                override fun onNext(data: KitsuToken) {
+                    Log.d("Login Success", "${data.accessToken} ${data.createdAt} ${data.expiresIn}")
+                    val realm = Realm.getDefaultInstance()
+                    realm.beginTransaction()
+                    realm.insert(Kitsu(user,user,user,password, "simple", data.accessToken,data.createdAt, data.expiresIn, data.refreshToken))
+                    realm.commitTransaction()
+                    realm.close()
+                }
+
+                override fun onComplete() {
+//                    isLoading.set(false)
+                }
+            })
+    }
+
+    @RealmModule(classes = [Anilist::class, Kitsu::class, Myanimelist::class, Settings::class, Update::class])
+    public class SettingsDB {
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!disposable.isDisposed) {
+            disposable.dispose()
+        }
+    }
+
+    external fun getNativeKey1(): String
 }
+
