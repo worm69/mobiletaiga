@@ -73,6 +73,11 @@ android {
                             android.defaultConfig.versionCode
         }
     }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -92,12 +97,16 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'TOKEN', WhatAnimeToken
         it.buildConfigField 'String', 'SERVER_DOMAIN', WhatAnimeDomain
-        it.buildConfigField 'String', 'CALLBACKURL', CallbackURL
-        it.buildConfigField 'String', 'AUTHURL', AuthURL
-        it.buildConfigField 'String', 'ACCESSTOKENURL', AccessTokenURL
-        it.buildConfigField 'String', 'CLIENTID', ClientId
-        it.buildConfigField 'String', 'CLIENTSECRET', ClientSecret
-        it.buildConfigField 'String', 'AUTH_TOKEN_TEST_ANILIST', AUTH_TOKEN
+        it.buildConfigField 'String', 'ANILISTCALLBACKURL', AnilistCallbackURL
+        it.buildConfigField 'String', 'ANILISTAUTHURL', AnilistAuthURL
+        it.buildConfigField 'String', 'ANILISTACCESSTOKENURL', AnilistAccessTokenURL
+        it.buildConfigField 'String', 'ANILISTCLIENTID', AnilistClientId
+        it.buildConfigField 'String', 'ANILISTCLIENTSECRET', AnilistClientSecret
+
+        it.buildConfigField 'String', 'KITSUURL', KitsuURL
+        it.buildConfigField 'String', 'KITSUCLIENTID', KitsuClientId
+        it.buildConfigField 'String', 'KITSUCLIENTSECRET', KitsuClientSecret
+
 
     }
     sourceSets {
