@@ -1,6 +1,7 @@
 package pt.dbmg.mobiletaiga.repository.api
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import pt.dbmg.mobiletaiga.network.response.AnimeCharacters
 import pt.dbmg.mobiletaiga.network.response.AnimeCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.AnimePaged
@@ -56,6 +57,7 @@ import pt.dbmg.mobiletaiga.network.response.GroupsPaged
 import pt.dbmg.mobiletaiga.network.response.GroupsResource
 import pt.dbmg.mobiletaiga.network.response.InstallmentsPaged
 import pt.dbmg.mobiletaiga.network.response.InstallmentsResource
+import pt.dbmg.mobiletaiga.network.response.KitsuToken
 import pt.dbmg.mobiletaiga.network.response.LeaderChatMessagesPaged
 import pt.dbmg.mobiletaiga.network.response.LeaderChatMessagesResouce
 import pt.dbmg.mobiletaiga.network.response.LibraryEntries
@@ -127,6 +129,7 @@ import pt.dbmg.mobiletaiga.network.response.UsersBlocksPaged
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -140,8 +143,9 @@ interface ApiKitsu {
      * @param username user name
      * @param password password
      */
+    @FormUrlEncoded
     @POST("/api/oauth/token")
-    fun getToken(@Field("grant_type") grant_type: String, @Field("username")username: String,  @Field("password")password: String)
+    fun getToken(@Field("grant_type") grant_type: String, @Field("username")username: String,  @Field("password")password: String): Observable<KitsuToken>
 
     //region Characters & People Done
     @GET("/api/edge/anime-characters")

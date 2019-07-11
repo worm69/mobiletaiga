@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.users_fragment.*
+import kotlinx.android.synthetic.main.users_fragment.usersList
 import pt.dbmg.mobiletaiga.App
 import pt.dbmg.mobiletaiga.R
 import pt.dbmg.mobiletaiga.viewmodel.data.UsersList
@@ -40,7 +40,7 @@ class UsersListFragment : MvvmFragment() {
 
     fun showUsers(data: UsersList) {
         if (data.error == null) {
-            usersList.adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, data.users)
+            usersList.adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, data.users) }
         } else if (data.error is ConnectException || data.error is UnknownHostException) {
             Timber.d("No connection, maybe inform user that data loaded from DB.")
         } else {

@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class DataTrendingDrama(
     @SerializedName("attributes")
-    val attributes: AttributesTrendingDrama,
+    val attributes: AttributesDrama,
     @SerializedName("id")
     val id: String, // 1
     @SerializedName("links")
     val links: Links1,
     @SerializedName("relationships")
-    val relationships: RelationshipsTrendingDrama,
+    val relationships: RelationshipsDrama,
     @SerializedName("type")
     val type: String // drama
 )

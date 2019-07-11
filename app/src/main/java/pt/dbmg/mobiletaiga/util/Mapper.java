@@ -13,16 +13,18 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.maddog05.maddogutilities.number.Numbers;
-import pt.dbmg.mobiletaiga.core.entity.output.OutputGetQuota;
 import java.io.ByteArrayOutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 import pt.dbmg.mobiletaiga.BuildConfig;
 import pt.dbmg.mobiletaiga.R;
+import pt.dbmg.mobiletaiga.core.entity.output.OutputGetQuota;
 import pt.dbmg.mobiletaiga.repository.entity.ChangelogItem;
 import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail;
+import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail.Doc;
 
 
 public class Mapper {
@@ -175,6 +177,17 @@ public class Mapper {
     public static SearchDetail parseSearchDetail(JsonObject json) {
         SearchDetail searchDetail = new SearchDetail();
 
+        parseJson(json, searchDetail);
+        JsonArray arrayDocs = json.get("docs").getAsJsonArray();
+        for (int i = 0; i < arrayDocs.size(); i++) {
+            Doc doc = getDoc(arrayDocs, i);
+            searchDetail.docs.add(doc);
+        }
+
+        return searchDetail;
+    }
+
+    private static void parseJson(final JsonObject json, final SearchDetail searchDetail) {
         searchDetail.rawDocsCount = new ArrayList<>();
         searchDetail.rawDocsCount.add(json.get("RawDocsCount").getAsInt());
 
@@ -190,38 +203,36 @@ public class Mapper {
         searchDetail.expire = 0;//json.get("expire").getAsInt();
 
         searchDetail.docs = new ArrayList<>();
-        JsonArray arrayDocs = json.get("docs").getAsJsonArray();
-        for (int i = 0; i < arrayDocs.size(); i++) {
-            JsonObject _doc = arrayDocs.get(i).getAsJsonObject();
-            SearchDetail.Doc doc = new SearchDetail.Doc();
+    }
 
-            doc.fromTime = _doc.get("from").getAsDouble();
-            doc.toTime = _doc.get("to").getAsDouble();
-            doc.atTime = _doc.get("at").getAsDouble();
-            doc.episode = elementString(_doc.get("episode"), C.EMPTY);
-            doc.similarity = _doc.get("similarity").getAsDouble();
-            doc.anilistId = elementInt(_doc.get("anilist_id"), C.INTEGER_NONE);
-            doc.romanjiTitle = elementString(_doc.get("title_romaji"), C.EMPTY);//ALWAYS WITH DATA
-            doc.japaneseTitle = elementString(_doc.get("title"), doc.romanjiTitle);
-            doc.englishTitle = elementString(_doc.get("title_english"), doc.romanjiTitle);
+    @NotNull
+    private static Doc getDoc(final JsonArray arrayDocs, final int i) {
+        JsonObject _doc = arrayDocs.get(i).getAsJsonObject();
+        Doc doc = new Doc();
 
-            doc.synonyms = new ArrayList<>();
-            JsonArray arraySynonyms = _doc.get("synonyms").getAsJsonArray();
-            for (int j = 0; j < arraySynonyms.size(); j++)
-                doc.synonyms.add(arraySynonyms.get(j).getAsString());
+        doc.fromTime = _doc.get("from").getAsDouble();
+        doc.toTime = _doc.get("to").getAsDouble();
+        doc.atTime = _doc.get("at").getAsDouble();
+        doc.episode = elementString(_doc.get("episode"), C.EMPTY);
+        doc.similarity = _doc.get("similarity").getAsDouble();
+        doc.anilistId = elementInt(_doc.get("anilist_id"), C.INTEGER_NONE);
+        doc.romanjiTitle = elementString(_doc.get("title_romaji"), C.EMPTY);//ALWAYS WITH DATA
+        doc.japaneseTitle = elementString(_doc.get("title"), doc.romanjiTitle);
+        doc.englishTitle = elementString(_doc.get("title_english"), doc.romanjiTitle);
 
-            doc.season = elementString(_doc.get("season"), C.EMPTY);
-            doc.anime = elementString(_doc.get("anime"), C.EMPTY);
-            doc.fileName = elementString(_doc.get("filename"), C.EMPTY);
-            doc.tokenThumb = elementString(_doc.get("tokenthumb"), C.EMPTY);
+        doc.synonyms = new ArrayList<>();
+        JsonArray arraySynonyms = _doc.get("synonyms").getAsJsonArray();
+        for (int j = 0; j < arraySynonyms.size(); j++)
+            doc.synonyms.add(arraySynonyms.get(j).getAsString());
 
-            doc.myAnimeListId = elementInt(_doc.get("mal_id"), C.INTEGER_NONE);
-            doc.isHentai = _doc.get("is_adult").getAsBoolean();
+        doc.season = elementString(_doc.get("season"), C.EMPTY);
+        doc.anime = elementString(_doc.get("anime"), C.EMPTY);
+        doc.fileName = elementString(_doc.get("filename"), C.EMPTY);
+        doc.tokenThumb = elementString(_doc.get("tokenthumb"), C.EMPTY);
 
-            searchDetail.docs.add(doc);
-        }
-
-        return searchDetail;
+        doc.myAnimeListId = elementInt(_doc.get("mal_id"), C.INTEGER_NONE);
+        doc.isHentai = _doc.get("is_adult").getAsBoolean();
+        return doc;
     }
 
     public static List<ChangelogItem> parseChangelog(JsonArray json) {

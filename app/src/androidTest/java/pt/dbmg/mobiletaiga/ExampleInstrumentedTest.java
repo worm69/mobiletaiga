@@ -1,14 +1,12 @@
 package pt.dbmg.mobiletaiga;
 
+import static org.junit.Assert.*;
+
 import android.content.Context;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.*;
+import org.junit.runner.*;
 
 /**
  * Instrumentation test, which will execute on an Android device.
