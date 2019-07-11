@@ -25,6 +25,10 @@
                 android:icon="@drawable/ic_settings_black_24dp"
                 android:title="@string/what_anime_settings" />
             <item
+                android:id="@+id/nav_app_rss"
+                android:icon="@drawable/ic_rss_feed_black_24dp"
+                android:title="@string/app_rss" />
+            <item
                 android:id="@+id/nav_app_settings"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="@string/app_settings" />

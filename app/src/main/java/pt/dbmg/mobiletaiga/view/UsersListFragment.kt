@@ -40,7 +40,7 @@ class UsersListFragment : MvvmFragment() {
 
     fun showUsers(data: UsersList) {
         if (data.error == null) {
-            usersList.adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, data.users)
+            usersList.adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, data.users) }
         } else if (data.error is ConnectException || data.error is UnknownHostException) {
             Timber.d("No connection, maybe inform user that data loaded from DB.")
         } else {
