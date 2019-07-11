@@ -11,7 +11,7 @@ cache:
   - "$HOME/.android/build-cache"
 env:
   global:
-  - ANDROID_API=28
+  - ANDROID_API=29
   - EMULATOR_API=24
   - ANDROID_ABI=armeabi-v7a
   - ANDROID_BUILD_TOOLS=28.0.3
