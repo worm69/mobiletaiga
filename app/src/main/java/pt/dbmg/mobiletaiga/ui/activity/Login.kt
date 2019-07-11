@@ -30,19 +30,17 @@ import io.realm.annotations.RealmModule
 import pt.dbmg.mobiletaiga.repository.data.settingsDB.Myanimelist
 import pt.dbmg.mobiletaiga.repository.data.settingsDB.Settings
 import pt.dbmg.mobiletaiga.repository.data.settingsDB.Update
+import pt.dbmg.mobiletaiga.ui.dialog.LoginSkipAccountLinkDialog
+import pt.dbmg.mobiletaiga.util.SecurityUtils
 import java.io.File
+import java.security.SecureRandom
 
 class Login : AppCompatActivity() {
     private val SECOND_ACTIVITY_REQUEST_CODE = 0
-
-    //For the sake of simplicity, for now we use this instead of Dagger
+    private var disposable: Disposable? =null
     companion object {
-        init {
-            System.loadLibrary("keys")
-        }
         private lateinit var retrofit: Retrofit
         private lateinit var kitsuApi: ApiKitsu
-        private lateinit var disposable: Disposable
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,13 +60,15 @@ class Login : AppCompatActivity() {
                 }
             }
         }
-        val key1 = Base64.decode(getNativeKey1(),Base64.DEFAULT)
+        val key = ByteArray(64)
+        SecureRandom().nextBytes(key)
+
         Realm.init(this)
         val realmConfig = RealmConfiguration.Builder()
             .name("mobile-taiga.realm")
             .deleteRealmIfMigrationNeeded() //colocar quando se mudar a estrutura da db
             .addModule(SettingsDB())    //modulo com informações para encryptar
-            .encryptionKey(key1) //Encryp db
+            .encryptionKey(key) //Encryp db
             .schemaVersion(0)
             .build()
         when {
@@ -76,7 +76,7 @@ class Login : AppCompatActivity() {
             else -> Log.d(this.toString(), " Realm DB dont Exist")
         }
         Realm.setDefaultConfiguration(realmConfig)
-
+        Log.i("RealmEncryptionKey", SecurityUtils.bytesToHex(key));
     }
     fun doLogin(view: View?) {
         if (view?.id == pt.dbmg.mobiletaiga.R.id.btn_login) {
@@ -119,7 +119,8 @@ class Login : AppCompatActivity() {
     }
 
     private fun showWarningPopUp() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        LoginSkipAccountLinkDialog.newInstance(this)
+            .showDialog()
     }
 
     private fun getKitsuCredencials() {
@@ -171,11 +172,12 @@ class Login : AppCompatActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        if (!disposable.isDisposed) {
-            disposable.dispose()
-        }
-    }
+//        if (!disposable!!.isDisposed) {
+////            disposable?.dispose()
+////        }
 
-    external fun getNativeKey1(): String
+        disposable?.dispose()
+
+    }
 }
 

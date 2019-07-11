@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.Login">
+        <activity android:name=".ui.activity.Login"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,6 +72,7 @@
             android:name=".ui.activity.SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppSettingsStyle" />
+        <activity android:name=".rss.RssFeed" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
