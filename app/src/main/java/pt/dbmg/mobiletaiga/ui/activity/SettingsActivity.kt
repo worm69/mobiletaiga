@@ -2,14 +2,13 @@ package pt.dbmg.mobiletaiga.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.MenuItem
 import com.maddog05.maddogutilities.callback.Callback
 import pt.dbmg.mobiletaiga.R
 import pt.dbmg.mobiletaiga.ui.fragment.SettingsFragment
 import pt.dbmg.mobiletaiga.util.C
-
 
 class SettingsActivity : AppCompatActivity() {
 

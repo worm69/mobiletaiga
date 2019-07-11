@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonArray
@@ -19,7 +20,6 @@ import pt.dbmg.mobiletaiga.ui.adapter.AdapterChangelog
 import pt.dbmg.mobiletaiga.util.Mapper
 import java.io.InputStream
 import java.nio.charset.Charset
-import androidx.fragment.app.FragmentManager
 
 /*
  * Created by andreetorres on 26/01/18.

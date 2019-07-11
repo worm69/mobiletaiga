@@ -1,5 +1,6 @@
 package pt.dbmg.mobiletaiga
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -22,11 +23,10 @@ import kotlinx.android.synthetic.main.app_bar_main2.toolbar
 import okhttp3.OkHttpClient
 import pt.dbmg.mobiletaiga.R.layout.activity_main
 import pt.dbmg.mobiletaiga.R.string
-import java.util.logging.Logger
-import android.content.Intent
-import androidx.navigation.findNavController
+import pt.dbmg.mobiletaiga.rss.RssFeed
 import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity
 import pt.dbmg.mobiletaiga.ui.fragment.SearchFragment
+import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener  {
     override fun onFragmentInteraction(uri: Uri) {
@@ -141,6 +141,11 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 
             R.id.nav_app_settings -> {
 
+            }
+
+            R.id.nav_app_rss ->{
+                val intent = Intent(this, RssFeed::class.java)
+                startActivity(intent)
             }
         }
 

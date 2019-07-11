@@ -1,8 +1,8 @@
 package pt.dbmg.mobiletaiga.mvp.presenter
 
 import com.maddog05.maddogutilities.android.Checkers
-import pt.dbmg.mobiletaiga.mvp.view.MainView
 import pt.dbmg.mobiletaiga.BuildConfig
+import pt.dbmg.mobiletaiga.mvp.view.MainView
 import pt.dbmg.mobiletaiga.network.LogicNetworkRetrofit
 import pt.dbmg.mobiletaiga.repository.data.LogicPreferenceSharedPref
 import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail
