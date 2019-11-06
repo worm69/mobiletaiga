@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="Fetch" />
+        android:text="@string/fetch" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -23,12 +23,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_toStartOf="@id/fetchFeedButton"
-        android:hint="Rss feed source">
+        android:hint="@string/rss_feed_source">
 
         <EditText
             android:id="@+id/rssFeedEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="@string/rss_feed_source"
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,21 +40,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textInputLayout"
-        android:text="Feed Title: " />
+        android:text="@string/feed_title" />
 
     <TextView
         android:id="@+id/feedDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/feedTitle"
-        android:text="Feed Description: " />
+        android:text="@string/feed_description" />
 
     <TextView
         android:id="@+id/feedLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/feedDescription"
-        android:text="Feed Link: " />
+        android:text="@string/feed_link" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

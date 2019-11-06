@@ -76,7 +76,11 @@ class VideoSelectActivity : AppCompatActivity(), OnPreparedListener, OnCompletio
     }
 
     private fun setupData() {
-        videoView.setVideoURI(Uri.parse(pathVideo))
+        if(::pathVideo.isInitialized){
+            videoView.setVideoURI(Uri.parse(pathVideo))
+        }else{
+            videoView.setVideoURI(intent.data)
+        }
     }
 
     private fun confirmSelectedFrame() {

@@ -11,50 +11,53 @@
         android:id="@+id/iv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/mobile_taiga_logo_cd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/mobile_taiga_logo_cd" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <Spinner
         android:id="@+id/sp_service"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
         android:entries="@array/service_array"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="@+id/btn_skip"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
     <EditText
         android:id="@+id/et_user"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
+        android:hint="@string/login_user"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:text="@string/login_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sp_service"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/sp_service" />
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/password"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/et_user"
         app:layout_constraintStart_toStartOf="@+id/et_user"
@@ -65,9 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/login"
         android:onClick="doLogin"
-        app:layout_constraintStart_toStartOf="@+id/et_password"
+        android:text="@string/login"
+        app:layout_constraintStart_toStartOf="@+id/sp_service"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <Button
@@ -76,6 +79,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/skip"
-        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintEnd_toEndOf="@+id/sp_service"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

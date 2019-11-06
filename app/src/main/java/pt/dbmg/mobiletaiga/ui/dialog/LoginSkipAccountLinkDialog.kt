@@ -13,8 +13,6 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import pt.dbmg.anilistclient.LoginAnilistActivity
 import pt.dbmg.mobiletaiga.MainActivity
 import pt.dbmg.mobiletaiga.R
 

@@ -27,9 +27,9 @@ def fileFilter = [
     '**/*Module*.*' //Dagger2 generated code
 ]
 
-def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-def mainSrc = "${project.projectDir}/src/main/java"
-def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+//def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+//def mainSrc = "${project.projectDir}/src/main/java"
+//def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
 
 jacoco {
   version = "$jacoco_version"

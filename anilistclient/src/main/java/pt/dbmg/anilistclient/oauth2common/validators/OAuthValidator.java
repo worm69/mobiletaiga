@@ -6,16 +6,16 @@ import pt.dbmg.anilistclient.oauth2common.exception.OAuthProblemException;
 
 public interface OAuthValidator {
 
-    public void validateMethod(HttpServletRequest request) throws OAuthProblemException;
+    void validateMethod(HttpServletRequest request) throws OAuthProblemException;
 
-    public void validateContentType(HttpServletRequest request) throws OAuthProblemException;
+    void validateContentType(HttpServletRequest request) throws OAuthProblemException;
 
-    public void validateRequiredParameters(HttpServletRequest request) throws OAuthProblemException;
+    void validateRequiredParameters(HttpServletRequest request) throws OAuthProblemException;
 
-    public void validateOptionalParameters(HttpServletRequest request) throws OAuthProblemException;
+    void validateOptionalParameters(HttpServletRequest request) throws OAuthProblemException;
 
-    public void validateNotAllowedParameters(HttpServletRequest request) throws OAuthProblemException;
+    void validateNotAllowedParameters(HttpServletRequest request) throws OAuthProblemException;
 
-    public void performAllValidations(HttpServletRequest request) throws OAuthProblemException;
+    void performAllValidations(HttpServletRequest request) throws OAuthProblemException;
 
 }

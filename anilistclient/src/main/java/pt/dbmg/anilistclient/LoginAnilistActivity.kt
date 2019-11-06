@@ -89,11 +89,10 @@ class LoginAnilistActivity() : AppCompatActivity(){
                     intent.putExtra("token", response.accessToken)
                     intent.putExtra("tokenExpires", response.expiresIn)
                     intent.putExtra("refreshToken", response.refreshToken)
-
                     setResult(Activity.RESULT_OK, intent)
                     finish()
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                   Log.e("ERROR", e.toString())
                 }
             })
 

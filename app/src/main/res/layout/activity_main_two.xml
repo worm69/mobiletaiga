@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
             android:layout_marginTop="@dimen/activity_margin"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="4dp"
@@ -48,11 +47,8 @@
             android:layout_alignTop="@+id/card_main"
             android:layout_alignBottom="@+id/card_main"
             android:layout_marginStart="@dimen/space_between_views"
-            android:layout_marginLeft="@dimen/space_between_views"
             android:layout_marginEnd="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:layout_toEndOf="@+id/card_main"
-            android:layout_toRightOf="@+id/card_main"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardElevation="0dp">
 
@@ -91,7 +87,6 @@
                 android:layout_gravity="top|end"
                 android:layout_marginTop="@dimen/space_between_views"
                 android:layout_marginEnd="@dimen/space_between_views"
-                android:layout_marginRight="@dimen/space_between_views"
                 android:tint="@android:color/white"
                 app:srcCompat="@drawable/ic_information" />
         </androidx.cardview.widget.CardView>
@@ -151,7 +146,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
         android:layout_marginBottom="@dimen/activity_margin"
         android:tint="@android:color/white"
         app:fabSize="normal"

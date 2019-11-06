@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -128,7 +127,7 @@ public class Mapper {
     }
 
     public static String getVideoUrl(SearchDetail.Doc doc) {
-        String encodeFormat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? StandardCharsets.UTF_8.toString() : C.EMPTY;
+        String encodeFormat = StandardCharsets.UTF_8.toString();
         String response = BuildConfig.SERVER_DOMAIN + "preview.php?season=";
         response += _encode(doc.season, encodeFormat) + "&anime=";
         response += _encode(doc.anime, encodeFormat) + "&file=";
@@ -139,7 +138,7 @@ public class Mapper {
     }
 
     public static String getImageUrl(SearchDetail.Doc doc) {
-        String encodeFormat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? StandardCharsets.UTF_8.toString() : C.EMPTY;
+        String encodeFormat = StandardCharsets.UTF_8.toString();
         String response = BuildConfig.SERVER_DOMAIN + "thumbnail.php?season=";
         response += _encode(doc.season, encodeFormat) + "&anime=";
         response += _encode(doc.anime, encodeFormat) + "&file=";
