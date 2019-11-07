@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/skip"
+        android:onClick="doSkip"
         app:layout_constraintEnd_toEndOf="@+id/sp_service"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -89,9 +89,7 @@ class Login : AppCompatActivity() {
         val realmKitsuTokens : Kitsu? = realm.where(Kitsu::class.java).findFirst()
         val realmAnilistTokens : Anilist? = realm.where(Anilist::class.java).findFirst()
         if(realmKitsuTokens!=null ||realmAnilistTokens!=null){
-            val intent = Intent(this@Login, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+            goMainActivity()
         }
 
 
@@ -159,34 +157,43 @@ class Login : AppCompatActivity() {
     private fun getTokenKitsu(apiKitsu: ApiKitsu) {
         val user = et_user.editableText.toString()
         val password= et_password.editableText.toString()
-        apiKitsu.getToken("password", user, password)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(object : Observer<KitsuToken> {
-                override fun onSubscribe(d: Disposable) {
-                    disposable = d
-                }
+        if (user.isNotBlank() && password.isNotBlank()) {
+            apiKitsu.getToken("password", user, password)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : Observer<KitsuToken> {
+                    override fun onSubscribe(d: Disposable) {
+                        disposable = d
+                    }
 
-                override fun onError(e: Throwable) {
-                    Timber.d( e.toString())
-                }
+                    override fun onError(e: Throwable) {
+                        Timber.d( e.toString())
+                    }
 
-                override fun onNext(data: KitsuToken) {
-                    Timber.d( "${data.accessToken} ${data.createdAt} ${data.expiresIn}")
-                    val realm = Realm.getDefaultInstance()
-                    realm.beginTransaction()
-                    realm.insert(Kitsu(user,user,user,password, "simple", data.accessToken,data.createdAt, data.expiresIn, data.refreshToken))
-                    realm.commitTransaction()
-                    realm.close()
-                }
+                    override fun onNext(data: KitsuToken) {
+                        Timber.d( "${data.accessToken} ${data.createdAt} ${data.expiresIn}")
+                        val realm = Realm.getDefaultInstance()
+                        realm.beginTransaction()
+                        realm.insert(Kitsu(user,user,user,password, "simple", data.accessToken,data.createdAt, data.expiresIn, data.refreshToken))
+                        realm.commitTransaction()
+                        realm.close()
+                    }
 
-                override fun onComplete() {
-//                    isLoading.set(false)
-                    val intent = Intent(this@Login, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(intent)
-                }
-            })
+                    override fun onComplete() {
+    //                    isLoading.set(false)
+                        goMainActivity()
+                    }
+                })
+        }else{
+            et_user.error = "Empety"
+            et_password.error = "Empety"
+        }
+    }
+
+    private fun goMainActivity() {
+        val intent = Intent(this@Login, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
     @RealmModule(classes = [Anilist::class, Kitsu::class, Myanimelist::class, Settings::class, Update::class])
@@ -196,5 +203,7 @@ class Login : AppCompatActivity() {
         super.onDestroy()
         disposable?.dispose()
     }
+
+    fun doSkip(view: View) { goMainActivity()}
 }
 
