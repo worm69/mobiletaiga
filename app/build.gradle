@@ -9,10 +9,26 @@ apply plugin: 'realm-android'
 apply plugin: 'jacoco-android'
 apply from: '../jacoco.gradle'
 apply from: '../sonar.gradle'
+apply plugin: 'com.google.firebase.appdistribution'
+
+
+
+def keystorePropertiesFile= rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     defaultConfig {
         applicationId "pt.dbmg.mobiletaiga"
         minSdkVersion 21
@@ -65,6 +81,11 @@ android {
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', ReleaseIsLoggerEnabled
+            firebaseAppDistribution {
+//                releaseNotesFile="/path/to/releasenotes.txt"
+                testers="gomesdanielbm@gmail.com"
+            }
+            signingConfig signingConfigs.config
         }
         debug {
             //use resConfig("en", "xxhdpi") Including Minimal Resources
@@ -73,6 +94,7 @@ android {
             minifyEnabled false
             useProguard false
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', DebugIsLoggerEnabled
+            signingConfig signingConfigs.config
         }
     }
     buildTypes.each {
@@ -109,6 +131,14 @@ android {
         maxProcessCount 4
     }
 }
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath 'com.google.firebase:firebase-appdistribution-gradle:1.1.0'
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -119,10 +149,13 @@ dependencies {
     def paging_version = "2.1.0"
     def android_support_library = '1.0.0-beta01'
 
+
+
     // add the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
 
     //Support library
     implementation "androidx.appcompat:appcompat:$android_support_library"
