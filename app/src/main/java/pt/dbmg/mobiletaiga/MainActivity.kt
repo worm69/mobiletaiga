@@ -189,7 +189,9 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_library -> {
-                Toast.makeText(this, "Library", Toast.LENGTH_SHORT).show()
+                if (NavHostFragment.findNavController(nav_host_fragment).currentDestination?.id != R.id.libraryFragment) {
+                    NavHostFragment.findNavController(nav_host_fragment).navigate(R.id.action_homeFragment_to_libraryFragment)
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }

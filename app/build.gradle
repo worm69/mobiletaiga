@@ -11,12 +11,9 @@ apply from: '../jacoco.gradle'
 apply from: '../sonar.gradle'
 apply plugin: 'com.google.firebase.appdistribution'
 
-
-
-def keystorePropertiesFile= rootProject.file("keystore.properties")
+def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
 
 android {
     compileSdkVersion 29
@@ -83,7 +80,7 @@ android {
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', ReleaseIsLoggerEnabled
             firebaseAppDistribution {
 //                releaseNotesFile="/path/to/releasenotes.txt"
-                testers="gomesdanielbm@gmail.com"
+                testers = "gomesdanielbm@gmail.com"
             }
             signingConfig signingConfigs.config
         }
@@ -149,13 +146,10 @@ dependencies {
     def paging_version = "2.1.0"
     def android_support_library = '1.0.0-beta01'
 
-
-
     // add the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-
 
     //Support library
     implementation "androidx.appcompat:appcompat:$android_support_library"
@@ -180,8 +174,12 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     // use -ktx for Kotlin
-    implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha4'
-    implementation 'com.apollographql.apollo:apollo-android-support:1.0.0-alpha4'
+    implementation 'com.apollographql.apollo:apollo-runtime:1.2.1'
+    implementation 'com.apollographql.apollo:apollo-android-support:1.2.1'
+    //uses jetbrains annotations, so you will need to include this as a compile time dependency
+    compileOnly 'org.jetbrains:annotations:16.0.1'
+    testCompileOnly 'org.jetbrains:annotations:16.0.1'
+
     implementation 'io.realm:android-adapters:3.0.0'
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     // use -ktx for Kotlin

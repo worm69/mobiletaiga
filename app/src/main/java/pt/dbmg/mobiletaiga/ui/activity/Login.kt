@@ -129,8 +129,10 @@ class Login : AppCompatActivity() {
                 val realm = Realm.getDefaultInstance()
                 realm.beginTransaction()
                 realm.insert(Anilist("test", "POINT_10", token, tokenExpires, refreshToken))
+                realm.insertOrUpdate(Update("Anilist","false"))
                 realm.commitTransaction()
                 realm.close()
+                goMainActivity()
             }
         }
 
@@ -175,6 +177,7 @@ class Login : AppCompatActivity() {
                         val realm = Realm.getDefaultInstance()
                         realm.beginTransaction()
                         realm.insert(Kitsu(user,user,user,password, "simple", data.accessToken,data.createdAt, data.expiresIn, data.refreshToken))
+                        realm.insertOrUpdate(Update("Kitsu","false"))
                         realm.commitTransaction()
                         realm.close()
                     }
