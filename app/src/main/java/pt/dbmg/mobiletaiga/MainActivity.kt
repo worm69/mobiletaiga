@@ -26,6 +26,7 @@ import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity
 import pt.dbmg.mobiletaiga.ui.fragment.SearchFragment
 import java.util.logging.Logger
 import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener  {
     override fun onFragmentInteraction(uri: Uri) {
