@@ -25,6 +25,7 @@ import pt.dbmg.mobiletaiga.rss.RssFeed
 import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity
 import pt.dbmg.mobiletaiga.ui.fragment.SearchFragment
 import java.util.logging.Logger
+import com.crashlytics.android.Crashlytics
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener  {
     override fun onFragmentInteraction(uri: Uri) {
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!BuildConfig.DEBUG) {
+            Fabric.with(this, Crashlytics())
+        }
         setContentView(activity_main)
         setSupportActionBar(toolbar)
         nav_button_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)

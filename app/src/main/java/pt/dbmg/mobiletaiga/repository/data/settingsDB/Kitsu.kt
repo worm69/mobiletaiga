@@ -1,5 +1,6 @@
 package pt.dbmg.mobiletaiga.repository.data.settingsDB
 
+import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
 
 open class Kitsu(

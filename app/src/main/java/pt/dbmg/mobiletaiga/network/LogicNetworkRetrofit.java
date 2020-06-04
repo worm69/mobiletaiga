@@ -9,6 +9,7 @@ import com.maddog05.maddogutilities.logger.Logger2;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -104,8 +105,7 @@ public class LogicNetworkRetrofit implements LogicNetwork {
                             logSeparator();
                         }
                     } else {
-                        String errorMessage = response.code() + C.SPACE + getString(context,
-                                R.string.error_service_response_or_body_null);
+                        String errorMessage = String.valueOf(response.code() + C.SPACE + getString(context, R.string.error_service_response_or_body_null));
                         Logger2.get().e(TAG, "searchWithPhoto: onResponse: " + errorMessage);
                         callback.done(Pair.create(errorMessage, new SearchDetail()));
                         logSeparator();
@@ -146,8 +146,7 @@ public class LogicNetworkRetrofit implements LogicNetwork {
                         OutputGetQuota outputGetQuota = Mapper.parseGetQuota(response.body());
                         callback.done(Pair.create("", outputGetQuota));
                     } else {
-                        String errorMessage = response.code() + C.SPACE + getString(context,
-                                R.string.error_service_response_or_body_null);
+                        String errorMessage = String.valueOf(response.code() + C.SPACE + getString(context, R.string.error_service_response_or_body_null));
                         Logger2.get().e(TAG, "getQuota: onResponse: " + errorMessage);
                         callback.done(Pair.create(errorMessage, new OutputGetQuota()));
                         logSeparator();
@@ -258,12 +257,12 @@ public class LogicNetworkRetrofit implements LogicNetwork {
         }
 
         @Override
-        public Socket createSocket(String host, int port) throws IOException {
+        public Socket createSocket(String host, int port) throws IOException, UnknownHostException {
             return enableTLSOnSocket(internalSSLSocketFactory.createSocket(host, port));
         }
 
         @Override
-        public Socket createSocket(String host, int port, InetAddress localHost, int localPort) throws IOException {
+        public Socket createSocket(String host, int port, InetAddress localHost, int localPort) throws IOException, UnknownHostException {
             return enableTLSOnSocket(internalSSLSocketFactory.createSocket(host, port, localHost, localPort));
         }
 

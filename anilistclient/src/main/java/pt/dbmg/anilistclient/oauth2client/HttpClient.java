@@ -9,7 +9,7 @@ import pt.dbmg.anilistclient.oauth2common.exception.OAuthSystemException;
 
 public interface HttpClient {
 
-    <T extends OAuthClientResponse> T execute(
+    public <T extends OAuthClientResponse> T execute(
         OAuthClientRequest request,
         Map<String, String> headers,
         String requestMethod,

@@ -260,7 +260,7 @@ public final class OAuthUtils {
         }
     }
 
-    private static String toString(Object from) {
+    private static final String toString(Object from) {
         return (from == null) ? null : from.toString();
     }
 

@@ -1,6 +1,7 @@
 package pt.dbmg.mobiletaiga.repository.api
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import pt.dbmg.mobiletaiga.network.response.AnimeCharacters
 import pt.dbmg.mobiletaiga.network.response.AnimeCharactersPaged
 import pt.dbmg.mobiletaiga.network.response.AnimePaged
