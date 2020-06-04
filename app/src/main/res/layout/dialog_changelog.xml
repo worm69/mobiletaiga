@@ -10,7 +10,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_close" />
 

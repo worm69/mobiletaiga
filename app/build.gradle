@@ -4,29 +4,28 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.apollographql.android'
-apply plugin: 'realm-android'
-apply plugin: 'jacoco-android'
 apply plugin: 'io.fabric'
+apply plugin: 'realm-android'
+//apply plugin: 'jacoco-android'
 apply from: '../jacoco.gradle'
 apply from: '../sonar.gradle'
+apply plugin: 'com.google.firebase.appdistribution'
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.29.0'
-    }
-}
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "28.0.3"
+    buildToolsVersion "29.0.2"
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     defaultConfig {
         applicationId "pt.dbmg.mobiletaiga"
         minSdkVersion 21
@@ -76,17 +75,21 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', ReleaseIsLoggerEnabled
+            firebaseAppDistribution {
+//                releaseNotesFile="/path/to/releasenotes.txt"
+                testers = "gomesdanielbm@gmail.com"
+            }
+            signingConfig signingConfigs.config
         }
         debug {
             //use resConfig("en", "xxhdpi") Including Minimal Resources
             //disable this build id for development build.
             ext.alwaysUpdateBuildId = false
             minifyEnabled false
-            useProguard false
             it.buildConfigField 'Boolean', 'IS_LOGGER_ENABLED', DebugIsLoggerEnabled
+            signingConfig signingConfigs.config
         }
     }
     buildTypes.each {
@@ -111,8 +114,11 @@ android {
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
     dexOptions {
         javaMaxHeapSize "4g"
@@ -120,41 +126,58 @@ android {
         maxProcessCount 4
     }
 }
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath 'com.google.firebase:firebase-appdistribution-gradle:1.4.1'
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     def nav_version = "1.0.0"
-    def futures_version = "1.0.0-alpha02"
-    def lifecycle_version = "2.0.0"
-    def room_version = "2.1.0"
-    def paging_version = "2.1.0"
+    def futures_version = "1.1.0-alpha01"
+    def lifecycle_version = "2.2.0"
+    def room_version = "2.2.5"
+    def paging_version = "2.1.2"
     def android_support_library = '1.0.0-beta01'
+
+    // add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.4.2'
+    implementation 'com.google.firebase:firebase-analytics:17.4.2'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     //Support library
     implementation "androidx.appcompat:appcompat:$android_support_library"
-    implementation "androidx.preference:preference:$android_support_library"
+    implementation "androidx.preference:preference:1.1.1"
     implementation "com.google.android.material:material:$android_support_library"
     implementation "androidx.cardview:cardview:$android_support_library"
-    implementation "androidx.percentlayout:percentlayout:$android_support_library"
+    implementation "androidx.percentlayout:percentlayout:1.0.0"
     implementation "androidx.recyclerview:recyclerview:$android_support_library"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-    implementation 'com.google.android.material:material:1.1.0-alpha07'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'com.jakewharton.timber:timber:4.6.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.3.0-alpha01'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     // use -ktx for Kotlin
-    implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha4'
-    implementation 'com.apollographql.apollo:apollo-android-support:1.0.0-alpha4'
+    implementation 'com.apollographql.apollo:apollo-runtime:1.2.1'
+    implementation 'com.apollographql.apollo:apollo-android-support:1.2.1'
+    //uses jetbrains annotations, so you will need to include this as a compile time dependency
+    compileOnly 'org.jetbrains:annotations:16.0.1'
+    testCompileOnly 'org.jetbrains:annotations:16.0.1'
+
     implementation 'io.realm:android-adapters:3.0.0'
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     // use -ktx for Kotlin
@@ -166,20 +189,12 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
-        transitive = true
-    }
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-
-    // use kapt for Kotlin
-
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
 
-    // use -ktx for Kotlin
-
     //Images
-    implementation('com.github.bumptech.glide:glide:4.8.0') {
+    implementation('com.github.bumptech.glide:glide:4.10.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
@@ -194,27 +209,27 @@ dependencies {
     }
     implementation 'com.github.GrenderG:Toasty:1.3.0'
     implementation 'com.github.whalemare:sheetmenu:1.3.6'
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
 
     // Test helpers
 
     // optional - Test helpers for LiveData
-    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "androidx.room:room-testing:$room_version"
-    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
     implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
-    compile project(path: ':anilistclient')
+    implementation project(path: ':anilistclient')
 }
 
 dokka {
@@ -256,31 +271,32 @@ project.afterEvaluate {
                 }
 
                 //Directory where the compiled class files are
-                classDirectories =
-                        fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/${sourcePath}",
-                                excludes: ['**/R.class',
-                                           '**/BR.class',
-                                           '**/R$*.class',
-                                           '**/*$ViewInjector*.*',
-                                           '**/*$ViewBinder*.*',
-                                           '**/BuildConfig.*',
-                                           'android/**',
-                                           '**/Manifest*.*',
-                                           '**/*$Lambda$*.*', // Jacoco can not handle several "$" in class name.
-                                           '**/*Module.*', // Modules for Dagger.
-                                           '**/*Dagger*.*', // Dagger auto-generated code.
-                                           '**/*MembersInjector*.*', // Dagger auto-generated code.
-                                           '**/*_Provide*Factory*.*',
-                                           '**/*_Factory.*', //Dagger auto-generated code
-                                           '**/*$*$*.*' // Anonymous classes generated by kotlin
-                                ])
+//                classDirectories =
+//                        fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/${sourcePath}",
+//                                excludes: ['**/R.class',
+//                                           '**/BR.class',
+//                                           '**/R$*.class',
+//                                           '**/*$ViewInjector*.*',
+//                                           '**/*$ViewBinder*.*',
+//                                           '**/BuildConfig.*',
+//                                           'android/**',
+//                                           '**/Manifest*.*',
+//                                           '**/*$Lambda$*.*', // Jacoco can not handle several "$" in class name.
+//                                           '**/*Module.*', // Modules for Dagger.
+//                                           '**/*Dagger*.*', // Dagger auto-generated code.
+//                                           '**/*MembersInjector*.*', // Dagger auto-generated code.
+//                                           '**/*_Provide*Factory*.*',
+//                                           '**/*_Factory.*', //Dagger auto-generated code
+//                                           '**/*$*$*.*' // Anonymous classes generated by kotlin
+//                                ])
 
-                sourceDirectories = files(["src/main/java",
-                                           "src/$productFlavorName/java",
-                                           "src/$buildTypeName/java"])
-
-                executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+//                sourceDirectories = files(["src/main/java",
+//                                           "src/$productFlavorName/java",
+//                                           "src/$buildTypeName/java"])
+//
+//                executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")
             }
         }
     }
 }
+apply plugin: 'com.google.gms.google-services'

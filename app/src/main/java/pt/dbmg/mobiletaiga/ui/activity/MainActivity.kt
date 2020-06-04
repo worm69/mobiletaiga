@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_PHOTO_GALLERY -> {
                 requestPhotoGallery(resultCode, data)
@@ -295,7 +296,7 @@ class MainActivity : AppCompatActivity(), MainView {
             wakeLock =
                     (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
                         newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WhatAnime::MainWakeLock").apply {
-                            acquire()
+                            acquire(10*60*1000L /*10 minutes*/)
                         }
                     }
         } else {

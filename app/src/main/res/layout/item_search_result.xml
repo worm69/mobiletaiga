@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="96dp"
             android:layout_marginEnd="@dimen/space_between_views"
-            android:layout_marginRight="@dimen/space_between_views"
             android:background="@android:color/darker_gray"
             app:layout_widthPercent="40%" />
 
@@ -29,12 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/iv_item_photo"
             android:layout_alignEnd="@+id/iv_item_photo"
-            android:layout_alignRight="@+id/iv_item_photo"
             android:layout_marginBottom="4dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
             android:background="@android:color/black"
-            android:text="00:00:00"
+            android:text="@string/start_time"
             android:textColor="@android:color/white" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -42,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/iv_item_photo"
-            android:layout_toRightOf="@+id/iv_item_photo"
             android:ellipsize="end"
             android:maxLines="3"
             android:text="@string/app_name"
@@ -52,7 +48,6 @@
             android:id="@+id/tv_item_episode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_item_title"
             android:layout_alignStart="@+id/tv_item_title"
             android:layout_below="@+id/tv_item_title"
             android:ellipsize="end"
@@ -64,11 +59,10 @@
             android:id="@+id/tv_item_similarity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_item_title"
             android:layout_alignStart="@+id/tv_item_title"
             android:layout_below="@+id/tv_item_episode"
             android:maxLines="1"
-            android:text="100.0%"
+            android:text="@string/percentage_100"
             android:textColor="@android:color/holo_green_dark" />
 
     </androidx.percentlayout.widget.PercentRelativeLayout>

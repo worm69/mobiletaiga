@@ -37,7 +37,7 @@ public class LogicPreferenceSharedPref implements LogicPreferences {
     @Override
     public void setLastChangelogVersion(int version) {
         SharedPreferences preferences = get();
-        preferences.edit().putInt(LAST_CHANGELOG_VERSION, version).commit();
+        preferences.edit().putInt(LAST_CHANGELOG_VERSION, version).apply();
     }
 
     @Override
@@ -49,6 +49,6 @@ public class LogicPreferenceSharedPref implements LogicPreferences {
     @Override
     public void setHContentEnabled(boolean isEnabled) {
         SharedPreferences preferences = get();
-        preferences.edit().putBoolean(H_CONTENT_ENABLED, isEnabled).commit();
+        preferences.edit().putBoolean(H_CONTENT_ENABLED, isEnabled).apply();
     }
 }

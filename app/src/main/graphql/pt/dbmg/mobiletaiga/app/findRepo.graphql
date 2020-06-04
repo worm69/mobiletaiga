@@ -1,3 +1,16 @@
+query MediaListByName($userName: String) {
+  MediaList(userName: $userName) {
+    status
+    score(format: POINT_10_DECIMAL)
+    progress
+    repeat
+    priority
+    media {
+      ...MediaFragment
+    }
+  }
+}
+
 query FindQuery($id:Int!){
   Media (id: $id, type: ANIME) {
     id
@@ -531,6 +544,28 @@ query MediaListCollection(
         private
         notes
       }
+      name
+      isCustomList
+      isSplitCompletedList
+      status
+    }
+    user {
+      ...UserFragment
+    }
+    hasNextChunk
+  }
+}
+
+
+# Tested get colection of all by type
+query MediaListCollection3Args(
+  $userId: Int
+  $userName: String
+  $type: MediaType
+) {
+  MediaListCollection(userId: $userId, userName: $userName, type:$type) {
+    lists {
+      ...MediaListFragment
       name
       isCustomList
       isSplitCompletedList
@@ -1372,4 +1407,12 @@ fragment LikeFragment on User {
   donatorBadge
   moderatorStatus
   updatedAt
+}
+
+fragment MediaListFragment on MediaListGroup {
+  entries{
+    media{
+      ...MediaFragment
+    }
+  }
 }

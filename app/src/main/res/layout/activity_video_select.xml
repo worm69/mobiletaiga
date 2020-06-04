@@ -47,7 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
         android:tint="@android:color/white"
         app:fabSize="normal"
         app:layout_anchor="@+id/container"
