@@ -23,7 +23,7 @@ class LoginAnilistActivity() : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_login_anilist)
-        var request: OAuthClientRequest? = null
+        var request: OAuthClientRequest?
         request = OAuthClientRequest
             .authorizationLocation("https://anilist.co/api/v2/oauth/authorize")
             .setClientId("1542").setRedirectURI("https://anilist.co/api/v2/oauth/pin")
@@ -62,12 +62,12 @@ class LoginAnilistActivity() : AppCompatActivity(){
     }
 
     private fun getCode() {
-        val uri = webView1.url.toUri()
+        val uri = webView1.url!!.toUri()
         if (uri.toString()
                 .startsWith("https://anilist.co/api/v2/oauth/pin?code=")
         ) {
             val code = uri.getQueryParameter("code")
-            var request: OAuthClientRequest? = null
+            var request: OAuthClientRequest?
 
 
 

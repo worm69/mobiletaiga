@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.apollographql.apollo.ApolloClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_main.drawer_layout
 import kotlinx.android.synthetic.main.activity_main.nav_view
 import kotlinx.android.synthetic.main.app_bar_main2.nav_button_menu
@@ -25,8 +26,6 @@ import pt.dbmg.mobiletaiga.rss.RssFeed
 import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity
 import pt.dbmg.mobiletaiga.ui.fragment.SearchFragment
 import java.util.logging.Logger
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener  {
     override fun onFragmentInteraction(uri: Uri) {
@@ -41,9 +40,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!BuildConfig.DEBUG) {
-            Fabric.with(this, Crashlytics())
-        }
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+
         setContentView(activity_main)
         setSupportActionBar(toolbar)
         nav_button_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)

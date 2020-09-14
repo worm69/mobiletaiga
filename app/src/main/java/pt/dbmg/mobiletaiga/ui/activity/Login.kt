@@ -128,7 +128,7 @@ class Login : AppCompatActivity() {
                 Timber.d( "$token $tokenExpires $refreshToken")
                 val realm = Realm.getDefaultInstance()
                 realm.beginTransaction()
-                realm.insert(Anilist("test", "POINT_10", token, tokenExpires, refreshToken))
+                realm.insert(Anilist("test", "POINT_10", token!!, tokenExpires!!, refreshToken!!))
                 realm.insertOrUpdate(Update("Anilist","false"))
                 realm.commitTransaction()
                 realm.close()

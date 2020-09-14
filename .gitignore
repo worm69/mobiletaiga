@@ -16,3 +16,4 @@ app/release/
 app/src/main/java/pt/dbmg/mobiletaiga/network/request/
 docker/gitea/
 docker/innodb-fix.cnf/
+keystore.properties

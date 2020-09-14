@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity(), MainView {
         val type = intent.type ?: ""
         if (action.isNotEmpty() && action == Intent.ACTION_SEND && type.isNotEmpty()) {
             if (type.startsWith("image/")) {
-                val uri = (intent.getParcelableExtra(Intent.EXTRA_STREAM) as Uri).toString()
+                val uri  = (intent.getParcelableExtra(Intent.EXTRA_STREAM) as Uri?).toString()
                 val glideLoader = GlideLoader.create()
                 glideLoader.with(this)
                 glideLoader.load(uri)
