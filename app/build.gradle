@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'com.apollographql.android'
+apply plugin: 'com.apollographql.apollo'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'realm-android'
 //apply plugin: 'jacoco-android'
@@ -26,6 +26,7 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+
     defaultConfig {
         applicationId "pt.dbmg.mobiletaiga"
         minSdkVersion 21
@@ -126,7 +127,12 @@ android {
         preDexLibraries true
         maxProcessCount 4
     }
+//    plugins {
+//        id("com.apollographql.apollo").version("2.3.1")
+//    }
 }
+
+
 buildscript {
     repositories {
         google()
@@ -136,6 +142,8 @@ buildscript {
         classpath 'com.google.firebase:firebase-appdistribution-gradle:2.0.1'
     }
 }
+
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -177,8 +185,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     // use -ktx for Kotlin
-    implementation 'com.apollographql.apollo:apollo-runtime:1.2.1'
-    implementation 'com.apollographql.apollo:apollo-android-support:1.2.1'
+    implementation 'com.apollographql.apollo:apollo-runtime:2.3.1'
+    implementation 'com.apollographql.apollo:apollo-android-support:2.3.1'
     //uses jetbrains annotations, so you will need to include this as a compile time dependency
     implementation 'org.jetbrains:annotations:20.1.0'
     compileOnly 'org.jetbrains:annotations:20.1.0'

@@ -5,7 +5,7 @@ buildscript {
     ext.kotlin_version = '1.4.10'
     ext.dokka_version = '0.9.17'
     ext.jacoco_version = '0.8.4'
-    ext.apollo_version = '1.2.1'
+    ext.apollo_version = '2.3.1'
     ext.realm_version = '7.0.5'
     ext.jacoco_android_version = '0.1.4'
     ext.sonarqube_version = '2.7'
