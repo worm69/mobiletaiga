@@ -1,11 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.gradle_version = '4.1.1'
-    ext.kotlin_version = '1.4.10'
+    ext.gradle_version = '4.1.3'
+    ext.kotlin_version = '1.5.0'
     ext.dokka_version = '0.9.17'
     ext.jacoco_version = '0.8.4'
-    ext.apollo_version = '2.3.1'
+    ext.apollo_version = '2.5.6'
     ext.realm_version = '7.0.5'
     ext.jacoco_android_version = '0.1.4'
     ext.sonarqube_version = '2.7'
@@ -17,7 +17,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.google.gms:google-services:4.3.4'
+        classpath 'com.google.gms:google-services:4.3.5'
         //https://stackoverflow.com/questions/52412023/api-variant-getexternalnativebuildtasks-is-obsolete-and-has-been-replaced-wi/52487634#52487634
         classpath "com.android.tools.build:gradle:${gradle_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -29,7 +29,7 @@ buildscript {
         classpath "com.hiya:jacoco-android:0.2"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$sonarqube_version"
         // Add dependency
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
 
 
         //check dependencies
@@ -47,10 +47,11 @@ allprojects {
 //    gradleLint.rules = ['all-dependency'] // add as many rules here as you'd like
 
     repositories {
+        google()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-        google()
+
         maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
 
