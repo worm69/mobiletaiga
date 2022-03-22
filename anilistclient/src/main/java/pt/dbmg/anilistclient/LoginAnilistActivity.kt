@@ -11,7 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import kotlinx.android.synthetic.main.web_login_anilist.webView1
+//import kotlinx.android.synthetic.main.web_login_anilist.webView1
 import pt.dbmg.anilistclient.oauth2client.OAuthClient
 import pt.dbmg.anilistclient.oauth2client.URLConnectionClient
 import pt.dbmg.anilistclient.oauth2client.request.OAuthClientRequest
@@ -62,7 +62,8 @@ class LoginAnilistActivity() : AppCompatActivity(){
     }
 
     private fun getCode() {
-        val uri = webView1.url!!.toUri()
+        val webview = findViewById<WebView>(R.id.webView1)
+        val uri = webview.url!!.toUri()
         if (uri.toString()
                 .startsWith("https://anilist.co/api/v2/oauth/pin?code=")
         ) {

@@ -14,23 +14,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maddog05.maddogutilities.android.Permissions
 import com.maddog05.maddogutilities.callback.Callback
 import com.maddog05.maddogutilities.image.Images
 import com.maddog05.maddogutilities.string.Strings
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_main_two.btn_main_info_quota
-import kotlinx.android.synthetic.main.activity_main_two.fab_main_search
-import kotlinx.android.synthetic.main.activity_main_two.iv_main_photo
-import kotlinx.android.synthetic.main.activity_main_two.layout_main_loading
-import kotlinx.android.synthetic.main.activity_main_two.rv_main_results
-import kotlinx.android.synthetic.main.activity_main_two.toolbar
-import kotlinx.android.synthetic.main.activity_main_two.tv_main_search_per_minute
-import kotlinx.android.synthetic.main.activity_main_two.tv_main_search_quota
-import kotlinx.android.synthetic.main.activity_main_two.tv_main_tutorial
+
 import pt.dbmg.mobiletaiga.R
 import pt.dbmg.mobiletaiga.R.string
+import pt.dbmg.mobiletaiga.databinding.ActivityMainBinding
+import pt.dbmg.mobiletaiga.databinding.ActivityMainTwoBinding
 import pt.dbmg.mobiletaiga.mvp.presenter.MainPresenter
 import pt.dbmg.mobiletaiga.mvp.view.MainView
 import pt.dbmg.mobiletaiga.repository.entity.output.SearchDetail
@@ -52,25 +47,27 @@ class MainActivity : AppCompatActivity(), MainView {
         private const val REQUEST_FRAME_VIDEO = 104
     }
 
+    private lateinit var binding: ActivityMainTwoBinding
     private lateinit var presenter: MainPresenter
     private var currentBitmap: Bitmap? = null
     private var isSearchRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_two)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main_two)
+//        setContentView(R.layout.activity_main_two)
         presenter = MainPresenter(this)
-        setSupportActionBar(toolbar)
-        rv_main_results.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        iv_main_photo.setOnClickListener {
+        setSupportActionBar(binding.toolbar)
+        binding.rvMainResults.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.ivMainPhoto.setOnClickListener {
             if (!isSearchRunning)
                 actionSelectImage()
         }
-        fab_main_search.setOnClickListener {
+        binding.fabMainSearch.setOnClickListener {
             if (!isSearchRunning)
                 presenter.actionSearch()
         }
-        btn_main_info_quota.setOnClickListener {
+        binding.btnMainInfoQuota.setOnClickListener {
             if (!isSearchRunning)
                 actionShowQuotaInfo()
         }
@@ -206,7 +203,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private fun processBitmap(bitmap: Bitmap?) {
         if (bitmap != null) {
             currentBitmap = bitmap
-            iv_main_photo.setImageBitmap(bitmap)
+            binding.ivMainPhoto.setImageBitmap(bitmap)
         } else
             showErrorGeneric(getString(R.string.error_image_recovered_from_storage))
     }
@@ -245,7 +242,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun drawSearchResults(results: MutableList<SearchDetail.Doc>) {
-        rv_main_results.adapter = AdapterMain(applicationContext, results, object : AdapterMain.OnDocClickListener {
+        binding.rvMainResults.adapter = AdapterMain(applicationContext, results, object : AdapterMain.OnDocClickListener {
             override fun onDocClicked(doc: SearchDetail.Doc) {
                 val url = Mapper.getVideoUrl(doc)
                 Navigator.goToPreviewVideo(this@MainActivity, url, doc)
@@ -258,11 +255,11 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun setSearchQuota(number: Int) {
-        tv_main_search_quota.text = getString(R.string.input_search_quota, number.toString())
+        binding.tvMainSearchQuota.text = getString(R.string.input_search_quota, number.toString())
     }
 
     override fun setSearchPerMinute(number: Int) {
-        tv_main_search_per_minute.text = getString(R.string.input_search_per_minute, number.toString())
+        binding.tvMainSearchPerMinute.text = getString(R.string.input_search_per_minute, number.toString())
     }
 
     override fun showChangelog() {
@@ -283,16 +280,16 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showIndicatorSearchResults(wantVisible: Boolean) {
-        tv_main_tutorial.visibility = if (wantVisible) View.VISIBLE else View.GONE
+        binding.tvMainTutorial.visibility = if (wantVisible) View.VISIBLE else View.GONE
     }
 
     private var wakeLock: PowerManager.WakeLock? = null
 
     override fun showLoading(wantVisible: Boolean) {
         isSearchRunning = wantVisible
-        layout_main_loading.visibility = if (wantVisible) View.VISIBLE else View.GONE
+        binding.layoutMainLoading.visibility = if (wantVisible) View.VISIBLE else View.GONE
         if (wantVisible) {
-            fab_main_search.hide()
+            binding.fabMainSearch.hide()
             wakeLock =
                     (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
                         newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WhatAnime::MainWakeLock").apply {
@@ -302,7 +299,7 @@ class MainActivity : AppCompatActivity(), MainView {
         } else {
             if (wakeLock != null && wakeLock!!.isHeld)
                 wakeLock?.release()
-            fab_main_search.show()
+            binding.fabMainSearch.show()
         }
     }
 }

@@ -13,9 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.annotations.RealmModule
-import kotlinx.android.synthetic.main.activity_login.et_password
-import kotlinx.android.synthetic.main.activity_login.et_user
-import kotlinx.android.synthetic.main.activity_login.sp_service
+
 import pt.dbmg.anilistclient.LoginAnilistActivity
 import pt.dbmg.mobiletaiga.BuildConfig
 import pt.dbmg.mobiletaiga.MainActivity
@@ -37,11 +35,15 @@ import java.security.SecureRandom
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.databinding.DataBindingUtil
 import io.realm.RealmResults
+import pt.dbmg.mobiletaiga.R
+import pt.dbmg.mobiletaiga.databinding.ActivityLoginBinding
 
 class Login : AppCompatActivity() {
     private val SECOND_ACTIVITY_REQUEST_CODE = 111
     private var disposable: Disposable? =null
+    private lateinit var binding:ActivityLoginBinding
     companion object {
         private lateinit var retrofit: Retrofit
         private lateinit var kitsuApi: ApiKitsu
@@ -49,20 +51,20 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(pt.dbmg.mobiletaiga.R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 //        Crashlytics.getInstance().crash() // Force a crash
 
-        sp_service?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spService?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if ( position == 0 || position == 2) {
-                    et_user.visibility = View.GONE
-                    et_password.visibility = View.GONE
+                    binding.etUser.visibility = View.GONE
+                    binding.etPassword.visibility = View.GONE
                 } else {
-                    et_user.visibility = View.VISIBLE
-                    et_password.visibility = View.VISIBLE
+                    binding.etUser.visibility = View.VISIBLE
+                    binding.etPassword.visibility = View.VISIBLE
                 }
             }
         }
@@ -99,7 +101,7 @@ class Login : AppCompatActivity() {
     fun doLogin(view: View?) {
         if (view?.id == pt.dbmg.mobiletaiga.R.id.btn_login) {
             //TODO check selected service
-            when (sp_service.selectedItem) {
+            when (binding.spService.selectedItem) {
                 "Select" -> showWarningPopUp()
                 "Kitsu" -> getKitsuCredencials()
                 "Anilist" -> getAnimistCredentials()
@@ -157,8 +159,8 @@ class Login : AppCompatActivity() {
     }
 
     private fun getTokenKitsu(apiKitsu: ApiKitsu) {
-        val user = et_user.editableText.toString()
-        val password= et_password.editableText.toString()
+        val user = binding.etUser.editableText.toString()
+        val password= binding.etPassword.editableText.toString()
         if (user.isNotBlank() && password.isNotBlank()) {
             apiKitsu.getToken("password", user, password)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -188,8 +190,8 @@ class Login : AppCompatActivity() {
                     }
                 })
         }else{
-            et_user.error = "Empety"
-            et_password.error = "Empety"
+            binding.etUser.error = "Empety"
+            binding.etPassword.error = "Empety"
         }
     }
 

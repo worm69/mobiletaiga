@@ -9,25 +9,26 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.NavHostFragment
 import com.apollographql.apollo.ApolloClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import kotlinx.android.synthetic.main.activity_main.drawer_layout
-import kotlinx.android.synthetic.main.activity_main.nav_view
-import kotlinx.android.synthetic.main.app_bar_main2.nav_button_menu
-import kotlinx.android.synthetic.main.app_bar_main2.nav_host_fragment
-import kotlinx.android.synthetic.main.app_bar_main2.toolbar
+
 import okhttp3.OkHttpClient
-import pt.dbmg.mobiletaiga.R.layout.activity_main
+
 import pt.dbmg.mobiletaiga.R.string
+import pt.dbmg.mobiletaiga.databinding.ActivityMainBinding
 import pt.dbmg.mobiletaiga.rss.RssFeed
 import pt.dbmg.mobiletaiga.ui.activity.SettingsActivity
 import pt.dbmg.mobiletaiga.ui.fragment.SearchFragment
 import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener, SearchFragment.OnFragmentInteractionListener  {
+
+    private lateinit var binding: ActivityMainBinding
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -41,21 +42,23 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
-
-        setContentView(activity_main)
-        setSupportActionBar(toolbar)
-        nav_button_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//        setContentView(activity_main)
+//        binding.
+        setSupportActionBar(binding.includeAppBar.toolbar)
+//        binding.includeAppBar.nav_button_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+//
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, string.navigation_drawer_open, string.navigation_drawer_close
+            this, binding.drawerLayout, binding.includeAppBar.toolbar, string.navigation_drawer_open, string.navigation_drawer_close
         )
-        drawer_layout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+        binding.navView.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
 //            supportFragmentManager.beginTransaction()
@@ -90,10 +93,10 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 //                    }
 //                })
     }
-    override fun onSupportNavigateUp() = NavHostFragment.findNavController(nav_host_fragment).navigateUp()
+    override fun onSupportNavigateUp() = NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).navigateUp()
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -147,7 +150,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
             }
         }
 
-        drawer_layout.closeDrawer(GravityCompat.START)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
     private fun setupApollo(): ApolloClient {
@@ -178,8 +181,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
             R.id.navigation_search -> {
                 Toast.makeText(this, "DashBoard", Toast.LENGTH_SHORT).show()
                 //check current fragment before navigate
-                if (NavHostFragment.findNavController(nav_host_fragment).currentDestination?.id != R.id.searchFragment) {
-                    NavHostFragment.findNavController(nav_host_fragment).navigate(R.id.action_homeFragment_to_searchFragment)
+                if (NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).currentDestination?.id != R.id.searchFragment) {
+                    NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).navigate(R.id.action_homeFragment_to_searchFragment)
                 }
                 return@OnNavigationItemSelectedListener true
             }
@@ -192,8 +195,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_library -> {
-                if (NavHostFragment.findNavController(nav_host_fragment).currentDestination?.id != R.id.libraryFragment) {
-                    NavHostFragment.findNavController(nav_host_fragment).navigate(R.id.action_homeFragment_to_libraryFragment)
+                if (NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).currentDestination?.id != R.id.libraryFragment) {
+                    NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).navigate(R.id.action_homeFragment_to_libraryFragment)
                 }
                 return@OnNavigationItemSelectedListener true
             }
