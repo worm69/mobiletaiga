@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.apollographql.apollo'
@@ -16,8 +16,8 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 32
+    buildToolsVersion "32.0.0"
     signingConfigs {
         config {
             keyAlias keystoreProperties['keyAlias']
@@ -30,13 +30,16 @@ android {
     defaultConfig {
         applicationId "pt.dbmg.mobiletaiga"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "0.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
+    }
+    dataBinding {
+        enabled = true
     }
 //    Split into platform dependent APK
     splits {
@@ -112,9 +115,6 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/java'
     }
-    lintOptions {
-        abortOnError false
-    }
     compileOptions {
         sourceCompatibility = 11
         targetCompatibility = 11
@@ -122,6 +122,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    lint {
+        abortOnError false
+    }
+    namespace 'pt.dbmg.mobiletaiga'
 
 //    plugins {
 //        id("com.apollographql.apollo").version("2.3.1")
@@ -133,11 +137,9 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-
-        //jcenter()
     }
     dependencies {
-        classpath 'com.google.firebase:firebase-appdistribution-gradle:3.0.0'
+        classpath 'com.google.firebase:firebase-appdistribution-gradle:3.0.1'
     }
 }
 
@@ -147,22 +149,22 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     def nav_version = "1.0.0"
     def futures_version = '1.1.0'
-    def lifecycle_version = "2.2.0"
-    def room_version = "2.3.0"
-    def paging_version = "2.1.2"
-    def android_support_library = '1.3.0-rc01'
+    def lifecycle_version = '2.4.0'
+    def room_version = '2.4.2'
+    def paging_version = '3.1.1'
+    def android_support_library = '1.4.1'
 
     // add the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics:20.0.2'
-    implementation 'com.google.firebase:firebase-analytics:20.0.2'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.7'
+    implementation 'com.google.firebase:firebase-analytics:20.1.1'
+    implementation 'com.google.firebase:firebase-analytics:20.1.1'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.9'
 
     //Support library
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation "androidx.appcompat:appcompat:$android_support_library"
-    implementation "androidx.preference:preference-ktx:1.1.1"
+    implementation "androidx.preference:preference-ktx:1.2.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.percentlayout:percentlayout:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
@@ -175,19 +177,21 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+    //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
+    //noinspection GradleDependency
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     // use -ktx for Kotlin
-    implementation 'com.apollographql.apollo:apollo-runtime:2.5.6'
-    implementation 'com.apollographql.apollo:apollo-android-support:2.5.6'
+    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
+    implementation 'com.apollographql.apollo:apollo-android-support:2.5.11'
     //uses jetbrains annotations, so you will need to include this as a compile time dependency
-    implementation 'org.jetbrains:annotations:20.1.0'
-    compileOnly 'org.jetbrains:annotations:20.1.0'
-    testCompileOnly 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+    testCompileOnly 'org.jetbrains:annotations:23.0.0'
 
     implementation 'io.realm:android-adapters:3.0.0'
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
@@ -205,7 +209,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     //Images
-    implementation('com.github.bumptech.glide:glide:4.12.0') {
+    implementation('com.github.bumptech.glide:glide:4.13.1') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
@@ -220,13 +224,13 @@ dependencies {
     }
     implementation 'com.github.GrenderG:Toasty:1.3.0'
     implementation 'com.github.whalemare:sheetmenu:1.3.6'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.1'
 
     // Test helpers
 
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:2.1.0"
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.3.0', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.13.2'
