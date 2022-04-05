@@ -12,6 +12,7 @@ import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
+import com.readystatesoftware.chuck.ChuckInterceptor
 import io.realm.Realm
 import okhttp3.OkHttpClient
 import pt.dbmg.mobiletaiga.app.FindQuery
@@ -57,6 +58,7 @@ class LibraryFragment : Fragment() {
 
         } else if(update?.activeservice=="Anilist"){
         client=setupApollo()
+
         client.query(
             MediaListCollection3ArgsQuery    //From the auto generated class
                 .builder()
@@ -67,10 +69,10 @@ class LibraryFragment : Fragment() {
                 .enqueue(object : ApolloCall.Callback<MediaListCollection3ArgsQuery.Data>() {
 
                     override fun onFailure(e: ApolloException) {
-                        Log.i("",e.message.toString())
+                        Log.i("ktloindev",e.message.toString())
                     }
                     override fun onResponse(response: Response<MediaListCollection3ArgsQuery.Data>) {
-                        Log.i("",response.toString())
+                        Log.i("ktloindev",response.toString())
                         Log.i(response.data()?.toString(), MainActivity::class.java.name)
 
 //                        runOnUiThread({
@@ -123,6 +125,7 @@ class LibraryFragment : Fragment() {
                 //                        , "Bearer " + BuildConfig.AUTH_TOKEN)
                 chain.proceed(builder.build())
             }
+            .addInterceptor( ChuckInterceptor(context))
             .build()
         return ApolloClient.builder()
             .serverUrl(BASE_URL)

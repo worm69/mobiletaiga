@@ -50,6 +50,7 @@ class LoginAnilistActivity() : AppCompatActivity(){
                 super.onLoadResource(view, url)
             }
 
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 println("when you click on any interlink on webview that time you got url :-$url")
                 return super.shouldOverrideUrlLoading(view, url)

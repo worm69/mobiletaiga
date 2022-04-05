@@ -1,4 +1,6 @@
-apply plugin: 'jacoco'
+plugins {
+  kotlin("jacoco")
+}
 
 def fileFilter = [
     '**/*Parcel.class',

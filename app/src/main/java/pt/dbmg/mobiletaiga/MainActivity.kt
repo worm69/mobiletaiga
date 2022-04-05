@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
 //        setContentView(activity_main)
 //        binding.
         setSupportActionBar(binding.includeAppBar.toolbar)
-//        binding.includeAppBar.nav_button_menu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        binding.includeAppBar.navButtonMenu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 //
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -195,8 +195,13 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentInteractionList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_library -> {
-                if (NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).currentDestination?.id != R.id.libraryFragment) {
-                    NavHostFragment.findNavController(binding.includeAppBar.navHostFragment.findFragment()).navigate(R.id.action_homeFragment_to_libraryFragment)
+                val navHostFragment = supportFragmentManager
+                    .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                val navController = navHostFragment.navController
+
+
+                if (navController.currentDestination?.id != R.id.libraryFragment) {
+                    navController.navigate(R.id.action_homeFragment_to_libraryFragment)
                 }
                 return@OnNavigationItemSelectedListener true
             }
