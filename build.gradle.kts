@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     repositories {
         mavenCentral()
@@ -14,13 +15,9 @@ buildscript {
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:${Constants.dokka_version}")
         classpath("com.apollographql.apollo:apollo-gradle-plugin:${Constants.apollo_version}")
         classpath("io.realm:realm-gradle-plugin:${Constants.realm_version}")
-//dont suport gradle 6
-//        classpath "com.dicedmelon.gradle:jacoco-android:$jacoco_android_version"
         classpath("com.hiya:jacoco-android:0.2")
         classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${Constants.sonarqube_version}")
-        // Add dependency
         classpath("com.google.firebase:firebase-crashlytics-gradle:${Constants.firebase_crashlytics}")
-
 
         //check dependencies
         classpath("com.netflix.nebula:gradle-lint-plugin:17.6.1")
@@ -32,9 +29,11 @@ buildscript {
 
 allprojects {
     //FIXME nebula
+    //Gradle Lint Plugin currently doesn't support kotlin build scripts. Please, switch to groovy build script if you want to use linting.
 //    apply(plugin = "nebula.lint")
-////    gradleLint.rules += "unused-dependency"
-////    gradleLint.rules = ["all-dependency"] // add as many rules here as you"d like
+//    gradleLint.rules += "unused-dependency"
+//    gradleLint.rules = ["all-dependency"] // add as many rules here as you"d like
+
 //    gradleLint {
 //        rules=['unused-dependency']
 //        reportFormat = 'text'
@@ -48,45 +47,40 @@ allprojects {
     }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+
+plugins {
+    java
+    id("org.sonarqube") version "3.3"
 }
-// TODO: fix sonar
-//apply plugin: "org.sonarqube"
-//plugins {
-//    id("org.sonarqube")
-//}
-//sonarqube {
-//    androidVariant "debug"
-//
-//    properties {
-//        property "sonar.sourceEncoding", "UTF-8"
-//        property "sonar.verbose", true
-//        property "sonar.host.url", "http://192.168.99.100:9000"
-//
-//        property "sonar.projectName", "Mobile Taiga"
-//        property "sonar.projectKey", "mobile-taiga"
-//        property "sonar.sourceEncoding", "UTF-8"
-//        property "sonar.projectVersion", "0.1"
-//        property "sonar.issuesReport.html.enable", "true"
-//        property "sonar.issuesReport.console.enable", "true"
-//
-//        property "sonar.coverage.jacoco.xmlReportPaths", findAllReports()
-//        property "detekt.sonar.kotlin.config.path", "${rootProject.projectDir}/detekt-config.yml"
-//        property "sonar.scm.provider", "git"
-//        property "sonar.login","c778a2de6a5124cad4c6cef87063c5b0e5b3c551"
-//        property "sonar.java.coveragePlugin", "jacoco"
-//    }
-//}
-//
-//String findAllReports() {
-//    def file = "${rootProject.buildDir}/reports"
-//
-//    def sonarEnabledProjects = rootProject.subprojects
-//            .findAll { p -> p.sonarqube.getProperties().get("skipProject") == false }
-//            *.name
-//            .collect { projectName -> "$file/jacocoTestReport-${projectName}.xml" }
-//            .join(",")
-//
-//    return sonarEnabledProjects
-//}
+
+sonarqube {
+    properties {
+        // See https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle#AnalyzingwithSonarQubeScannerforGradle-Configureanalysisproperties
+        property("sonar.sourceEncoding", "UTF-8")
+        val projectName = "Mobile Taiga"
+        property("sonar.projectName", projectName)
+        property("sonar.projectKey", System.getenv()["SONAR_PROJECT_KEY"] ?: projectName)
+        property("sonar.projectVersion", project.version.toString())
+        property("sonar.host.url", System.getenv()["SONAR_HOST_URL"] ?: "http://localhost:9000")
+        property("sonar.login", System.getenv()["SONAR_LOGIN"] ?: "")
+//        property("sonar.password", System.getenv()["SONAR_PASSWORD"] ?: "")
+        property("sonar.verbose", System.getenv()["SONAR_VERBOSE"] ?: false)
+
+        property("sonar.issuesReport.html.enable", true)
+        property("sonar.issuesReport.console.enable", true)
+
+        property("sonar.coverage.jacoco.xmlReportPaths", findAllReports())
+        property("detekt.sonar.kotlin.config.path", "${rootProject.projectDir}/detekt-config.yml")
+        property("sonar.scm.provider", "git")
+        property("sonar.java.coveragePlugin", "jacoco")
+    }
+}
+
+fun findAllReports() : String {
+    val file = "${rootProject.buildDir}/reports"
+    var sonarEnabledProjects = ""
+    rootProject.subprojects
+        .forEach {p->sonarEnabledProjects+="$file/jacocoTestReport-${p.name}.xml" }
+
+    return sonarEnabledProjects
+}
