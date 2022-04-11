@@ -11,7 +11,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-//import kotlinx.android.synthetic.main.web_login_anilist.webView1
 import pt.dbmg.anilistclient.oauth2client.OAuthClient
 import pt.dbmg.anilistclient.oauth2client.URLConnectionClient
 import pt.dbmg.anilistclient.oauth2client.request.OAuthClientRequest
@@ -23,10 +22,10 @@ class LoginAnilistActivity() : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_login_anilist)
-        var request: OAuthClientRequest?
-        request = OAuthClientRequest
+        val request: OAuthClientRequest? = OAuthClientRequest
             .authorizationLocation("https://anilist.co/api/v2/oauth/authorize")
-            .setClientId("1542").setRedirectURI("https://anilist.co/api/v2/oauth/pin")
+            .setClientId("1542")
+            .setRedirectURI("https://anilist.co/api/v2/oauth/pin")
             .buildQueryMessage()
 
         val webview = findViewById<WebView>(R.id.webView1)
@@ -46,7 +45,6 @@ class LoginAnilistActivity() : AppCompatActivity(){
             }
 
             override fun onLoadResource(view: WebView, url: String) {
-                // TODO Auto-generated method stub
                 super.onLoadResource(view, url)
             }
 
@@ -69,11 +67,8 @@ class LoginAnilistActivity() : AppCompatActivity(){
                 .startsWith("https://anilist.co/api/v2/oauth/pin?code=")
         ) {
             val code = uri.getQueryParameter("code")
-            var request: OAuthClientRequest?
 
-
-
-            request = OAuthClientRequest.tokenLocation("https://anilist.co/api/v2/oauth/token")
+            val request: OAuthClientRequest? = OAuthClientRequest.tokenLocation("https://anilist.co/api/v2/oauth/token")
                 .setGrantType(AUTHORIZATION_CODE)
                 .setClientId("1542")
                 .setClientSecret("jA95juoTN2BshTKueYdCqNz9Aaw9SZiq94Rr7oYh")
@@ -81,11 +76,16 @@ class LoginAnilistActivity() : AppCompatActivity(){
                 .setCode(code)
                 .buildBodyMessage()
 
-            val thread = Thread(Runnable {
+            val thread = Thread {
                 try {
                     val oAuthClient = OAuthClient(URLConnectionClient())
-                    val headers = mutableMapOf("Content-Type" to "application/json", "Accept" to "application/json")
-                    request.headers = headers
+                    val headers = mutableMapOf(
+                        "Content-Type" to "application/json",
+                        "Accept" to "application/json"
+                    )
+                    if (request != null) {
+                        request.headers = headers
+                    }
                     val response = oAuthClient.accessToken(request)
                     val intent = Intent()
                     intent.putExtra("token", response.accessToken)
@@ -94,9 +94,9 @@ class LoginAnilistActivity() : AppCompatActivity(){
                     setResult(Activity.RESULT_OK, intent)
                     finish()
                 } catch (e: Exception) {
-                   Log.e("ERROR", e.toString())
+                    Log.e("ERROR", e.toString())
                 }
-            })
+            }
 
             thread.start()
         }
