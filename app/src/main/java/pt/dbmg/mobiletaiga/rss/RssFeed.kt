@@ -63,12 +63,12 @@ class RssFeed : AppCompatActivity() {
 
         private var urlLink: String? = null
 
-        protected override fun onPreExecute() {
+        override fun onPreExecute() {
             mSwipeLayout!!.isRefreshing = true
             urlLink = mEditText!!.text.toString()
         }
 
-        protected override fun doInBackground(vararg voids: Void): Boolean? {
+        override fun doInBackground(vararg voids: Void): Boolean? {
             if (TextUtils.isEmpty(urlLink))
                 return false
 
@@ -89,7 +89,7 @@ class RssFeed : AppCompatActivity() {
             return false
         }
 
-        protected override fun onPostExecute(success: Boolean?) {
+         override fun onPostExecute(success: Boolean?) {
             mSwipeLayout!!.isRefreshing = false
 
             if (success!!) {
@@ -114,7 +114,7 @@ class RssFeed : AppCompatActivity() {
         var link: String? = null
         var description: String? = null
         var isItem = false
-        val items =  mutableListOf<RssFeedModel>()
+        val items = mutableListOf<RssFeedModel>()
 
         try {
             val xmlPullParser = Xml.newPullParser()

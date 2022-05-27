@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath("com.google.gms:google-services:${Constants.google_services}")
-        classpath("com.android.tools.build:gradle:${Constants.gradle_version}")
+        classpath("com.android.tools.build:gradle:7.2.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Constants.kotlin_version}")
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:${Constants.dokka_version}")
         classpath("com.apollographql.apollo:apollo-gradle-plugin:${Constants.apollo_version}")

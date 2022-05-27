@@ -44,7 +44,7 @@ dependencies {
     //not comm
     implementation ("javax.servlet:servlet-api:2.5")
     implementation ("org.codehaus.jettison:jettison:1.4.1")
-    implementation ("org.slf4j:slf4j-api:1.7.30")
+    implementation ("org.slf4j:slf4j-api:1.7.36")
 
     //tests
     testImplementation("junit:junit:${Constants.junit}")

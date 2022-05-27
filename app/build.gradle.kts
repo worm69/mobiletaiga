@@ -158,8 +158,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Constants.kotlin_version}")
 
     // add the Firebase SDK for Google Analytics
-    implementation("com.google.firebase:firebase-analytics:20.1.2")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.9")
+    implementation("com.google.firebase:firebase-analytics:21.0.0")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.11")
 
     //UI
     implementation("androidx.recyclerview:recyclerview:1.2.1")
@@ -169,7 +169,7 @@ dependencies {
     implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout:${Constants.constraint_layout}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("com.google.android.material:material:1.5.0")
+    implementation("com.google.android.material:material:1.6.0")
     implementation("androidx.paging:paging-runtime-ktx:${Constants.paging_version}")
     implementation("io.realm:android-adapters:3.0.0")
 
