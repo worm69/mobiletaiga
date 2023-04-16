@@ -14,16 +14,16 @@ android {
 
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildTypes {
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
 
         release {
@@ -43,8 +43,8 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:${Constants.constraint_layout}")
     //not comm
     implementation ("javax.servlet:servlet-api:2.5")
-    implementation ("org.codehaus.jettison:jettison:1.4.1")
-    implementation ("org.slf4j:slf4j-api:1.7.36")
+    implementation ("org.codehaus.jettison:jettison:1.5.4")
+    implementation ("org.slf4j:slf4j-api:2.0.7")
 
     //tests
     testImplementation("junit:junit:${Constants.junit}")

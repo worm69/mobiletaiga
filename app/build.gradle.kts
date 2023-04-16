@@ -108,7 +108,7 @@ android {
                 releaseNotesFile = "/path/to/releasenotes.txt"
                 testers = "gomesdanielbm@gmail.com"
             }
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             //use resConfig("en", "xxhdpi") Including Minimal Resources
@@ -125,12 +125,12 @@ android {
 //        main.java.srcDirs += "src/main/java"
 //    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     lint {
         abortOnError = false
