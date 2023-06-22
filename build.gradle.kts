@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath("com.google.gms:google-services:${Constants.google_services}")
-        classpath("com.android.tools.build:gradle:8.0.0")
+        classpath("com.android.tools.build:gradle:8.0.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Constants.kotlin_version}")
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:${Constants.dokka_version}")
         classpath("com.apollographql.apollo:apollo-gradle-plugin:${Constants.apollo_version}")
@@ -20,7 +20,7 @@ buildscript {
         classpath("com.google.firebase:firebase-crashlytics-gradle:${Constants.firebase_crashlytics}")
 
         //check dependencies
-        classpath("com.netflix.nebula:gradle-lint-plugin:17.6.1")
+        classpath("com.netflix.nebula:gradle-lint-plugin:18.0.3")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
