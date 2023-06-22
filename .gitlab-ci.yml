@@ -68,8 +68,11 @@ stages:
 - test
 
 lintDebug:
+  variables:
+    SECURE_FILES_DOWNLOAD_PATH: './app'
   stage: build
   script:
+  - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
   - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
 assembleDebug:
@@ -84,6 +87,9 @@ assembleDebug:
     - app/build/outputs/
 
 debugTests:
+  variables:
+    SECURE_FILES_DOWNLOAD_PATH: './app'
   stage: test
   script:
+  - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
   - ./gradlew -Pci --console=plain :app:testDebug
