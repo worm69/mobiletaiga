@@ -50,7 +50,7 @@ before_script:
   - popd
   - popd
   - export PATH=$PATH:${ANDROID_HOME}/cmdline-tools/tools/bin/
-
+  - echo $GOOGLE_SERVICES_JSON | base64 -d > app/google-services.json
   # Nothing fancy here, just checking sdkManager version
   - sdkmanager --version
 
