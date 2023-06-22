@@ -158,20 +158,20 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Constants.kotlin_version}")
 
     // add the Firebase SDK for Google Analytics
-    implementation("com.google.firebase:firebase-analytics:21.0.0")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.11")
+    implementation("com.google.firebase:firebase-analytics:21.3.0")
+    implementation("com.google.firebase:firebase-crashlytics:18.3.7")
 
     //UI
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout:${Constants.constraint_layout}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("com.google.android.material:material:1.6.0")
+    implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.paging:paging-runtime-ktx:${Constants.paging_version}")
-    implementation("io.realm:android-adapters:3.0.0")
+    //implementation("io.realm:android-adapters:4.0.0")
 
     //Support library
     implementation("androidx.multidex:multidex:${Constants.multidex_version}")
@@ -221,7 +221,7 @@ dependencies {
     implementation("androidx.concurrent:concurrent-futures:${Constants.futures_version}")
 
     //Videos
-    implementation("com.devbrackets.android:exomedia:4.3.0") {
+    implementation("com.devbrackets.android:exomedia:5.0.0-beta01") {
         exclude(group = "com.google.android", module = "support-v7")
     }
 
@@ -242,7 +242,7 @@ dependencies {
     // Test helpers
 
     // optional - Test helpers for LiveData
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0") {
         exclude(group = "com.android.support", module = "support-annotations")
     }

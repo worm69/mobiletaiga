@@ -29,9 +29,7 @@
         <com.devbrackets.android.exomedia.ui.widget.VideoView
             android:id="@+id/video_view_preview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:videoViewApiImpl="@layout/exomedia_default_exo_texture_video_view"
-            app:useDefaultControls="true" />
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
     <ProgressBar

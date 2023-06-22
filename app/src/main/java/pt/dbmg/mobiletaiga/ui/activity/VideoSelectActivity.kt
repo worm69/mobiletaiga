@@ -68,7 +68,7 @@ class VideoSelectActivity : AppCompatActivity(), OnPreparedListener, OnCompletio
         videoView = findViewById<VideoView>(R.id.video_view_preview)
         videoView.setOnPreparedListener(this)
         videoView.setOnCompletionListener(this)
-        videoView.setVolume(0f)
+        videoView.volume = 0f
     }
 
     private fun setupActions() {
@@ -77,9 +77,10 @@ class VideoSelectActivity : AppCompatActivity(), OnPreparedListener, OnCompletio
 
     private fun setupData() {
         if(::pathVideo.isInitialized){
-            videoView.setVideoURI(Uri.parse(pathVideo))
+            //videoView.setVideoURI(Uri.parse(pathVideo))
+            videoView.setMedia(Uri.parse(pathVideo))
         }else{
-            videoView.setVideoURI(intent.data)
+            videoView.setMedia(intent.data)
         }
     }
 
@@ -88,7 +89,7 @@ class VideoSelectActivity : AppCompatActivity(), OnPreparedListener, OnCompletio
             showError(getString(R.string.error_video_not_loaded))
         } else {
             if (videoView.isPlaying)
-                videoView.stopPlayback()
+                videoView.stop()
             val newBitmap: Bitmap? = videoView.bitmap
             if (newBitmap == null) {
                 showError(getString(R.string.error_encoding_image))

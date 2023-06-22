@@ -5,9 +5,9 @@ object Constants {
     const val buildTools = "33.0.2"
 
     const val gradle_version = "7.4.2"
-    const val kotlin_version = "1.8.20"
+    const val kotlin_version = "1.8.22"
     const val app_compat = "1.6.1"
-    const val core_ktx = "1.10.0"
+    const val core_ktx = "1.10.1"
     const val constraint_layout = "2.1.4"
     const val google_services = "4.3.10"
     const val firebase_crashlytics = "2.8.1"
@@ -20,7 +20,7 @@ object Constants {
 
     const val junit = "4.13.2"
     const val test_runner = "1.4.0"
-    const val test_espresso = "3.4.0"
+    const val test_espresso = "3.5.1"
 
 
     const val dokka_version = "1.6.10"
